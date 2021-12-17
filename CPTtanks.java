@@ -9,6 +9,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	tankpanel thepanel = new tankpanel();
 	
 	
+	
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		
