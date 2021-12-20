@@ -8,7 +8,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 	JFrame theframe = new JFrame("Tanks");
 	tankpanel thepanel = new tankpanel();
 	
-	
+	JButton playbut = new JButton("Play");
+	JButton themebut = new JButton("
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
