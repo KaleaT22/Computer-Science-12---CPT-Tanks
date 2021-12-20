@@ -19,6 +19,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//if player starts game
 		if(evt.getSource() == playbut){
 			thepanel.strScreen = "play";
+			
 		}
 	}
 	
@@ -27,7 +28,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 	}
 	
 	public void keyPressed(KeyEvent evt){
-		
+		//PLAYER 1
+		//move left
+		if(evt.getKeyChar() == 'a'){
+			
+		}
 	}
 	
 	public void keyTyped(KeyEvent evt){
