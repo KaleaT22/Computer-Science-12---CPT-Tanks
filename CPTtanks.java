@@ -19,6 +19,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//if player starts game
 		if(evt.getSource() == playbut){
 			thepanel.strScreen = "play";
+			playbut.setEnabled(false);
+			themebut.setEnabled(false);
 			
 		}
 	}
@@ -41,7 +43,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	//constructor
 	public CPTtanks(){
-		thepanel.setPreferredSize(new Dimension(1280, 720));
+		//thepanel.setPreferredSize(new Dimension(1280, 720));
 		
 		//play button
 		playbut.setSize(300, 25);
