@@ -22,17 +22,17 @@ public class tankpanel extends JPanel implements ActionListener{
 	}
 	
 	public void paintComponent(Graphics g){
+		//DOESN'T WORK :((
 		//home screen
 		if(strScreen.equals("start")){
 			System.out.println(strScreen);
 			
+			//temporary, will use images later
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 1280, 720);
 			
 		//play screen
-		}
-		
-		if(strScreen.equals("play")){
+		}else if(strScreen.equals("play")){
 			System.out.println("play: " + strScreen);
 			
 		}
