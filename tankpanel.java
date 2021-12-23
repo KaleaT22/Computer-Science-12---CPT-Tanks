@@ -14,6 +14,8 @@ public class tankpanel extends JPanel implements ActionListener{
 	int intTank2Pos = 960;
 	int intTank2Def = 0;
 	
+	getBullet bullet1 = new getBullet();
+	
 	Timer thetimer = new Timer(1000/60, this);
 	String strScreen = "Start";
 	
