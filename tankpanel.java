@@ -23,7 +23,7 @@ public class tankpanel extends JPanel implements ActionListener{
 	
 	public void paintComponent(Graphics g){
 		//home screen
-		if(strScreen.equals("start")){
+		if(strScreen.equals("Start")){
 			System.out.println("STARTED");
 			
 			//temporary, will use images later
@@ -31,8 +31,8 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.fillRect(0, 0, 1280, 720);
 			
 		//play screen
-		}else if(strScreen.equals("play")){
-			System.out.println("PLAY SCREEN OPENED");
+		}else if(strScreen.equals("Play")){
+			System.out.println("Game screen launched");
 			g.setColor(Color.YELLOW);
 			g.fillRect(0, 0, 1280, 720);
 			

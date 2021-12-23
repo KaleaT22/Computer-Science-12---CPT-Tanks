@@ -29,7 +29,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent evt){
 		//if player starts game
 		if(evt.getSource() == playbut){
-			thepanel.strScreen = "play";
+			thepanel.strScreen = "Play";
 			playbut.setEnabled(false);
 			themebut.setEnabled(false);
 			
