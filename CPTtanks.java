@@ -37,22 +37,26 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theclient.setVisible(false);
 			theIP.setVisible(false);
 			theipAdd.setVisible(false);
+			theframe.requestFocus();
 		}
 	}
 	
 	public void keyReleased(KeyEvent evt){
 		if(evt.getKeyChar()=='a'){
-			thepanel.intTank1Def=0;
+			thepanel.intTank1Def = 0;
+			
 		}else if(evt.getKeyChar()=='d'){
-			thepanel.intTank1Def=0;
+			thepanel.intTank1Def = 0;
 		}
 	}
 	
 	public void keyPressed(KeyEvent evt){
-		if(evt.getKeyChar()=='a'){
+		if(evt.getKeyChar() == 'a'){
+			System.out.println("Type A");
 			thepanel.intTank1Def = -5;
 		}
-		if(evt.getKeyChar()=='d'){
+		if(evt.getKeyChar() == 'd'){
+			System.out.println("Type D");
 			thepanel.intTank1Def = 5;
 		}
 	}
@@ -80,13 +84,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//server button
 		theserver.setSize(200, 25);
-		theserver.setLocation(0, 550);
+		theserver.setLocation(1080, 0);
 		theserver.addActionListener(this);
 		thepanel.add(theserver);
 		
 		//client button
 		theclient.setSize(200, 25);
-		theclient.setLocation(200,550);
+		theclient.setLocation(1080, 25);
 		theclient.addActionListener(this);
 		thepanel.add(theclient);
 		
