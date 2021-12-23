@@ -30,41 +30,30 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//if player starts game
 		if(evt.getSource() == playbut){
 			thepanel.strScreen = "Play";
-			playbut.setEnabled(false);
-			themebut.setEnabled(false);
-			
+			playbut.setVisible(false);
+			themebut.setVisible(false);
+			thedisconnect.setVisible(false);
+			theserver.setVisible(false);
+			theclient.setVisible(false);
+			theIP.setVisible(false);
+			theipAdd.setVisible(false);
 		}
 	}
 	
 	public void keyReleased(KeyEvent evt){
-		
+		if(evt.getKeyChar()=='a'){
+			thepanel.intTank1Def=0;
+		}else if(evt.getKeyChar()=='d'){
+			thepanel.intTank1Def=0;
+		}
 	}
 	
 	public void keyPressed(KeyEvent evt){
-		//PLAYER 1
-		//move left
-		if(evt.getKeyChar() == 'a'){
-			System.out.println("PLAYER 1: left press");
-		
-		//move right	
-		}else if(evt.getKeyChar() == 'd'){
-			System.out.println("PLAYER 1: right press");
-			
+		if(evt.getKeyChar()=='a'){
+			thepanel.intTank1Def = -5;
 		}
-		
-		//PLAYER 2
-		//move left
-		if(evt.getKeyCode() == KeyEvent.VK_LEFT){
-			System.out.println("PLAYER 2: left press");
-			
-			//ssm.sendText("move, left");
-			
-		//move down
-		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
-			System.out.println("PLAYER 2: right press");
-			
-			//ssm.sendText("move, down");
-			
+		if(evt.getKeyChar()=='d'){
+			thepanel.intTank1Def = 5;
 		}
 	}
 	
