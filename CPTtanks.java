@@ -138,7 +138,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}
 		if(evt.getKeyChar() == ' '){
 			if(boolServer==true){
-				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos+40),thepanel.intTank1Pow,thepanel.intTank1Ang);
+				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos+40),thepanel.intTank1Pow,thepanel.intTank1Ang,true);
 				System.out.println("FIRED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			}
 		}

@@ -9,6 +9,7 @@ public class getBullet{
 	double dblPowerX;
 	double dblPowerY;
 	double dblAngleRadians;
+	boolean boolLaunched;
 	
 	int intX;
 	int intTankX;
@@ -38,6 +39,12 @@ public class getBullet{
 		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+580);
 		System.out.println(dblTime+"");
 		System.out.println(intY+"");
+		
+		if(boolLaunched==false){
+			dblGravity=0;
+			dblPowerY=0;
+		}
+		//If the ball wasn't launched, its in limbo (not moving) until it is launched
 	}
 	
 	public void drawIt(Graphics g){
@@ -47,11 +54,12 @@ public class getBullet{
 	}
 	
 	//Constructor
-	public getBullet(int intTankX, double dblPower, double dblAngle){
+	public getBullet(int intTankX, double dblPower, double dblAngle, boolean boolLaunched){
 		super();
 		this.intTankX=intTankX;
 		this.dblPower=dblPower;
 		this.dblAngle=dblAngle;
+		this.boolLaunched=boolLaunched;
 	}
 	///Now the APanel and JPanel are exactly the same
 
