@@ -10,9 +10,9 @@ public class getBullet{
 	double dblPowerY;
 	double dblAngleRadians;
 	
-	int intX = 0;
-	int intY = 400;
-	int intY2 =0;
+	int intX;
+	int intTankX;
+	int intY = 580;
 	int intDef = +4;
 	int intDef2 = -4;
 	double dblTime=0;
@@ -23,38 +23,33 @@ public class getBullet{
 	///To draw this APanel differently
 	///JPanel by default draws a grey background
 	///APanel will draw whatever we want it to
-	public void paintComponent(Graphics g){
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, 1800, 1000);
-		
-		//Change this to change the visual speed of the projectile (not velocity)
-		dblTime=dblTime+(3/60.0);
+	public void nextPos(){
+		dblTime=dblTime+(10/60.0);
 		
 		dblAngleRadians=Math.toRadians(dblAngle);
 		dblPowerX=((dblPower)*(Math.cos(dblAngleRadians)));
 		dblPowerY=(1*((dblPower)*(Math.sin(dblAngleRadians))));
 		
 		//d = v*t
-		intX=(int)(dblPowerX*dblTime);
+		intX=((int)(dblPowerX*dblTime))+intTankX;
 		//intX=0;
 		
 		//d = Vi*t + 1/2*a*t^2
-		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+400);
-		
-		g.setColor(Color.WHITE);
-		g.drawString(dblPowerX+"TEST TEST",30,30);
-		g.drawString(dblPowerY+"TEST TEST",30,60);
+		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+580);
 		System.out.println(dblTime+"");
 		System.out.println(intY+"");
-		
+	}
+	
+	public void drawIt(Graphics g){
 		g.setColor(Color.WHITE);
-		g.fillOval(intX, intY, 40, 40);
+		g.fillOval(intX, intY, 20, 20);
+		this.nextPos();
 	}
 	
 	//Constructor
-	public getBullet(int intX, double dblPower, double dblAngle){
+	public getBullet(int intTankX, double dblPower, double dblAngle){
 		super();
-		this.intX=intX;
+		this.intTankX=intTankX;
 		this.dblPower=dblPower;
 		this.dblAngle=dblAngle;
 	}

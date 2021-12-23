@@ -7,6 +7,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//properties
 	JFrame theframe = new JFrame("Tanks");
 	tankpanel thepanel = new tankpanel();
+	boolean boolServer=true;
 	
 	//server, client
 	JButton theserver = new JButton("Server");
@@ -134,6 +135,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 		if(evt.getKeyChar() == 'd'){
 			System.out.println("Type D");
 			thepanel.intTank1Def = 5;
+		}
+		if(evt.getKeyChar() == ' '){
+			if(boolServer==true){
+				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos+40),thepanel.intTank1Pow,thepanel.intTank1Ang);
+				System.out.println("FIRED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			}
 		}
 	}
 	

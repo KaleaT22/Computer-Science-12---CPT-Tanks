@@ -10,11 +10,14 @@ public class tankpanel extends JPanel implements ActionListener{
 	//Properties
 	int intTank1Pos = 320;
 	int intTank1Def = 0;
+	int intTank1Pow = 70;
+	int intTank1Ang = 45;
+	
 	
 	int intTank2Pos = 960;
 	int intTank2Def = 0;
 	
-	getBullet bullet1 = new getBullet();
+	getBullet bullet1 = new getBullet(100,110,45);
 	
 	Timer thetimer = new Timer(1000/60, this);
 	String strScreen = "Start";
@@ -53,6 +56,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			intTank2Pos = intTank2Pos + intTank2Def;
 			
+			bullet1.drawIt(g);
 		}
 	}
 	
