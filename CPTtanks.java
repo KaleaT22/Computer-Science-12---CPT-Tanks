@@ -40,11 +40,15 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//SSM
 	SuperSocketMaster ssm;
 	
+	boolean blnisServer;
+	
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		//server connects
 		if(evt.getSource() == theserver){
 			theserver.setEnabled(false); 
+			theclient.setEnabled(false);
+			theipAdd.setEnabled(false);
 			
 			ssm = new SuperSocketMaster(8374, this);
 			
@@ -52,20 +56,26 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			if(blnIsConnected){
 				playbut.setEnabled(true);
+				themebut.setEnabled(true);
 				thedisconnect.setEnabled(true);
 				theframe.requestFocus();
 				
 				System.out.println("server");
 				
+				blnisServer = true;
+				
 						
 			}else{
 				theserver.setEnabled(true); 
+				theclient.setEnabled(true); 
+				theipAdd.setEnabled(true);
 				
 			}
 			
 		//if client connects
 		}else if(evt.getSource() == theclient){
 			theclient.setEnabled(false);
+			theserver.setEnabled(false);
 			theipAdd.setEnabled(false);
 			
 			ssm = new SuperSocketMaster(theipAdd.getText(), 8374, this);
@@ -73,19 +83,25 @@ public class CPTtanks implements ActionListener, KeyListener{
 			boolean blnIsConnected = ssm.connect();
 			
 			if(blnIsConnected){
+				playbut.setEnabled(false);
+				themebut.setEnabled(false);
 				thedisconnect.setEnabled(true);
 			
 				System.out.println("client");
+				
+				blnisServer = false;
 					
 			}else{
 				theclient.setEnabled(true); 
 				theipAdd.setEnabled(true);
+				theserver.setEnabled(true);
 			
 			}
 		
 		//if server disconnects	
 		}else if(evt.getSource() == thedisconnect){
 			theclient.setEnabled(true);
+			theserver.setEnabled(true);
 			theipAdd.setEnabled(true);
 			thedisconnect.setEnabled(false);
 		
