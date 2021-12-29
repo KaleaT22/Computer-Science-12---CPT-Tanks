@@ -16,9 +16,13 @@ public class tankpanel extends JPanel implements ActionListener{
 	
 	int intTank2Pos = 960;
 	int intTank2Def = 0;
+	int intTank2Pow = 70;
+	int intTank2Ang = 45;
 	
-	getBullet bullet1 = new getBullet(-30,0,0,false);
 	//Spawns bullet off screen in limbo waiting to be launched
+	getBullet bullet1 = new getBullet(-30,0,0,false);
+	
+	getBullet bullet2 = new getBullet(1310, 0, 0, false);
 	
 	Timer thetimer = new Timer(1000/60, this);
 	String strScreen = "Start";
@@ -51,13 +55,15 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			intTank1Pos = intTank1Pos + intTank1Def;
 			
+			bullet1.drawIt(g);
+			
 			//TANK 2
 			g.setColor(Color.ORANGE);
 			g.fillRect(intTank2Pos, 580, 80, 40);
 			
 			intTank2Pos = intTank2Pos + intTank2Def;
 			
-			bullet1.drawIt(g);
+			bullet2.drawIt(g);
 		}
 	}
 	

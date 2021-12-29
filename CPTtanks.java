@@ -7,7 +7,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//properties
 	JFrame theframe = new JFrame("Tanks");
 	tankpanel thepanel = new tankpanel();
-	boolean boolServer=true;
+	
+	int intRow = 0;
+	int intColumn = 0;
 	
 	//server, client
 	JButton theserver = new JButton("Server");
@@ -39,6 +41,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	//SSM
 	SuperSocketMaster ssm;
+	
+	String strLine;
+	String[][] strMessage = new String[10][10];
+	String strLineSplit[];
 	
 	boolean blnisServer;
 	
@@ -90,6 +96,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("client");
 				
 				blnisServer = false;
+				ssm.sendText("client, connect");
 					
 			}else{
 				theclient.setEnabled(true); 
@@ -109,13 +116,91 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 			theipAdd.setText("");
 			
+			ssm.sendText("client, disconnect");
+			
 			ssm.disconnect();
 		
 		//servers connected
 		}else if(evt.getSource() == ssm){
 			System.out.println("SSM TEST: " + ssm.readText());
 			if(ssm != null){	
-				
+				try{		
+					for(intRow = 0; intRow < 1; intRow++){
+						strLine = ssm.readText();
+						
+						//this actually does the splits string and puts in a 1D array
+						strLineSplit = strLine.split(", ");
+								
+						for(intColumn = 0; intColumn < 3; intColumn++){
+							strMessage[intRow][intColumn] = strLineSplit[intColumn];
+							System.out.println("strMessage[" + intRow + "][" + intColumn + "]");
+							System.out.println("Array: " + strMessage[intRow][intColumn]);
+							
+						}
+						
+						System.out.println("TEST 1: " + strMessage[0][0]);
+					}
+					
+					//check if server
+					if(strMessage[0][0].equals("server")){
+						//if server starts game
+						if(strMessage[0][1].equals("playstart")){
+							thepanel.strScreen = "Play";
+							playbut.setVisible(false);
+							themebut.setVisible(false);
+							thedisconnect.setVisible(false);
+							theserver.setVisible(false);
+							theclient.setVisible(false);
+							theIP.setVisible(false);
+							theipAdd.setVisible(false);
+							
+							theframe.requestFocus();
+						
+						//if stop movement
+						}else if(strMessage[0][1].equals("stop")){
+							thepanel.intTank1Def = 0;
+						
+						//if move	
+						}else if(strMessage[0][1].equals("move")){
+							//move left
+							if(strMessage[0][2].equals("left")){
+								thepanel.intTank1Def = -5;
+							
+							//move right
+							}else if(strMessage[0][2].equals("right")){
+								thepanel.intTank1Def = 5;
+								
+							}
+						}
+						
+					//check if client
+					}else if(strMessage[0][0].equals("client")){
+						//if connected
+						if(strMessage[0][1].equals("connect")){
+							thechatarea.append("Player 2 connected");
+							
+						//if stop movement
+						}else if(strMessage[0][1].equals("stop")){
+							thepanel.intTank1Def = 0;
+						
+						//if move	
+						}else if(strMessage[0][1].equals("move")){
+							//move left
+							if(strMessage[0][2].equals("left")){
+								thepanel.intTank2Def = -5;
+							
+							//move right
+							}else if(strMessage[0][2].equals("right")){
+								thepanel.intTank2Def = 5;
+								
+							}
+						}
+					}
+					
+				}catch(ArrayIndexOutOfBoundsException e){
+					System.out.println("No string split");
+						
+				}
 			}
 		
 		//if player starts game
@@ -129,33 +214,95 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theIP.setVisible(false);
 			theipAdd.setVisible(false);
 			
+			ssm.sendText("server, playstart");
+			
 			theframe.requestFocus();
 			
 		}
 	}
 	
 	public void keyReleased(KeyEvent evt){
-		if(evt.getKeyChar() == 'a'){
-			thepanel.intTank1Def = 0;
+		//stop server movements
+		if(blnisServer == true){
+			//stop left
+			if(evt.getKeyChar() == 'a'){
+				thepanel.intTank1Def = 0;
+				
+				ssm.sendText("server, stop");
+				
+			//stop right
+			}else if(evt.getKeyChar()== 'd'){
+				thepanel.intTank1Def = 0;
+				
+				ssm.sendText("server, stop");
+			}
 			
-		}else if(evt.getKeyChar()=='d'){
-			thepanel.intTank1Def = 0;
+		//stop client movements
+		}else{
+			//stop left
+			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+				thepanel.intTank2Def = 0;
+				
+				ssm.sendText("client, stop");
+			
+			//stop right
+			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+				thepanel.intTank2Def = 0;
+				
+				ssm.sendText("client, stop");
+			}
 		}
 	}
 	
 	public void keyPressed(KeyEvent evt){
-		if(evt.getKeyChar() == 'a'){
-			System.out.println("Type A");
-			thepanel.intTank1Def = -5;
-		}
-		if(evt.getKeyChar() == 'd'){
-			System.out.println("Type D");
-			thepanel.intTank1Def = 5;
-		}
-		if(evt.getKeyChar() == ' '){
-			if(boolServer==true){
-				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos+40),thepanel.intTank1Pow,thepanel.intTank1Ang,true);
-				System.out.println("FIRED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		//server movements
+		if(blnisServer == true){
+			//left
+			if(evt.getKeyChar() == 'a'){
+				System.out.println("Server: Left");
+				thepanel.intTank1Def = -5;
+				
+				ssm.sendText("server, move, left");
+			
+			//right
+			}else if(evt.getKeyChar() == 'd'){
+				System.out.println("Server: Right");
+				thepanel.intTank1Def = 5;
+				
+				ssm.sendText("server, move, right");
+			}
+			
+			//shoot
+			if(evt.getKeyChar() == ' '){
+				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
+				System.out.println("FIRED!");
+				
+				ssm.sendText("server, shoot");
+				
+			}
+		
+		//client movements
+		}else{
+			//left
+			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+				System.out.println("Client: Left");
+				thepanel.intTank2Def = -5;
+				ssm.sendText("client, move, left");
+			
+			//right
+			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+				System.out.println("Client: Right");
+				thepanel.intTank2Def = 5;
+				ssm.sendText("client, move, right");
+				
+			}
+			
+			//shoot
+			if(evt.getKeyChar() == ' '){
+				thepanel.bullet2 = new getBullet((thepanel.intTank1Pos - 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
+				ssm.sendText("client, shoot");
+				System.out.println("FIRED!");
+				
 			}
 		}
 	}
