@@ -105,7 +105,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			}
 		
-		//if server disconnects	
+		//if player disconnects	
 		}else if(evt.getSource() == thedisconnect){
 			theclient.setEnabled(true);
 			theserver.setEnabled(true);
@@ -116,8 +116,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 			theipAdd.setText("");
 			
-			ssm.sendText("client, disconnect");
-			
+			if(blnisServer == true){
+				ssm.sendText("server, disconnect");
+				
+			}else{
+				ssm.sendText("client, disconnect");
+			}
 			ssm.disconnect();
 		
 		//servers connected
