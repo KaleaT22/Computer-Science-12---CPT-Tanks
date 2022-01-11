@@ -92,6 +92,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				playbut.setEnabled(false);
 				themebut.setEnabled(false);
 				thedisconnect.setEnabled(true);
+				thechat.setEnabled(true);
 			
 				System.out.println("client");
 				
@@ -143,67 +144,79 @@ public class CPTtanks implements ActionListener, KeyListener{
 						}
 						
 						System.out.println("TEST 1: " + strMessage[0][0]);
-					}
-					
-					//check if server
-					if(strMessage[0][0].equals("server")){
-						//if server starts game
-						if(strMessage[0][1].equals("playstart")){
-							thepanel.strScreen = "Play";
-							playbut.setVisible(false);
-							themebut.setVisible(false);
-							thedisconnect.setVisible(false);
-							theserver.setVisible(false);
-							theclient.setVisible(false);
-							theIP.setVisible(false);
-							theipAdd.setVisible(false);
-							
-							theframe.requestFocus();
 						
-						//if stop movement
-						}else if(strMessage[0][1].equals("stop")){
-							thepanel.intTank1Def = 0;
-						
-						//if move	
-						}else if(strMessage[0][1].equals("move")){
-							//move left
-							if(strMessage[0][2].equals("left")){
-								thepanel.intTank1Def = -5;
-							
-							//move right
-							}else if(strMessage[0][2].equals("right")){
-								thepanel.intTank1Def = 5;
-								
-							}
-						}
-						
-					//check if client
-					}else if(strMessage[0][0].equals("client")){
-						//if connected
-						if(strMessage[0][1].equals("connect")){
-							thechatarea.append("Player 2 connected");
-							
-						//if stop movement
-						}else if(strMessage[0][1].equals("stop")){
-							thepanel.intTank1Def = 0;
-						
-						//if move	
-						}else if(strMessage[0][1].equals("move")){
-							//move left
-							if(strMessage[0][2].equals("left")){
-								thepanel.intTank2Def = -5;
-							
-							//move right
-							}else if(strMessage[0][2].equals("right")){
-								thepanel.intTank2Def = 5;
-								
-							}
-						}
 					}
 					
 				}catch(ArrayIndexOutOfBoundsException e){
 					System.out.println("No string split");
+					
+				}
+					
+				//check if server
+				if(strMessage[0][0].equals("server")){
+					//if server starts game
+					if(strMessage[0][1].equals("playstart")){
+						thepanel.strScreen = "Play";
+						playbut.setVisible(false);
+						themebut.setVisible(false);
+						thedisconnect.setVisible(false);
+						theserver.setVisible(false);
+						theclient.setVisible(false);
+						theIP.setVisible(false);
+						theipAdd.setVisible(false);
 						
+						theframe.requestFocus();
+					
+					//if stop movement
+					}else if(strMessage[0][1].equals("stop")){
+						thepanel.intTank1Def = 0;
+					
+					//if move	
+					}else if(strMessage[0][1].equals("move")){
+						//move left
+						if(strMessage[0][2].equals("left")){
+							thepanel.intTank1Def = -5;
+						
+						//move right
+						}else if(strMessage[0][2].equals("right")){
+							thepanel.intTank1Def = 5;
+							
+						}
+						
+					//if fires
+					}else if(strMessage[0][1].equals("shoot")){
+						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
+						
+					}
+					
+				//check if client
+				}else if(strMessage[0][0].equals("client")){
+					//if connected
+					if(strMessage[0][1].equals("connect")){
+						thechatarea.append("\nPlayer 2 connected!");
+						thechat.setEnabled(true);
+						
+					//if stop movement
+					}else if(strMessage[0][1].equals("stop")){
+						thepanel.intTank2Def = 0;
+					
+					//if move	
+					}else if(strMessage[0][1].equals("move")){
+						//move left
+						if(strMessage[0][2].equals("left")){
+							thepanel.intTank2Def = -5;
+						
+						//move right
+						}else if(strMessage[0][2].equals("right")){
+							thepanel.intTank2Def = 5;
+							
+						}
+					
+					//if fires
+					}else if(strMessage[0][1].equals("shoot")){
+						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
+						
+					}
 				}
 			}
 		
@@ -221,7 +234,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 			ssm.sendText("server, playstart");
 			
 			theframe.requestFocus();
-			
+		
+		//if player sends chat message	
+		}else if(evt.getSource() == thechat){
+			//thetext.append
 		}
 	}
 	
@@ -303,7 +319,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			//shoot
 			if(evt.getKeyChar() == ' '){
-				thepanel.bullet2 = new getBullet((thepanel.intTank1Pos - 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
+				thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
 				ssm.sendText("client, shoot");
 				System.out.println("FIRED!");
 				
