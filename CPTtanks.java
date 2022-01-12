@@ -183,6 +183,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 							
 						}
 						
+					//if depress / elevating cannon
+					}else if(strMessage[0][1].equals("angle")){
+						thepanel.intTank1Ang = Integer.parseInt(strMessage[0][2]);
+						
 					//if fires
 					}else if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
@@ -211,6 +215,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 							thepanel.intTank2Def = 5;
 							
 						}
+						
+					//if depress / elevating cannon
+					}else if(strMessage[0][1].equals("angle")){
+						thepanel.intTank2Ang = Integer.parseInt(strMessage[0][2]);
 					
 					//if fires
 					}else if(strMessage[0][1].equals("shoot")){
@@ -290,20 +298,24 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thepanel.intTank1Def = 5;
 				
 				ssm.sendText("server, move, right");
-			//Elevate the gun
+			
+			//elevate the gun
 			}else if(evt.getKeyChar() == 'w'){
 				System.out.println("Server: gun elevating");
 				thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
+				
 				System.out.println(thepanel.intTank1Ang);
 				
+				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 
-			//Depress the gun
+			//depress the gun
 			}else if(evt.getKeyChar() == 's'){
 				System.out.println("Server: gun depressing");
 				thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
+				
 				System.out.println(thepanel.intTank1Ang);
 				
-				
+				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 			}
 			
 			//shoot
@@ -329,19 +341,23 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thepanel.intTank2Def = 5;
 				ssm.sendText("client, move, right");
 				
-			//Elevate the gun
-			}else if(evt.getKeyChar() == KeyEvent.VK_UP){
+			//elevate the gun
+			}else if(evt.getKeyCode() == KeyEvent.VK_UP){
 				System.out.println("Server: gun elevating");
 				thepanel.intTank2Ang = thepanel.intTank2Ang + 5;
+				
 				System.out.println(thepanel.intTank2Ang);
 				
+				ssm.sendText("client, angle, " + thepanel.intTank2Ang);
 				
-			//Depress the gun
-			}else if(evt.getKeyChar() == KeyEvent.VK_DOWN){
+			//depress the gun
+			}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
 				System.out.println("Server: gun depressing");
 				thepanel.intTank2Ang = thepanel.intTank2Ang - 5;
+				
 				System.out.println(thepanel.intTank2Ang);
 				
+				ssm.sendText("client, angle, " + thepanel.intTank2Ang);
 				
 			}
 			
