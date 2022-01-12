@@ -37,8 +37,8 @@ public class getBullet{
 		
 		//d = Vi*t + 1/2*a*t^2
 		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+580);
-		System.out.println(dblTime+"");
-		System.out.println(intY+"");
+		//System.out.println(dblTime+"");
+		//System.out.println(intY+"");
 		
 		if(boolLaunched==false){
 			dblGravity=0;
