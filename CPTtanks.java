@@ -97,6 +97,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("client");
 				
 				blnisServer = false;
+				
+				thechatarea.append("\nConnection Successful\n");
 				ssm.sendText("client, connect");
 					
 			}else{
@@ -191,13 +193,17 @@ public class CPTtanks implements ActionListener, KeyListener{
 					}else if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
 						
+					//chat message	
+					}else if(strMessage[0][1].equals("chat")){
+						thechatarea.append("\nP1: " + strMessage[0][2]);
+						
 					}
 					
 				//check if client
 				}else if(strMessage[0][0].equals("client")){
 					//if connected
 					if(strMessage[0][1].equals("connect")){
-						thechatarea.append("\nPlayer 2 connected!");
+						thechatarea.append("\nPlayer 2 connected!\n");
 						thechat.setEnabled(true);
 						
 					//if stop movement
@@ -223,6 +229,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 					//if fires
 					}else if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
+					
+					//chat message	
+					}else if(strMessage[0][1].equals("chat")){
+						thechatarea.append("\nP2: " + strMessage[0][2]);
 						
 					}
 				}
@@ -245,7 +255,21 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//if player sends chat message	
 		}else if(evt.getSource() == thechat){
-			//thetext.append
+			strChat = thechat.getText();
+			
+			//send for server
+			if(blnisServer == true){
+				thechatarea.append("\nP1: " + strChat);
+				
+				ssm.sendText("server, chat, " + strChat);
+			
+			//send for client
+			}else{
+				thechatarea.append("\nP2: " + strChat);
+				
+				ssm.sendText("client, chat, " + strChat);
+				
+			}
 		}
 	}
 	
