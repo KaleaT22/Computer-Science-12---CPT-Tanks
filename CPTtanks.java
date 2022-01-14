@@ -166,24 +166,20 @@ public class CPTtanks implements ActionListener, KeyListener{
 						theclient.setVisible(false);
 						theIP.setVisible(false);
 						theipAdd.setVisible(false);
+						thechat.setVisible(false);
+						thechatarea.setVisible(false);
 						
 						theframe.requestFocus();
 					
 					//if stop movement
 					}else if(strMessage[0][1].equals("stop")){
 						thepanel.intTank1Def = 0;
-					
-					//if move	
-					}else if(strMessage[0][1].equals("move")){
-						//move left
-						if(strMessage[0][2].equals("left")){
-							thepanel.intTank1Def = -5;
 						
-						//move right
-						}else if(strMessage[0][2].equals("right")){
-							thepanel.intTank1Def = 5;
-							
-						}
+					}
+					
+					//if move
+					if(strMessage[0][1].equals("move")){
+						thepanel.intTank1Pos = Integer.parseInt(strMessage[0][2]);
 						
 					//if depress / elevating cannon
 					}else if(strMessage[0][1].equals("angle")){
@@ -205,33 +201,35 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("connect")){
 						thechatarea.append("\nPlayer 2 connected!\n");
 						thechat.setEnabled(true);
-						
+					
+					}
+					
 					//if stop movement
-					}else if(strMessage[0][1].equals("stop")){
+					if(strMessage[0][1].equals("stop")){
 						thepanel.intTank2Def = 0;
 					
+					}
+					
 					//if move	
-					}else if(strMessage[0][1].equals("move")){
-						//move left
-						if(strMessage[0][2].equals("left")){
-							thepanel.intTank2Def = -5;
+					if(strMessage[0][1].equals("move")){
+						thepanel.intTank2Pos = Integer.parseInt(strMessage[0][2]);	
 						
-						//move right
-						}else if(strMessage[0][2].equals("right")){
-							thepanel.intTank2Def = 5;
-							
-						}
-						
+					}
+					
 					//if depress / elevating cannon
-					}else if(strMessage[0][1].equals("angle")){
+					if(strMessage[0][1].equals("angle")){
 						thepanel.intTank2Ang = Integer.parseInt(strMessage[0][2]);
 					
+					}
+					
 					//if fires
-					}else if(strMessage[0][1].equals("shoot")){
+					if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
 					
+					}
+					
 					//chat message	
-					}else if(strMessage[0][1].equals("chat")){
+					if(strMessage[0][1].equals("chat")){
 						thechatarea.append("\nP2: " + strMessage[0][2]);
 						
 					}
@@ -248,6 +246,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theclient.setVisible(false);
 			theIP.setVisible(false);
 			theipAdd.setVisible(false);
+			thechat.setVisible(false);
+			thechatarea.setVisible(false);
 			
 			ssm.sendText("server, playstart");
 			
@@ -314,14 +314,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Server: Left");
 				thepanel.intTank1Def = -5;
 				
-				ssm.sendText("server, move, left");
+				ssm.sendText("server, move, " + thepanel.intTank1Pos);
 			
 			//right
 			}else if(evt.getKeyChar() == 'd'){
 				System.out.println("Server: Right");
 				thepanel.intTank1Def = 5;
 				
-				ssm.sendText("server, move, right");
+				ssm.sendText("server, move, " + thepanel.intTank1Pos);
 			
 			//elevate the gun
 			}else if(evt.getKeyChar() == 'w'){
@@ -357,13 +357,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 				System.out.println("Client: Left");
 				thepanel.intTank2Def = -5;
-				ssm.sendText("client, move, left");
+				ssm.sendText("client, move, " + thepanel.intTank2Pos);
 			
 			//right
 			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 				System.out.println("Client: Right");
 				thepanel.intTank2Def = 5;
-				ssm.sendText("client, move, right");
+				ssm.sendText("client, move, " + thepanel.intTank2Pos);
 				
 			//elevate the gun
 			}else if(evt.getKeyCode() == KeyEvent.VK_UP){
@@ -473,6 +473,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		theframe.setContentPane(thepanel);
 		thepanel.setLayout(null);
+		theframe.setResizable(false);
 		theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theframe.pack();
 		theframe.setVisible(true);
