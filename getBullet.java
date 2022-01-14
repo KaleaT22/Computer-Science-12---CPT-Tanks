@@ -19,6 +19,8 @@ public class getBullet{
 	double dblTime=0;
 	double dblGravity=(-9.8);
 	
+	String strColor = "WHITE";
+	
 	//Method
 	///Override the method in JPanel
 	///To draw this APanel differently
@@ -43,12 +45,17 @@ public class getBullet{
 		if(boolLaunched==false){
 			dblGravity=0;
 			dblPowerY=0;
+			dblPowerX=0;
 		}
 		//If the ball wasn't launched, its in limbo (not moving) until it is launched
 	}
 	
 	public void drawIt(Graphics g){
 		g.setColor(Color.WHITE);
+		if(dblPowerX ==0){
+			g.setColor(Color.RED);
+		}
+		//Once the cannon stops moving, turn it red
 		g.fillOval(intX, intY, 20, 20);
 		this.nextPos();
 	}

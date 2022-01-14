@@ -64,6 +64,9 @@ public class tankpanel extends JPanel implements ActionListener{
 			intTank2Pos = intTank2Pos + intTank2Def;
 			
 			bullet2.drawIt(g);
+			if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
+				bullet1.boolLaunched=false;
+			}
 		}
 	}
 	
