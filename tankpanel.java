@@ -66,7 +66,16 @@ public class tankpanel extends JPanel implements ActionListener{
 			bullet2.drawIt(g);
 			if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
 				bullet1.boolLaunched=false;
+				bullet1.boolHitbox=true;
 			}
+			//If server's bullet hits enemy tank (client), stop the bullet from moving and change it's color to red
+			
+			if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 580, 80, 40))){
+				bullet2.boolLaunched=false;
+				bullet2.boolHitbox=true;
+			}
+			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
+			
 		}
 	}
 	

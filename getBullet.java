@@ -10,10 +10,14 @@ public class getBullet{
 	double dblPowerY;
 	double dblAngleRadians;
 	boolean boolLaunched;
+	boolean boolHitbox=false;
+	boolean boolGetCoords=true;
 	
 	int intX;
+	int intCurrentX;
 	int intTankX;
 	int intY = 580;
+	int intCurrentY;
 	int intDef = +4;
 	int intDef2 = -4;
 	double dblTime=0;
@@ -43,11 +47,20 @@ public class getBullet{
 		//System.out.println(intY+"");
 		
 		if(boolLaunched==false){
+			if(boolHitbox==true && boolGetCoords==true){
+				intCurrentX=intX;
+				intCurrentY=intY;
+				boolGetCoords=false;
+			}
+			//If the ball hits something (hitbox), then gather the coordnates where it hits and change boolGetCoords to false, this ensures that
+			//the coordnates are only gathered ONE time, otherwise it would just keep updating the coords and the ball would keep moving
+			intX=intCurrentX;
+			intY=intCurrentY;
 			dblGravity=0;
 			dblPowerY=0;
 			dblPowerX=0;
 		}
-		//If the ball wasn't launched, its in limbo (not moving) until it is launched
+		//If the ball isn't considered "launched", stop the ball from moving
 	}
 	
 	public void drawIt(Graphics g){

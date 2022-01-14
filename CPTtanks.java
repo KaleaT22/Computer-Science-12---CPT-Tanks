@@ -224,7 +224,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					//if fires
 					if(strMessage[0][1].equals("shoot")){
-						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
+						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
 					
 					}
 					
@@ -387,7 +387,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			//shoot
 			if(evt.getKeyChar() == ' '){
-				thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, thepanel.intTank2Ang, true);
+				thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
 				ssm.sendText("client, shoot");
 				System.out.println("FIRED!");
 				
