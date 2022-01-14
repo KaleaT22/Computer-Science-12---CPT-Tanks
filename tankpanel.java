@@ -71,6 +71,10 @@ public class tankpanel extends JPanel implements ActionListener{
 				bullet1.boolLaunched=false;
 				bullet1.boolHitbox=true;
 				//If the bullet touches the floor, stop the bullet from moving and change it's color to red
+			}else if(bullet1.intX<0 || bullet1.intX>1280){
+				bullet1.boolLaunched=false;
+				bullet1.boolHitbox=true;
+				//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
 			}
 			//If server's bullet hits enemy tank (client), stop the bullet from moving and change it's color to red
 			
@@ -81,7 +85,12 @@ public class tankpanel extends JPanel implements ActionListener{
 				bullet2.boolLaunched=false;
 				bullet2.boolHitbox=true;
 				//If the bullet touches the floor, stop the bullet from moving and change it's color to red
+			}else if(bullet2.intX<0 || bullet2.intX>1280){
+				bullet2.boolLaunched=false;
+				bullet2.boolHitbox=true;
+				//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
 			}
+			//If 
 			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
 			
 		}
