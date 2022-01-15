@@ -281,12 +281,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thepanel.intTank1Def = 0;
 				
 				ssm.sendText("server, stop");
+				ssm.sendText("server, move, " + thepanel.intTank1Pos);
 				
 			//stop right
 			}else if(evt.getKeyChar()== 'd'){
 				thepanel.intTank1Def = 0;
 				
 				ssm.sendText("server, stop");
+				ssm.sendText("server, move, " + thepanel.intTank1Pos);
 			}
 			
 		//stop client movements
@@ -296,12 +298,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thepanel.intTank2Def = 0;
 				
 				ssm.sendText("client, stop");
+				ssm.sendText("client, move, " + thepanel.intTank2Pos);
 			
 			//stop right
 			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 				thepanel.intTank2Def = 0;
 				
 				ssm.sendText("client, stop");
+				ssm.sendText("client, move, " + thepanel.intTank2Pos);
 			}
 		}
 	}
