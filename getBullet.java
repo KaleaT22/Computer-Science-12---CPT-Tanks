@@ -13,11 +13,11 @@ public class getBullet{
 	boolean boolHitbox=false;
 	boolean boolGetCoords=true;
 	
-	int intX;
-	int intCurrentX;
+	int intX = -20;
 	int intTankX;
 	int intY = 580;
-	int intCurrentY;
+	int intCurrentX = -20;
+	int intCurrentY = -20;
 	int intDef = +4;
 	int intDef2 = -4;
 	double dblTime=0;
@@ -57,8 +57,8 @@ public class getBullet{
 			intX=intCurrentX;
 			intY=intCurrentY;
 			dblGravity=0;
-			dblPowerY=0;
-			dblPowerX=0;
+			dblPowerY=-20;
+			dblPowerX=-20;
 		}
 		//If the ball isn't considered "launched", stop the ball from moving
 	}
