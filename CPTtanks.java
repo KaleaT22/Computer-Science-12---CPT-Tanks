@@ -69,6 +69,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("server");
 				
 				blnisServer = true;
+				thepanel.blnPanelServer = true;
 				
 						
 			}else{

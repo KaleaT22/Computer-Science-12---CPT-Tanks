@@ -19,6 +19,8 @@ public class tankpanel extends JPanel implements ActionListener{
 	int intTank2Pow = 70;
 	int intTank2Ang = 45;
 	
+	boolean blnPanelServer;
+	
 	//Spawns bullet off screen in limbo waiting to be launched
 	getBullet bullet1 = new getBullet(-30,0,0,false);
 	
@@ -56,6 +58,17 @@ public class tankpanel extends JPanel implements ActionListener{
 			intTank1Pos = intTank1Pos + intTank1Def;
 			
 			bullet1.drawIt(g);
+			Font Scorefont10 = new Font("Sans Serif", Font.PLAIN, 27);
+			if(blnPanelServer == true){
+				g.setFont(Scorefont10);
+				g.setColor(Color.BLACK);
+				g.drawString("Launch angle: "+intTank1Ang, 50, 75);
+			}
+			else{
+				g.setFont(Scorefont10);
+				g.setColor(Color.BLACK);
+				g.drawString("Launch angle: "+intTank2Ang, 50, 75);
+			}
 			
 			//TANK 2
 			g.setColor(Color.ORANGE);
