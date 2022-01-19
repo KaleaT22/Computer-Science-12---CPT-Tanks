@@ -47,6 +47,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 	String strLineSplit[];
 	
 	boolean blnisServer;
+	boolean serverTurn = true;
+	boolean clientTurn = false;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
@@ -195,6 +197,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 						thechatarea.append("\nP1: " + strMessage[0][2]);
 						
 					}
+					//Switch to clients turn
+					if(strMessage[0][1].equals("turnClient")){
+						serverTurn = false;
+					
+					}
 					
 				//check if client
 				}else if(strMessage[0][0].equals("client")){
@@ -232,6 +239,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 					//chat message	
 					if(strMessage[0][1].equals("chat")){
 						thechatarea.append("\nP2: " + strMessage[0][2]);
+						
+					}
+					//switch to servers turn
+					if(strMessage[0][1].equals("turnServer")){
+						serverTurn = true;
 						
 					}
 				}
@@ -314,102 +326,107 @@ public class CPTtanks implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent evt){
 		//server movements
 		if(blnisServer == true){
+			if(serverTurn == true){
 			//left
-			if(evt.getKeyChar() == 'a'){
-				System.out.println("Server: Left");
-				thepanel.intTank1Def = -5;
+				if(evt.getKeyChar() == 'a'){
+					System.out.println("Server: Left");
+					thepanel.intTank1Def = -5;
+					
+					//ssm.sendText("server, move, " + thepanel.intTank1Pos);
+					
+					//call function to send ssm to move tank
+					moveTank("server, move, " + thepanel.intTank1Pos);
+					
+				//right
+				}else if(evt.getKeyChar() == 'd'){
+					System.out.println("Server: Right");
+					thepanel.intTank1Def = 5;
+					
+					//ssm.sendText("server, move, " + thepanel.intTank1Pos);
+					
+					//call function to send ssm to move tank
+					moveTank("server, move, " + thepanel.intTank1Pos);
 				
-				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
-				
-				//call function to send ssm to move tank
-				moveTank("server, move, " + thepanel.intTank1Pos);
-				
-			//right
-			}else if(evt.getKeyChar() == 'd'){
-				System.out.println("Server: Right");
-				thepanel.intTank1Def = 5;
-				
-				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
-				
-				//call function to send ssm to move tank
-				moveTank("server, move, " + thepanel.intTank1Pos);
-			
-			//elevate the gun
-			}else if(evt.getKeyChar() == 'w'){
-				System.out.println("Server: gun elevating");
-				thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
-				
-				System.out.println(thepanel.intTank1Ang);
-				
-				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
+				//elevate the gun
+				}else if(evt.getKeyChar() == 'w'){
+					System.out.println("Server: gun elevating");
+					thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
+					
+					System.out.println(thepanel.intTank1Ang);
+					
+					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 
-			//depress the gun
-			}else if(evt.getKeyChar() == 's'){
-				System.out.println("Server: gun depressing");
-				thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
+				//depress the gun
+				}else if(evt.getKeyChar() == 's'){
+					System.out.println("Server: gun depressing");
+					thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
+					
+					System.out.println(thepanel.intTank1Ang);
+					
+					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
+				}
 				
-				System.out.println(thepanel.intTank1Ang);
-				
-				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
-			}
-			
-			//shoot
-			if(evt.getKeyChar() == ' '){
-				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
-				System.out.println("FIRED!");
-				
-				ssm.sendText("server, shoot");
-				
+				//shoot
+				if(evt.getKeyChar() == ' '){
+					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
+					System.out.println("FIRED!");
+					ssm.sendText("server, shoot");
+					ssm.sendText("server, turnClient");
+					serverTurn = false;
+				}
 			}
 		
 		//client movements
 		}else{
-			//left
-			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
-				System.out.println("Client: Left");
-				thepanel.intTank2Def = -5;
+			if(serverTurn == false){
+				//left
+				if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+					System.out.println("Client: Left");
+					thepanel.intTank2Def = -5;
+					
+					//ssm.sendText("client, move, " + thepanel.intTank2Pos);
+					
+					//call function to send ssm to move tank
+					moveTank("client, move, " + thepanel.intTank2Pos);
 				
-				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
+				//right
+				}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+					System.out.println("Client: Right");
+					thepanel.intTank2Def = 5;
+					
+					//ssm.sendText("client, move, " + thepanel.intTank2Pos);
+					
+					//call function to send ssm to move tank
+					moveTank("client, move, " + thepanel.intTank2Pos);
+					
+				//elevate the gun
+				}else if(evt.getKeyCode() == KeyEvent.VK_UP){
+					System.out.println("Server: gun elevating");
+					thepanel.intTank2Ang = thepanel.intTank2Ang + 5;
+					
+					System.out.println(thepanel.intTank2Ang);
+					
+					ssm.sendText("client, angle, " + thepanel.intTank2Ang);
+					
+				//depress the gun
+				}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+					System.out.println("Server: gun depressing");
+					thepanel.intTank2Ang = thepanel.intTank2Ang - 5;
+					
+					System.out.println(thepanel.intTank2Ang);
+					
+					ssm.sendText("client, angle, " + thepanel.intTank2Ang);
+					
+				}
 				
-				//call function to send ssm to move tank
-				moveTank("client, move, " + thepanel.intTank2Pos);
-			
-			//right
-			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
-				System.out.println("Client: Right");
-				thepanel.intTank2Def = 5;
-				
-				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
-				
-				//call function to send ssm to move tank
-				moveTank("client, move, " + thepanel.intTank2Pos);
-				
-			//elevate the gun
-			}else if(evt.getKeyCode() == KeyEvent.VK_UP){
-				System.out.println("Server: gun elevating");
-				thepanel.intTank2Ang = thepanel.intTank2Ang + 5;
-				
-				System.out.println(thepanel.intTank2Ang);
-				
-				ssm.sendText("client, angle, " + thepanel.intTank2Ang);
-				
-			//depress the gun
-			}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
-				System.out.println("Server: gun depressing");
-				thepanel.intTank2Ang = thepanel.intTank2Ang - 5;
-				
-				System.out.println(thepanel.intTank2Ang);
-				
-				ssm.sendText("client, angle, " + thepanel.intTank2Ang);
-				
-			}
-			
-			//shoot
-			if(evt.getKeyChar() == ' '){
-				thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
-				ssm.sendText("client, shoot");
-				System.out.println("FIRED!");
-				
+				//shoot
+				if(evt.getKeyChar() == ' '){
+					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
+					ssm.sendText("client, shoot");
+					System.out.println("FIRED!");
+					ssm.sendText("client, turnServer");
+					serverTurn = true;
+				}
 			}
 		}
 	}
