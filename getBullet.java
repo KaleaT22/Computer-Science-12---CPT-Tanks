@@ -48,8 +48,10 @@ public class getBullet{
 		
 		if(boolLaunched==false){
 			if(boolHitbox==true && boolGetCoords==true){
-				intCurrentX=intX;
-				intCurrentY=intY;
+				//intCurrentX=intX;
+				//intCurrentY=intY;
+				intCurrentX=-20;
+				intCurrentY=-20;
 				boolGetCoords=false;
 			}
 			//If the ball hits something (hitbox), then gather the coordnates where it hits and change boolGetCoords to false, this ensures that
