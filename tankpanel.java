@@ -66,12 +66,14 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.setColor(Color.BLACK);
 				g.drawString("Launch angle: "+intTank1Ang, 50, 75);
 				g.drawString("Health: "+intHealth1, 50, 150);
+				g.drawString("Health: "+intHealth2, 1000, 150);
 			}
 			else{
 				g.setFont(Scorefont10);
 				g.setColor(Color.BLACK);
 				g.drawString("Launch angle: "+intTank2Ang, 1000, 75);
 				g.drawString("Health: "+intHealth2, 1000, 150);
+				g.drawString("Health: "+intHealth1, 50, 150);
 			}
 			
 			//TANK 2
