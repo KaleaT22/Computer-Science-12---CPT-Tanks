@@ -12,12 +12,14 @@ public class tankpanel extends JPanel implements ActionListener{
 	int intTank1Def = 0;
 	int intTank1Pow = 70;
 	int intTank1Ang = 45;
+	int intHealth1 = 100;
 	
 	
 	int intTank2Pos = 960;
 	int intTank2Def = 0;
 	int intTank2Pow = 70;
 	int intTank2Ang = 45;
+	int intHealth2 = 100;
 	
 	boolean blnPanelServer;
 	
@@ -63,11 +65,13 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.setFont(Scorefont10);
 				g.setColor(Color.BLACK);
 				g.drawString("Launch angle: "+intTank1Ang, 50, 75);
+				g.drawString("Health: "+intHealth1, 50, 150);
 			}
 			else{
 				g.setFont(Scorefont10);
 				g.setColor(Color.BLACK);
-				g.drawString("Launch angle: "+intTank2Ang, 50, 75);
+				g.drawString("Launch angle: "+intTank2Ang, 1000, 75);
+				g.drawString("Health: "+intHealth2, 1000, 150);
 			}
 			
 			//TANK 2
@@ -80,6 +84,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
 				bullet1.boolLaunched=false;
 				bullet1.boolHitbox=true;
+				intHealth2 = intHealth2 - 10;
 			}else if(bullet1.intY>600){
 				bullet1.boolLaunched=false;
 				bullet1.boolHitbox=true;
@@ -94,6 +99,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 580, 80, 40))){
 				bullet2.boolLaunched=false;
 				bullet2.boolHitbox=true;
+				intHealth1 = intHealth1 - 10;
 			}else if(bullet2.intY>600){
 				bullet2.boolLaunched=false;
 				bullet2.boolHitbox=true;
