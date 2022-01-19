@@ -319,14 +319,20 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Server: Left");
 				thepanel.intTank1Def = -5;
 				
-				ssm.sendText("server, move, " + thepanel.intTank1Pos);
-			
+				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
+				
+				//call function to send ssm to move tank
+				moveTank("server, move, " + thepanel.intTank1Pos);
+				
 			//right
 			}else if(evt.getKeyChar() == 'd'){
 				System.out.println("Server: Right");
 				thepanel.intTank1Def = 5;
 				
-				ssm.sendText("server, move, " + thepanel.intTank1Pos);
+				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
+				
+				//call function to send ssm to move tank
+				moveTank("server, move, " + thepanel.intTank1Pos);
 			
 			//elevate the gun
 			}else if(evt.getKeyChar() == 'w'){
@@ -362,13 +368,21 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 				System.out.println("Client: Left");
 				thepanel.intTank2Def = -5;
-				ssm.sendText("client, move, " + thepanel.intTank2Pos);
+				
+				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
+				
+				//call function to send ssm to move tank
+				moveTank("client, move, " + thepanel.intTank2Pos);
 			
 			//right
 			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 				System.out.println("Client: Right");
 				thepanel.intTank2Def = 5;
-				ssm.sendText("client, move, " + thepanel.intTank2Pos);
+				
+				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
+				
+				//call function to send ssm to move tank
+				moveTank("client, move, " + thepanel.intTank2Pos);
 				
 			//elevate the gun
 			}else if(evt.getKeyCode() == KeyEvent.VK_UP){
@@ -402,6 +416,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	public void keyTyped(KeyEvent evt){
 		
+	}
+	
+	//ssm movements method
+	public void moveTank(String strMove){
+		String strSSM = strMove;
+		
+		ssm.sendText(strMove);
 	}
 	
 	//constructor
