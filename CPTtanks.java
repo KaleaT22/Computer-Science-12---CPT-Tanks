@@ -45,7 +45,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	String strChat = "";
 	boolean blnChat = false;
-	boolean blnConnected=false;
+	boolean blnConnected = false;
 	
 	String strUser = "";
 	
@@ -57,6 +57,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 	String strLineSplit[];
 	
 	boolean blnisServer;
+	
+	boolean blnserverTurn = true;
+	
+	boolean blnserverShoot = false;
+	boolean blnclientShoot = false;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
@@ -75,8 +80,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theserver.setEnabled(false); 
 			theclient.setEnabled(false);
 			theipAdd.setEnabled(false);
+			
 			ssm = new SuperSocketMaster(8374, this);
-			blnConnected=true;
+			
+			blnConnected = true;
+			
 			boolean blnIsConnected = ssm.connect();
 			
 			if(blnIsConnected){
@@ -119,7 +127,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				blnisServer = false;
 				
 				thechatarea.append("\nConnection Successful\n");
-				ssm.sendText("client, connect");
+				ssm.sendText("client, connect, " + strUser);
 				blnConnected=true;
 			}else{
 				theclient.setEnabled(true); 
@@ -131,6 +139,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//if player disconnects	
 		}else if(evt.getSource() == thedisconnect){
 			thedisconnect.setEnabled(false);
+			theuserInput.setEnabled(true);
+			thechat.setEnabled(false);
 			
 			theuserInput.setText("");
 		
@@ -157,7 +167,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 						//this actually does the splits string and puts in a 1D array
 						strLineSplit = strLine.split(", ");
 								
-						for(intColumn = 0; intColumn < 3; intColumn++){
+						for(intColumn = 0; intColumn < 4; intColumn++){
 							strMessage[intRow][intColumn] = strLineSplit[intColumn];
 							System.out.println("strMessage[" + intRow + "][" + intColumn + "]");
 							System.out.println("Array: " + strMessage[intRow][intColumn]);
@@ -185,6 +195,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 						theclient.setVisible(false);
 						theIP.setVisible(false);
 						theipAdd.setVisible(false);
+						theUser.setVisible(false);
+						theuserInput.setVisible(false);
 						
 						chatBut.setVisible(true);
 						chatBut.setEnabled(true);
@@ -209,9 +221,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 					}else if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
 						
+						blnserverTurn = false;
+						
 					//chat message	
 					}else if(strMessage[0][1].equals("chat")){
-						thechatarea.append("\nP1: " + strMessage[0][2]);
+						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
 						
 					}
 					
@@ -219,7 +233,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				}else if(strMessage[0][0].equals("client")){
 					//if connected
 					if(strMessage[0][1].equals("connect")){
-						thechatarea.append("\nPlayer 2 connected!\n");
+						thechatarea.append("\n" + strMessage[0][2] + " connected!\n");
 						thechat.setEnabled(true);
 					
 					}
@@ -245,12 +259,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 					//if fires
 					if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
+						
+						blnserverTurn = true;
 					
 					}
 					
 					//chat message	
 					if(strMessage[0][1].equals("chat")){
-						thechatarea.append("\nP2: " + strMessage[0][2]);
+						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
 						
 					}
 				}
@@ -266,6 +282,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theclient.setVisible(false);
 			theIP.setVisible(false);
 			theipAdd.setVisible(false);
+			theUser.setVisible(false);
+			theuserInput.setVisible(false);
 			
 			thechat.setVisible(true);
 			chatBut.setVisible(true);
@@ -280,10 +298,17 @@ public class CPTtanks implements ActionListener, KeyListener{
 			//if chatfield disabled, enable
 			if(blnChat == false){
 				thechat.setEnabled(true);
+				
+				blnChat = true;
 			
 			//if chatfield enabled, disable
 			}else{
 				thechat.setEnabled(false);
+				
+				blnChat = false;
+				
+				theframe.requestFocus();
+				
 			}
 		
 		//if player sends chat message	
@@ -294,17 +319,17 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(blnisServer == true){
 				thechatarea.append("\n" + strUser + ": " + strChat);
 				
-				ssm.sendText("server, chat, " + strChat);
+				ssm.sendText("server, chat, " + strUser + ", " + strChat);
 				
-				thechatarea.append("");
+				thechat.setText("");
 			
 			//send for client
 			}else{
 				thechatarea.append("\n" + strUser + ": " + strChat);
 				
-				ssm.sendText("client, chat, " + strChat);
+				ssm.sendText("client, chat, " + strUser + ", " + strChat);
 				
-				thechatarea.append("");
+				thechat.setText("");
 			}
 		}
 	}
@@ -368,33 +393,38 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 				//call function to send ssm to move tank
 				moveTank("server, move, " + thepanel.intTank1Pos);
-			
-			//elevate the gun
-			}else if(evt.getKeyChar() == 'w'){
-				System.out.println("Server: gun elevating");
-				thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
 				
-				System.out.println(thepanel.intTank1Ang);
-				
-				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
-
-			//depress the gun
-			}else if(evt.getKeyChar() == 's'){
-				System.out.println("Server: gun depressing");
-				thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
-				
-				System.out.println(thepanel.intTank1Ang);
-				
-				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 			}
 			
-			//shoot
-			if(evt.getKeyChar() == ' '){
-				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
-				System.out.println("FIRED!");
+			if(blnserverTurn == true){
+				//elevate the gun
+				if(evt.getKeyChar() == 'w'){
+					System.out.println("Server: gun elevating");
+					thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
+					
+					System.out.println(thepanel.intTank1Ang);
+					
+					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
+
+				//depress the gun
+				}else if(evt.getKeyChar() == 's'){
+					System.out.println("Server: gun depressing");
+					thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
+					
+					System.out.println(thepanel.intTank1Ang);
+					
+					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
+				}
 				
-				ssm.sendText("server, shoot");
-				
+				//shoot
+				if(evt.getKeyChar() == ' '){
+					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
+					System.out.println("FIRED!");
+					
+					ssm.sendText("server, shoot");
+					
+					blnserverTurn = false;
+				}
 			}
 		
 		//client movements
@@ -419,32 +449,37 @@ public class CPTtanks implements ActionListener, KeyListener{
 				//call function to send ssm to move tank
 				moveTank("client, move, " + thepanel.intTank2Pos);
 				
-			//elevate the gun
-			}else if(evt.getKeyCode() == KeyEvent.VK_UP){
-				System.out.println("Server: gun elevating");
-				thepanel.intTank2Ang = thepanel.intTank2Ang + 5;
-				
-				System.out.println(thepanel.intTank2Ang);
-				
-				ssm.sendText("client, angle, " + thepanel.intTank2Ang);
-				
-			//depress the gun
-			}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
-				System.out.println("Server: gun depressing");
-				thepanel.intTank2Ang = thepanel.intTank2Ang - 5;
-				
-				System.out.println(thepanel.intTank2Ang);
-				
-				ssm.sendText("client, angle, " + thepanel.intTank2Ang);
-				
 			}
 			
-			//shoot
-			if(evt.getKeyChar() == ' '){
-				thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
-				ssm.sendText("client, shoot");
-				System.out.println("FIRED!");
+			if(blnserverTurn == false){
+				//elevate the gun
+				if(evt.getKeyCode() == KeyEvent.VK_UP){
+					System.out.println("Server: gun elevating");
+					thepanel.intTank2Ang = thepanel.intTank2Ang + 5;
+					
+					System.out.println(thepanel.intTank2Ang);
+					
+					ssm.sendText("client, angle, " + thepanel.intTank2Ang);
+					
+				//depress the gun
+				}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+					System.out.println("Server: gun depressing");
+					thepanel.intTank2Ang = thepanel.intTank2Ang - 5;
+					
+					System.out.println(thepanel.intTank2Ang);
+					
+					ssm.sendText("client, angle, " + thepanel.intTank2Ang);
+					
+				}
 				
+				//shoot
+				if(evt.getKeyChar() == ' '){
+					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
+					ssm.sendText("client, shoot");
+					System.out.println("FIRED!");
+					
+					blnserverTurn = true;
+				}
 			}
 		}
 	}
@@ -464,8 +499,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 		if(blnConnected==true){
 			if(blnisServer == true){
 				ssm.sendText("server, move, " + thepanel.intTank1Pos);
+				
 			}else if(blnisServer == false){
 				ssm.sendText("client, move, " + thepanel.intTank2Pos);
+				
 			}
 		}
 	}
@@ -526,12 +563,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//user label
 		theUser.setSize(200, 25);
 		theUser.setHorizontalAlignment(SwingConstants.CENTER);
-		theUser.setLocation(1080, 125);
+		theUser.setLocation(1080, 130);
 		thepanel.add(theUser);
 		
 		//username input
 		theuserInput.setSize(200, 25);
-		theuserInput.setLocation(1080, 150);
+		theuserInput.setLocation(1080, 155);
 		theuserInput.addActionListener(this);
 		thepanel.add(theuserInput);
 		
@@ -543,27 +580,27 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//chat scroll
 		thechatscroll = new JScrollPane(thechatarea);
-		thechatscroll.setSize(200,400);
-		thechatscroll.setLocation(1080, 250);
+		thechatscroll.setSize(200, 350);
+		thechatscroll.setLocation(1080, 200);
 		thechatarea.setEnabled(false);
 		thepanel.add(thechatscroll);  
 	
 		//chat label
 		thechatlabel.setSize(200, 25);
-		thechatlabel.setLocation(1080, 500);
+		thechatlabel.setLocation(1080, 550);
 		thechatlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		thepanel.add(thechatlabel);
 		
 		//chat textfield
 		thechat.setSize(200, 25);
-		thechat.setLocation(1080, 525);
+		thechat.setLocation(1080, 575);
 		thechat.addActionListener(this);
 		thechat.setEnabled(false);
 		thepanel.add(thechat);
 		
 		//chat button
 		chatBut.setSize(200, 25);
-		chatBut.setLocation(1100, 550);
+		chatBut.setLocation(1080, 600);
 		chatBut.addActionListener(this);
 		chatBut.setVisible(false);
 		thepanel.add(chatBut);
