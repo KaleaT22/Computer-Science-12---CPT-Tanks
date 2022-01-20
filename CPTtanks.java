@@ -6,7 +6,7 @@ import javax.swing.event.*;
 public class CPTtanks implements ActionListener, KeyListener{
 	//properties
 	JFrame theframe = new JFrame("Tanks");
-	tankpanel thepanel = new tankpanel();
+	tankpanel thepanel = new tankpanel(this);
 	
 	int intRow = 0;
 	int intColumn = 0;
@@ -45,6 +45,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	String strChat = "";
 	boolean blnChat = false;
+	boolean blnConnected=false;
 	
 	String strUser = "";
 	
@@ -74,9 +75,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theserver.setEnabled(false); 
 			theclient.setEnabled(false);
 			theipAdd.setEnabled(false);
-			
 			ssm = new SuperSocketMaster(8374, this);
-			
+			blnConnected=true;
 			boolean blnIsConnected = ssm.connect();
 			
 			if(blnIsConnected){
@@ -120,7 +120,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 				thechatarea.append("\nConnection Successful\n");
 				ssm.sendText("client, connect");
-					
+				blnConnected=true;
 			}else{
 				theclient.setEnabled(true); 
 				theipAdd.setEnabled(true);
@@ -458,6 +458,16 @@ public class CPTtanks implements ActionListener, KeyListener{
 		String strSSM = strMove;
 		
 		ssm.sendText(strMove);
+	}
+	
+	public void movingTank(){
+		if(blnConnected==true){
+			if(blnisServer == true){
+				ssm.sendText("server, move, " + thepanel.intTank1Pos);
+			}else if(blnisServer == false){
+				ssm.sendText("client, move, " + thepanel.intTank2Pos);
+			}
+		}
 	}
 	
 	//constructor
