@@ -23,6 +23,8 @@ public class tankpanel extends JPanel implements ActionListener{
 	
 	boolean blnPanelServer;
 	
+	CPTtanks TheTanks;
+	
 	//Spawns bullet off screen in limbo waiting to be launched
 	getBullet bullet1 = new getBullet(-30,0,0,false);
 	
@@ -118,9 +120,11 @@ public class tankpanel extends JPanel implements ActionListener{
 	}
 	
 	//constructor
-	public tankpanel(){
+	public tankpanel(CPTtanks theTanks){
 		super();
 		this.setPreferredSize(new Dimension(1280, 720));
 		thetimer.start();
+		
+		 this.TheTanks = TheTanks;
 	}
 }

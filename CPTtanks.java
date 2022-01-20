@@ -6,7 +6,7 @@ import javax.swing.event.*;
 public class CPTtanks implements ActionListener, KeyListener{
 	//properties
 	JFrame theframe = new JFrame("Tanks");
-	tankpanel thepanel = new tankpanel();
+	tankpanel thepanel = new tankpanel(this);
 	
 	int intRow = 0;
 	int intColumn = 0;
@@ -119,7 +119,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				blnisServer = false;
 				
 				thechatarea.append("\nConnection Successful\n");
-				ssm.sendText("client, connect");
+				ssm.sendText("client, connect, " + strUser);
 					
 			}else{
 				theclient.setEnabled(true); 
@@ -185,9 +185,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 						theclient.setVisible(false);
 						theIP.setVisible(false);
 						theipAdd.setVisible(false);
+						theUser.setVisible(false);
+						theuserInput.setVisible(false);
 						
-						chatBut.setVisible(true);
-						chatBut.setEnabled(true);
+						thechat.setEnabled(false);
+						//chatBut.setVisible(true);
+						//chatBut.setEnabled(true);
 						
 						theframe.requestFocus();
 					
@@ -211,7 +214,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 						
 					//chat message	
 					}else if(strMessage[0][1].equals("chat")){
-						thechatarea.append("\nP1: " + strMessage[0][2]);
+						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
 						
 					}
 					
@@ -219,7 +222,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				}else if(strMessage[0][0].equals("client")){
 					//if connected
 					if(strMessage[0][1].equals("connect")){
-						thechatarea.append("\nPlayer 2 connected!\n");
+						thechatarea.append("\n" + strMessage[0][2] + " connected!\n");
 						thechat.setEnabled(true);
 					
 					}
@@ -250,7 +253,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					//chat message	
 					if(strMessage[0][1].equals("chat")){
-						thechatarea.append("\nP2: " + strMessage[0][2]);
+						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
 						
 					}
 				}
@@ -266,10 +269,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theclient.setVisible(false);
 			theIP.setVisible(false);
 			theipAdd.setVisible(false);
+			theUser.setVisible(false);
+			theuserInput.setVisible(false);
 			
-			thechat.setVisible(true);
-			chatBut.setVisible(true);
-			chatBut.setEnabled(true);
+			thechat.setEnabled(false);
+			//chatBut.setVisible(true);
+			//chatBut.setEnabled(true);
 			
 			ssm.sendText("server, playstart");
 			
@@ -280,10 +285,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 			//if chatfield disabled, enable
 			if(blnChat == false){
 				thechat.setEnabled(true);
+				
+				blnChat = true;
 			
 			//if chatfield enabled, disable
 			}else{
 				thechat.setEnabled(false);
+				
+				blnChat = false;
 			}
 		
 		//if player sends chat message	
@@ -294,17 +303,17 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(blnisServer == true){
 				thechatarea.append("\n" + strUser + ": " + strChat);
 				
-				ssm.sendText("server, chat, " + strChat);
+				ssm.sendText("server, chat, " + strUser + ", " + strChat);
 				
-				thechatarea.append("");
+				thechat.setText("");
 			
 			//send for client
 			}else{
 				thechatarea.append("\n" + strUser + ": " + strChat);
 				
-				ssm.sendText("client, chat, " + strChat);
+				ssm.sendText("client, chat, " + strUser + ", " + strChat);
 				
-				thechatarea.append("");
+				thechat.setText("");
 			}
 		}
 	}
@@ -528,32 +537,32 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//CHAT
 		//chat area
 		thechatarealabel.setSize(200, 25);
-		thechatarealabel.setLocation(1080, 200);
+		thechatarealabel.setLocation(1080, 180);
 		thechatarealabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		//chat scroll
 		thechatscroll = new JScrollPane(thechatarea);
-		thechatscroll.setSize(200,400);
-		thechatscroll.setLocation(1080, 250);
+		thechatscroll.setSize(200,350);
+		thechatscroll.setLocation(1080, 180);
 		thechatarea.setEnabled(false);
 		thepanel.add(thechatscroll);  
 	
 		//chat label
 		thechatlabel.setSize(200, 25);
-		thechatlabel.setLocation(1080, 500);
+		thechatlabel.setLocation(1080, 525);
 		thechatlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		thepanel.add(thechatlabel);
 		
 		//chat textfield
 		thechat.setSize(200, 25);
-		thechat.setLocation(1080, 525);
+		thechat.setLocation(1080, 550);
 		thechat.addActionListener(this);
 		thechat.setEnabled(false);
 		thepanel.add(thechat);
 		
 		//chat button
 		chatBut.setSize(200, 25);
-		chatBut.setLocation(1100, 550);
+		chatBut.setLocation(1080, 575);
 		chatBut.addActionListener(this);
 		chatBut.setVisible(false);
 		thepanel.add(chatBut);
