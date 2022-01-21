@@ -373,7 +373,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//server movements
 		if(blnisServer == true && blnShotfreeze == false){
 			//left
-			if(evt.getKeyChar() == 'a'){
+			if(evt.getKeyChar() == 'a' && thepanel.intTank1Pos>0){
 				System.out.println("Server: Left");
 				thepanel.intTank1Def = -5;
 				
@@ -383,7 +383,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				moveTank("server, move, " + thepanel.intTank1Pos);
 				
 			//right
-			}else if(evt.getKeyChar() == 'd'){
+			}else if(evt.getKeyChar() == 'd' && (thepanel.intTank1Pos+80)<1280){
 				System.out.println("Server: Right");
 				thepanel.intTank1Def = 5;
 				
@@ -428,7 +428,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//client movements
 		}else if(blnShotfreeze==false){
 			//left
-			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+			if(evt.getKeyCode() == KeyEvent.VK_LEFT && thepanel.intTank2Pos>0){
 				System.out.println("Client: Left");
 				thepanel.intTank2Def = -5;
 				
@@ -438,8 +438,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 				moveTank("client, move, " + thepanel.intTank2Pos);
 			
 			//right
-			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT && (thepanel.intTank2Pos+80)<1280){
 				System.out.println("Client: Right");
+				System.out.println(thepanel.intTank2Pos);
 				thepanel.intTank2Def = 5;
 				
 				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
@@ -495,6 +496,19 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	public void movingTank(){
 		if(blnConnected==true){
+			if((thepanel.intTank1Pos+80)>1280){
+				thepanel.intTank1Pos=1200;
+			}
+			if(thepanel.intTank1Pos<0){
+				thepanel.intTank1Pos=0;
+			}
+			if((thepanel.intTank2Pos+80)>1280){
+				thepanel.intTank2Pos=1200;
+			}
+			if(thepanel.intTank2Pos<0){
+				thepanel.intTank2Pos=0;
+			}
+			
 			if(blnisServer == true){
 				ssm.sendText("server, move, " + thepanel.intTank1Pos);
 				
