@@ -353,14 +353,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//stop client movements
 		}else{
 			//stop left
-			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+			if(evt.getKeyChar() == 'a'){
 				thepanel.intTank2Def = 0;
 				
 				ssm.sendText("client, stop");
 				ssm.sendText("client, move, " + thepanel.intTank2Pos);
 			
 			//stop right
-			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+			}else if(evt.getKeyChar() == 'd'){
 				thepanel.intTank2Def = 0;
 				
 				ssm.sendText("client, stop");
@@ -396,7 +396,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			if(blnserverTurn == true && blnShotfreeze == false){
 				//elevate the gun
-				if(evt.getKeyChar() == 'w'){
+				if(evt.getKeyChar() == 'w' && thepanel.intTank1Ang<90){
 					System.out.println("Server: gun elevating");
 					thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
 					
@@ -405,7 +405,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 
 				//depress the gun
-				}else if(evt.getKeyChar() == 's'){
+				}else if(evt.getKeyChar() == 's' && thepanel.intTank1Ang>0){
 					System.out.println("Server: gun depressing");
 					thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
 					
@@ -428,7 +428,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//client movements
 		}else if(blnShotfreeze==false){
 			//left
-			if(evt.getKeyCode() == KeyEvent.VK_LEFT && thepanel.intTank2Pos>0){
+			if(evt.getKeyChar() == 'a' && thepanel.intTank2Pos>0){
 				System.out.println("Client: Left");
 				thepanel.intTank2Def = -5;
 				
@@ -438,7 +438,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				moveTank("client, move, " + thepanel.intTank2Pos);
 			
 			//right
-			}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT && (thepanel.intTank2Pos+80)<1280){
+			}else if(evt.getKeyChar() == 'd' && (thepanel.intTank2Pos+80)<1280){
 				System.out.println("Client: Right");
 				System.out.println(thepanel.intTank2Pos);
 				thepanel.intTank2Def = 5;
@@ -452,7 +452,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			if(blnserverTurn == false && blnShotfreeze ==false){
 				//elevate the gun
-				if(evt.getKeyCode() == KeyEvent.VK_UP){
+				if(evt.getKeyChar() == 'w' && thepanel.intTank2Ang<90){
 					System.out.println("Server: gun elevating");
 					thepanel.intTank2Ang = thepanel.intTank2Ang + 5;
 					
@@ -461,7 +461,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					ssm.sendText("client, angle, " + thepanel.intTank2Ang);
 					
 				//depress the gun
-				}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+				}else if(evt.getKeyChar() == 's' && thepanel.intTank2Ang>0){
 					System.out.println("Server: gun depressing");
 					thepanel.intTank2Ang = thepanel.intTank2Ang - 5;
 					
