@@ -86,36 +86,46 @@ public class tankpanel extends JPanel implements ActionListener{
 			intTank2Pos = intTank2Pos + intTank2Def;
 			
 			bullet2.drawIt(g);
-			if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
-				bullet1.boolLaunched=false;
-				bullet1.boolHitbox=true;
-				intHealth2 = intHealth2 - 10;
-			}else if(bullet1.intY>600){
-				bullet1.boolLaunched=false;
-				bullet1.boolHitbox=true;
-				//If the bullet touches the floor, stop the bullet from moving and change it's color to red
-			}else if(bullet1.intX<0 || bullet1.intX>1280){
-				bullet1.boolLaunched=false;
-				bullet1.boolHitbox=true;
-				//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
+			if(bullet1.boolHitbox==false){
+					if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
+					bullet1.boolLaunched=false;
+					bullet1.boolHitbox=true;
+					intHealth2 = intHealth2 - 10;
+					TheTanks.allowShooting();
+				}else if(bullet1.intY>600){
+					bullet1.boolLaunched=false;
+					bullet1.boolHitbox=true;
+					TheTanks.allowShooting();
+					//If the bullet touches the floor, stop the bullet from moving and change it's color to red
+				}else if(bullet1.intX<0 || bullet1.intX>1280){
+					bullet1.boolLaunched=false;
+					bullet1.boolHitbox=true;
+					TheTanks.allowShooting();
+					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
+				}
+				//If server's bullet hits enemy tank (client), stop the bullet from moving and change it's color to red
 			}
-			//If server's bullet hits enemy tank (client), stop the bullet from moving and change it's color to red
 			
-			if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 580, 80, 40))){
-				bullet2.boolLaunched=false;
-				bullet2.boolHitbox=true;
-				intHealth1 = intHealth1 - 10;
-			}else if(bullet2.intY>600){
-				bullet2.boolLaunched=false;
-				bullet2.boolHitbox=true;
-				//If the bullet touches the floor, stop the bullet from moving and change it's color to red
-			}else if(bullet2.intX<0 || bullet2.intX>1280){
-				bullet2.boolLaunched=false;
-				bullet2.boolHitbox=true;
-				//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
-			}
-			//If 
+			if(bullet2.boolHitbox==false){
+				if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 580, 80, 40))){
+					bullet2.boolLaunched=false;
+					bullet2.boolHitbox=true;
+					intHealth1 = intHealth1 - 10;
+					TheTanks.allowShooting();
+				}else if(bullet2.intY>600){
+					bullet2.boolLaunched=false;
+					bullet2.boolHitbox=true;
+					TheTanks.allowShooting();
+					//If the bullet touches the floor, stop the bullet from moving and change it's color to red
+				}else if(bullet2.intX<0 || bullet2.intX>1280){
+					bullet2.boolLaunched=false;
+					bullet2.boolHitbox=true;
+					TheTanks.allowShooting();
+					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
+				}
 			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
+			}
+			
 			
 		}
 	}

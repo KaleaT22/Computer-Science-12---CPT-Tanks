@@ -59,9 +59,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	boolean blnisServer;
 	
 	boolean blnserverTurn = true;
-	
-	boolean blnserverShoot = false;
-	boolean blnclientShoot = false;
+	boolean blnShotfreeze=false;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
@@ -93,7 +91,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thedisconnect.setEnabled(true);
 				theframe.requestFocus();
 				
-				System.out.println("server");
+				//System.out.println("server");
 				
 				blnisServer = true;
 				thepanel.blnPanelServer = true;
@@ -122,7 +120,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thedisconnect.setEnabled(true);
 				thechat.setEnabled(true);
 			
-				System.out.println("client");
+				//System.out.println("client");
 				
 				blnisServer = false;
 				
@@ -158,7 +156,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//servers connected
 		}else if(evt.getSource() == ssm){
-			System.out.println("SSM TEST: " + ssm.readText());
+			//System.out.println("SSM TEST: " + ssm.readText());
 			if(ssm != null){	
 				try{		
 					for(intRow = 0; intRow < 1; intRow++){
@@ -169,17 +167,17 @@ public class CPTtanks implements ActionListener, KeyListener{
 								
 						for(intColumn = 0; intColumn < 4; intColumn++){
 							strMessage[intRow][intColumn] = strLineSplit[intColumn];
-							System.out.println("strMessage[" + intRow + "][" + intColumn + "]");
-							System.out.println("Array: " + strMessage[intRow][intColumn]);
+							//System.out.println("strMessage[" + intRow + "][" + intColumn + "]");
+							//System.out.println("Array: " + strMessage[intRow][intColumn]);
 							
 						}
 						
-						System.out.println("TEST 1: " + strMessage[0][0]);
+						//System.out.println("TEST 1: " + strMessage[0][0]);
 						
 					}
 					
 				}catch(ArrayIndexOutOfBoundsException e){
-					System.out.println("No string split");
+					//System.out.println("No string split");
 					
 				}
 					
@@ -221,7 +219,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					}else if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
 						
-						blnserverTurn = false;
+						blnShotfreeze = true;
 						
 					//chat message	
 					}else if(strMessage[0][1].equals("chat")){
@@ -260,7 +258,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("shoot")){
 						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
 						
-						blnserverTurn = true;
+						blnShotfreeze = true;
 					
 					}
 					
@@ -373,7 +371,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	public void keyPressed(KeyEvent evt){
 		//server movements
-		if(blnisServer == true){
+		if(blnisServer == true && blnShotfreeze == false){
 			//left
 			if(evt.getKeyChar() == 'a'){
 				System.out.println("Server: Left");
@@ -396,7 +394,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 			}
 			
-			if(blnserverTurn == true){
+			if(blnserverTurn == true && blnShotfreeze == false){
 				//elevate the gun
 				if(evt.getKeyChar() == 'w'){
 					System.out.println("Server: gun elevating");
@@ -422,13 +420,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 					System.out.println("FIRED!");
 					
 					ssm.sendText("server, shoot");
-					
-					blnserverTurn = false;
+					thepanel.intTank1Def = 0;
+					blnShotfreeze = true;
 				}
 			}
 		
 		//client movements
-		}else{
+		}else if(blnShotfreeze==false){
 			//left
 			if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 				System.out.println("Client: Left");
@@ -451,7 +449,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 			}
 			
-			if(blnserverTurn == false){
+			if(blnserverTurn == false && blnShotfreeze ==false){
 				//elevate the gun
 				if(evt.getKeyCode() == KeyEvent.VK_UP){
 					System.out.println("Server: gun elevating");
@@ -477,8 +475,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
 					ssm.sendText("client, shoot");
 					System.out.println("FIRED!");
-					
-					blnserverTurn = true;
+					thepanel.intTank2Def = 0;
+					blnShotfreeze = true;
 				}
 			}
 		}
@@ -506,6 +504,16 @@ public class CPTtanks implements ActionListener, KeyListener{
 			}
 		}
 	}
+	
+	public void allowShooting(){
+		blnShotfreeze = false;
+		if(blnserverTurn == false){
+			blnserverTurn = true;
+		}else{
+			blnserverTurn = false;
+		}
+	}
+	//Once the cannonball lands, switch to the next players turn and allow movement
 	
 	//constructor
 	public CPTtanks(){
