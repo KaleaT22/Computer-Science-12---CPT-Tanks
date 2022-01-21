@@ -213,11 +213,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 						
 					//if depress / elevating cannon
 					}else if(strMessage[0][1].equals("angle")){
-						thepanel.intTank1Ang = Integer.parseInt(strMessage[0][2]);
-						
+						thepanel.intTank1Ang = Integer.parseInt(strMessage[0][2]);				
+					
 					//if fires
 					}else if(strMessage[0][1].equals("shoot")){
-						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
+						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true);
 						
 						blnShotfreeze = true;
 						
@@ -225,6 +225,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 					}else if(strMessage[0][1].equals("chat")){
 						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
 						
+					}else if(strMessage[0][1].equals("power")){
+						thepanel.intTank1PowBoost = Integer.parseInt(strMessage[0][2]);
+						System.out.println(thepanel.intTank1PowBoost);
 					}
 					
 				//check if client
@@ -254,9 +257,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					}
 					
+					//Updates client power
+					if(strMessage[0][1].equals("power")){
+						thepanel.intTank2PowBoost = Integer.parseInt(strMessage[0][2]);
+					}
+					
 					//if fires
 					if(strMessage[0][1].equals("shoot")){
-						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
+						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true);
 						
 						blnShotfreeze = true;
 					
@@ -408,15 +416,24 @@ public class CPTtanks implements ActionListener, KeyListener{
 				}else if(evt.getKeyChar() == 's' && thepanel.intTank1Ang>0){
 					System.out.println("Server: gun depressing");
 					thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
-					
 					System.out.println(thepanel.intTank1Ang);
-					
 					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 				}
 				
+				if(evt.getKeyChar() == 'e' && thepanel.intTank1PowBoost<20){
+					thepanel.intTank1PowBoost=thepanel.intTank1PowBoost+2;
+					ssm.sendText("server, power, " + thepanel.intTank1PowBoost);
+				//Increase power
+				
+				}else if(evt.getKeyChar() == 'q' && thepanel.intTank1PowBoost>0){
+					thepanel.intTank1PowBoost=thepanel.intTank1PowBoost-2;
+					ssm.sendText("server, power, " + thepanel.intTank1PowBoost);
+				}
+				//Decrease power
+				
 				//shoot
 				if(evt.getKeyChar() == ' '){
-					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow, thepanel.intTank1Ang, true);
+					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true);
 					System.out.println("FIRED!");
 					
 					ssm.sendText("server, shoot");
@@ -471,9 +488,19 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 				}
 				
-				//shoot
+				if(evt.getKeyChar() == 'e' && thepanel.intTank2PowBoost<20){
+					thepanel.intTank2PowBoost=thepanel.intTank2PowBoost+2;
+					ssm.sendText("client, power, " + thepanel.intTank2PowBoost);
+				//Increase power
+				
+				}else if(evt.getKeyChar() == 'q' && thepanel.intTank2PowBoost>0){
+					thepanel.intTank2PowBoost=thepanel.intTank2PowBoost-2;
+					ssm.sendText("client, power, " + thepanel.intTank2PowBoost);
+				}
+				//Decrease power
+				
 				if(evt.getKeyChar() == ' '){
-					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow, (180-thepanel.intTank2Ang), true);
+					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true);
 					ssm.sendText("client, shoot");
 					System.out.println("FIRED!");
 					thepanel.intTank2Def = 0;

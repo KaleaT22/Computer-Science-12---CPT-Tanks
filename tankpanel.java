@@ -10,14 +10,17 @@ public class tankpanel extends JPanel implements ActionListener{
 	//Properties
 	int intTank1Pos = 320;
 	int intTank1Def = 0;
-	int intTank1Pow = 70;
+	int intTank1Pow = 80;
+	int intTank1PowBoost = 0;
+	
 	int intTank1Ang = 45;
 	int intHealth1 = 100;
 	
 	
 	int intTank2Pos = 960;
 	int intTank2Def = 0;
-	int intTank2Pow = 70;
+	int intTank2Pow = 80;
+	int intTank2PowBoost = 0;
 	int intTank2Ang = 45;
 	int intHealth2 = 100;
 	
@@ -55,7 +58,8 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.fillRect(0, 0, 1280, 720);
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 620, 1280, 100);
-			
+			g.setColor(Color.GRAY);
+			g.fillRect(620, 460, 40, 160);
 			//TANK 1
 			g.setColor(Color.RED);
 			g.fillRect(intTank1Pos, 580, 80, 40);
@@ -70,6 +74,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.drawString("Launch angle: "+intTank1Ang, 50, 75);
 				g.drawString("Health: "+intHealth1, 50, 150);
 				g.drawString("Health: "+intHealth2, 1000, 150);
+				g.drawString("POWER: "+(intTank1Pow+intTank1PowBoost), 50, 225);
 			}
 			else{
 				g.setFont(Scorefont10);
@@ -77,6 +82,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.drawString("Launch angle: "+intTank2Ang, 1000, 75);
 				g.drawString("Health: "+intHealth2, 1000, 150);
 				g.drawString("Health: "+intHealth1, 50, 150);
+				g.drawString("POWER: "+(intTank2Pow+intTank2PowBoost), 1000, 112);
 			}
 			
 			//TANK 2
@@ -87,11 +93,12 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			bullet2.drawIt(g);
 			if(bullet1.boolHitbox==false){
-					if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
+				if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
 					intHealth2 = intHealth2 - 10;
 					TheTanks.allowShooting();
+					//If the bullet hits a tank
 				}else if(bullet1.intY>600){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
@@ -112,6 +119,7 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet2.boolHitbox=true;
 					intHealth1 = intHealth1 - 10;
 					TheTanks.allowShooting();
+					//If the bullet hits a tank
 				}else if(bullet2.intY>600){
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
