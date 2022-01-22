@@ -117,22 +117,22 @@ public class tankpanel extends JPanel implements ActionListener{
 			intTank1Pos = intTank1Pos + intTank1Def;
 			
 			bullet1.drawIt(g);
-			Font Scorefont10 = new Font("Sans Serif", Font.PLAIN, 27);
+			Font Scorefont10 = new Font("Comic Sans MS", Font.PLAIN, 21);
 			if(blnPanelServer == true){
 				g.setFont(Scorefont10);
 				g.setColor(Color.BLACK);
-				g.drawString("Launch angle: "+intTank1Ang, 50, 75);
-				g.drawString("Health: "+intHealth1, 50, 150);
-				g.drawString("Health: "+intHealth2, 1000, 150);
-				g.drawString("POWER: "+(intTank1Pow+intTank1PowBoost), 50, 225);
+				g.drawString("Launch angle: "+intTank1Ang, 25, 85);
+				g.drawString("Health: "+intHealth1, 25, 50);
+				g.drawString("Health: "+intHealth2, 1100, 50);
+				g.drawString("POWER: "+(intTank1Pow+intTank1PowBoost), 25, 120);
 			}
 			else{
 				g.setFont(Scorefont10);
 				g.setColor(Color.BLACK);
-				g.drawString("Launch angle: "+intTank2Ang, 1000, 75);
-				g.drawString("Health: "+intHealth2, 1000, 150);
-				g.drawString("Health: "+intHealth1, 50, 150);
-				g.drawString("POWER: "+(intTank2Pow+intTank2PowBoost), 1000, 112);
+				g.drawString("Launch angle: "+intTank2Ang, 1100, 85);
+				g.drawString("Health: "+intHealth2, 1100, 50);
+				g.drawString("Health: "+intHealth1, 25, 50);
+				g.drawString("POWER: "+(intTank2Pow+intTank2PowBoost), 1100, 120);
 			}
 			
 			//TANK 2

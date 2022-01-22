@@ -200,6 +200,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 						theuserInput.setVisible(false);
 						helpbut.setVisible(false);
 						
+						thechatarealabel.setLocation(1080, 150);
+						thechatscroll.setLocation(1080, 150);
+						thechatlabel.setLocation(1080, 500);
+						thechat.setLocation(1080, 525);
+						chatBut.setLocation(1080, 550);
 						
 						chatBut.setVisible(true);
 						chatBut.setEnabled(true);
@@ -295,6 +300,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theipAdd.setVisible(false);
 			theUser.setVisible(false);
 			theuserInput.setVisible(false);
+			
+			thechatarealabel.setLocation(1080, 150);
+			thechatscroll.setLocation(1080, 150);
+			thechatlabel.setLocation(1080, 500);
+			thechat.setLocation(1080, 525);
+			chatBut.setLocation(1080, 550);
 			
 			thechat.setVisible(true);
 			chatBut.setVisible(true);
