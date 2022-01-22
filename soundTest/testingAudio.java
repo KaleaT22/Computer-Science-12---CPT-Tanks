@@ -9,9 +9,10 @@ public class testingAudio{
 		
 		soundObject.playSound(filepath);
 		
-		soundObject.playSound(filepath);
+		String file = "PEWPEWPEW2.wav";
 		
-		soundObject.playSound(filepath);
+		soundObject.playSound(file);
+		
 		
 	}
 }

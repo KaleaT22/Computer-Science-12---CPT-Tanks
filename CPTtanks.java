@@ -32,6 +32,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//theme button to change theme/background
 	JButton themebut = new JButton("Theme");
 	
+	//help button
+	JButton helpbut = new JButton("Help");
+	
 	//chat area
 	JLabel thechatarealabel = new JLabel("CHAT");
 	JTextArea thechatarea = new JTextArea("Come and chat here!");
@@ -341,7 +344,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	}
 	
 	public void keyReleased(KeyEvent evt){
-		//stop server movements
+		//stop server movements 
 		if(blnisServer == true){
 			//stop left
 			if(evt.getKeyChar() == 'a'){
@@ -562,16 +565,22 @@ public class CPTtanks implements ActionListener, KeyListener{
 		theframe.requestFocus();
 		
 		//play button
-		playbut.setSize(300, 25);
-		playbut.setLocation(100, 5);
+		playbut.setSize(200, 25);
+		playbut.setLocation(450, 400);
 		playbut.addActionListener(this);
 		thepanel.add(playbut);
 		
 		//theme button
-		themebut.setSize(300, 25);
-		themebut.setLocation(100, 35);
+		themebut.setSize(200, 25);
+		themebut.setLocation(450, 430);
 		themebut.addActionListener(this);
 		thepanel.add(themebut);
+		
+		//help button
+		helpbut.setSize(200, 25);
+		helpbut.setLocation(450, 460);
+		helpbut.addActionListener(this);
+		thepanel.add(helpbut);
 		
 		//server button
 		theserver.setSize(200, 25);
