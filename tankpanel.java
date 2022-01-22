@@ -40,6 +40,8 @@ public class tankpanel extends JPanel implements ActionListener{
 	BufferedImage oranTank72img = null;
 	BufferedImage oranTank90img = null;
 	
+	BufferedImage HelpTextimg = null;
+	
 	CPTtanks TheTanks;
 	
 	//Spawns bullet off screen in limbo waiting to be launched
@@ -64,6 +66,11 @@ public class tankpanel extends JPanel implements ActionListener{
 			//System.out.println("STARTED");
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, 1280, 720);
+		
+		}else if(strScreen.equals("Help")){
+			g.setColor(Color.GREEN);
+			g.fillRect(0, 0, 1280, 720);
+			g.drawImage(HelpTextimg, 10, 50, null);
 			
 		//Game screen
 		}else if(strScreen.equals("Play")){
@@ -254,6 +261,8 @@ public class tankpanel extends JPanel implements ActionListener{
 			oranTank54img = ImageIO.read(new File("THEORANGETANK54.png"));
 			oranTank72img = ImageIO.read(new File("THEORANGETANK72.png"));
 			oranTank90img = ImageIO.read(new File("THEORANGETANK90.png"));
+			
+			HelpTextimg = ImageIO.read(new File("HelpScreen.png"));
 		
 		
 		}catch(IOException e){

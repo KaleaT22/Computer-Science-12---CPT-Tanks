@@ -35,6 +35,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//help button
 	JButton helpbut = new JButton("Help");
 	
+	//button to go back to menu from Help Screen
+	JButton returnbut = new JButton("Back to Menu");
+	
+	//Test shoot Button
+	JButton TestBut = new JButton("Test Shoot");
+	
+	
 	//chat area
 	JLabel thechatarealabel = new JLabel("CHAT");
 	JTextArea thechatarea = new JTextArea("Come and chat here!");
@@ -73,7 +80,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theserver.setEnabled(true);
 			theclient.setEnabled(true);
 			theipAdd.setEnabled(true);
-			
+			returnbut.setVisible(false);
 			theuserInput.setEnabled(false);
 		
 		//server connects
@@ -199,6 +206,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 						theUser.setVisible(false);
 						theuserInput.setVisible(false);
 						helpbut.setVisible(false);
+						returnbut.setVisible(false);
+						TestBut.setVisible(false);
 						
 						thechatarealabel.setLocation(1080, 150);
 						thechatscroll.setLocation(1080, 150);
@@ -300,6 +309,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theipAdd.setVisible(false);
 			theUser.setVisible(false);
 			theuserInput.setVisible(false);
+			returnbut.setVisible(false);
+			TestBut.setVisible(false);
 			
 			thechatarealabel.setLocation(1080, 150);
 			thechatscroll.setLocation(1080, 150);
@@ -315,6 +326,37 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			theframe.requestFocus();
 		
+		//if player clicks help
+		}else if(evt.getSource() == helpbut){
+			thepanel.strScreen = "Help";
+			playbut.setVisible(false);
+			themebut.setVisible(false);
+			thedisconnect.setVisible(false);
+			theserver.setVisible(false);
+			theclient.setVisible(false);
+			theIP.setVisible(false);
+			theipAdd.setVisible(false);
+			theUser.setVisible(false);
+			theuserInput.setVisible(false);
+			helpbut.setVisible(false);
+			returnbut.setVisible(true);
+			TestBut.setVisible(true);
+			
+		}else if(evt.getSource() == returnbut){
+			thepanel.strScreen = "Start";
+			playbut.setVisible(true);
+			themebut.setVisible(true);
+			thedisconnect.setVisible(true);
+			theserver.setVisible(true);
+			theclient.setVisible(true);
+			theIP.setVisible(true);
+			theipAdd.setVisible(true);
+			theUser.setVisible(true);
+			theuserInput.setVisible(true);
+			helpbut.setVisible(true);
+			returnbut.setVisible(false);
+			TestBut.setVisible(false);
+			
 		//if player clicks chat button
 		}else if(evt.getSource() == chatBut){
 			//if chatfield disabled, enable
@@ -596,6 +638,20 @@ public class CPTtanks implements ActionListener, KeyListener{
 		helpbut.addActionListener(this);
 		thepanel.add(helpbut);
 		
+		//Return button
+		returnbut.setSize(200, 50);
+		returnbut.setLocation(300, 600);
+		returnbut.addActionListener(this);
+		returnbut.setVisible(false);
+		thepanel.add(returnbut);
+		
+		//Test arena access button
+		TestBut.setSize(200, 50);
+		TestBut.setLocation(700, 600);
+		TestBut.addActionListener(this);
+		TestBut.setVisible(false);
+		thepanel.add(TestBut);
+		 
 		//server button
 		theserver.setSize(200, 25);
 		theserver.setLocation(1080, 0);
