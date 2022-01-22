@@ -12,6 +12,8 @@ public class getBullet{
 	boolean boolLaunched;
 	boolean boolHitbox=false;
 	boolean boolGetCoords=true;
+	boolean boolServerTank;
+	int intBulletOffset=0;
 	
 	int intX = -20;
 	int intTankX;
@@ -37,12 +39,19 @@ public class getBullet{
 		dblPowerX=((dblPower)*(Math.cos(dblAngleRadians)));
 		dblPowerY=(1*((dblPower)*(Math.sin(dblAngleRadians))));
 		
+		if(boolServerTank==true){
+			intBulletOffset=40;
+		}else{
+			intBulletOffset=-40;
+		}
+		//This makes it so the cannonball fires out of the barrel side of the tank
+		
 		//d = v*t
-		intX=((int)(dblPowerX*dblTime))+intTankX;
+		intX=((int)(dblPowerX*dblTime))+(intTankX+intBulletOffset);
 		//intX=0;
 		
 		//d = Vi*t + 1/2*a*t^2
-		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+580);
+		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+560);
 		//System.out.println(dblTime+"");
 		//System.out.println(intY+"");
 		
@@ -66,7 +75,7 @@ public class getBullet{
 	}
 	
 	public void drawIt(Graphics g){
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK);
 		if(dblPowerX ==0){
 			g.setColor(Color.RED);
 		}
@@ -76,12 +85,13 @@ public class getBullet{
 	}
 	
 	//Constructor
-	public getBullet(int intTankX, double dblPower, double dblAngle, boolean boolLaunched){
+	public getBullet(int intTankX, double dblPower, double dblAngle, boolean boolLaunched, boolean boolServerTank){
 		super();
 		this.intTankX=intTankX;
 		this.dblPower=dblPower;
 		this.dblAngle=dblAngle;
 		this.boolLaunched=boolLaunched;
+		this.boolServerTank=boolServerTank;
 	}
 	///Now the APanel and JPanel are exactly the same
 

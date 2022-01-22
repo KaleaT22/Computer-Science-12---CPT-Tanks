@@ -43,9 +43,9 @@ public class tankpanel extends JPanel implements ActionListener{
 	CPTtanks TheTanks;
 	
 	//Spawns bullet off screen in limbo waiting to be launched
-	getBullet bullet1 = new getBullet(-30,0,0,false);
+	getBullet bullet1 = new getBullet(-30,0,0,false, true);
 	
-	getBullet bullet2 = new getBullet(1310, 0, 0, false);
+	getBullet bullet2 = new getBullet(1310, 0, 0, false, true);
 	
 	Timer thetimer = new Timer(1000/60, this);
 	String strScreen = "Start";
@@ -73,47 +73,47 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 620, 1280, 100);
 			g.setColor(Color.GRAY);
-			g.fillRect(620, 500, 40, 160);
+			g.fillRect(620, 460, 40, 160);
 			
 			//TANK 1
+			g.setColor(Color.RED);
+			g.fillRect(intTank1Pos, 560, 100, 60);
 			//if angle >= 0
 			if(intTank1Ang >= 0 && intTank1Ang < 18 ){
-				g.drawImage(greenTank0img, intTank1Pos, 580, null);
+				g.drawImage(greenTank0img, intTank1Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 18
 			if(intTank1Ang >= 18 && intTank1Ang < 36){
-				g.drawImage(greenTank18img, intTank1Pos, 580, null);
+				g.drawImage(greenTank18img, intTank1Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 36
 			if(intTank1Ang >= 36 && intTank1Ang < 54){
-				g.drawImage(greenTank36img, intTank1Pos, 580, null);
+				g.drawImage(greenTank36img, intTank1Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 54
 			if(intTank1Ang >= 54 && intTank1Ang < 72){
-				g.drawImage(greenTank54img, intTank1Pos, 580, null);
+				g.drawImage(greenTank54img, intTank1Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 72
 			if(intTank1Ang >= 72 && intTank1Ang < 90){
-				g.drawImage(greenTank72img, intTank1Pos, 580, null);
+				g.drawImage(greenTank72img, intTank1Pos-10, 530, null);
 				
 			}
 			
 			//if angle = 90
 			if(intTank1Ang == 90){
-				g.drawImage(greenTank90img, intTank1Pos, 580, null);
+				g.drawImage(greenTank90img, intTank1Pos-10, 530, null);
 				
 			}
-			//g.setColor(Color.RED);
-			//g.fillRect(intTank1Pos, 580, 80, 40);
-			
+
 			intTank1Pos = intTank1Pos + intTank1Def;
 			
 			bullet1.drawIt(g);
@@ -136,50 +136,49 @@ public class tankpanel extends JPanel implements ActionListener{
 			}
 			
 			//TANK 2
+			g.setColor(Color.ORANGE);
+			g.fillRect(intTank2Pos, 560, 100, 60);
 			//if angle >= 0
 			if(intTank2Ang >= 0 && intTank2Ang < 18){
-				g.drawImage(oranTank0img, intTank2Pos, 580, null);
+				g.drawImage(oranTank0img, intTank2Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 18
 			if(intTank2Ang >= 18 && intTank2Ang < 36){
-				g.drawImage(oranTank18img, intTank2Pos, 580, null);
+				g.drawImage(oranTank18img, intTank2Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 36
 			if(intTank2Ang >= 36 && intTank2Ang < 54){
-				g.drawImage(oranTank36img, intTank2Pos, 580, null);
+				g.drawImage(oranTank36img, intTank2Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 54
 			if(intTank2Ang >= 54 && intTank2Ang < 72){
-				g.drawImage(oranTank54img, intTank2Pos, 580, null);
+				g.drawImage(oranTank54img, intTank2Pos-10, 530, null);
 				
 			}
 			
 			//if angle >= 72
 			if(intTank2Ang >= 72 && intTank2Ang < 90){
-				g.drawImage(oranTank72img, intTank2Pos, 580, null);
+				g.drawImage(oranTank72img, intTank2Pos-10, 530, null);
 				
 			}
 			
 			//if angle == 90
 			if(intTank2Ang == 90){
-				g.drawImage(oranTank90img, intTank2Pos, 580, null);
+				g.drawImage(oranTank90img, intTank2Pos-10, 530, null);
 				
 			}
-			
-			//g.setColor(Color.ORANGE);
-			//g.fillRect(intTank2Pos, 580, 80, 40);
 			
 			intTank2Pos = intTank2Pos + intTank2Def;
 			
 			bullet2.drawIt(g);
 			if(bullet1.boolHitbox==false){
-				if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 580, 80, 40))){
+				if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 560, 100, 60))){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
 					intHealth2 = intHealth2 - 10;
@@ -195,12 +194,16 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet1.boolHitbox=true;
 					TheTanks.allowShooting();
 					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
+				}else if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(620, 460, 40, 160))){
+					bullet1.boolLaunched=false;
+					bullet1.boolHitbox=true;
+					TheTanks.allowShooting();
 				}
 				//If server's bullet hits enemy tank (client), stop the bullet from moving and change it's color to red
 			}
 			
 			if(bullet2.boolHitbox==false){
-				if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 580, 80, 40))){
+				if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 560, 100, 60))){
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
 					intHealth1 = intHealth1 - 10;
@@ -216,6 +219,10 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet2.boolHitbox=true;
 					TheTanks.allowShooting();
 					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
+				}else if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(620, 460, 40, 160))){
+					bullet2.boolLaunched=false;
+					bullet2.boolHitbox=true;
+					TheTanks.allowShooting();
 				}
 			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
 			}

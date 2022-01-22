@@ -220,7 +220,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					//if fires
 					}else if(strMessage[0][1].equals("shoot")){
-						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true);
+						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true, true);
 						
 						blnShotfreeze = true;
 						
@@ -267,7 +267,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					//if fires
 					if(strMessage[0][1].equals("shoot")){
-						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true);
+						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true, false);
 						
 						blnShotfreeze = true;
 					
@@ -436,7 +436,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 				//shoot
 				if(evt.getKeyChar() == ' '){
-					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true);
+					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true, true);
 					System.out.println("FIRED!");
 					
 					ssm.sendText("server, shoot");
@@ -503,7 +503,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				//Decrease power
 				
 				if(evt.getKeyChar() == ' '){
-					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true);
+					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true, false);
 					ssm.sendText("client, shoot");
 					System.out.println("FIRED!");
 					thepanel.intTank2Def = 0;
@@ -526,17 +526,17 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	public void movingTank(){
 		if(blnConnected==true){
-			if((thepanel.intTank1Pos+80)>1280){
-				thepanel.intTank1Pos=1200;
+			if((thepanel.intTank1Pos+100)>550){
+				thepanel.intTank1Pos=450;
 			}
 			if(thepanel.intTank1Pos<0){
 				thepanel.intTank1Pos=0;
 			}
-			if((thepanel.intTank2Pos+80)>1280){
-				thepanel.intTank2Pos=1200;
+			if((thepanel.intTank2Pos+100)>1280){
+				thepanel.intTank2Pos=1180;
 			}
-			if(thepanel.intTank2Pos<0){
-				thepanel.intTank2Pos=0;
+			if(thepanel.intTank2Pos<730){
+				thepanel.intTank2Pos=730;
 			}
 			
 			if(blnisServer == true){
@@ -548,6 +548,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			}
 		}
 	}
+	//Constantly update the tanks location, also constantly make sure that the tank is teleported back onto screen the moment it goes out of screen
 	
 	public void allowShooting(){
 		blnShotfreeze = false;
