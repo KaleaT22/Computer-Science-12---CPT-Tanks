@@ -15,18 +15,15 @@ public class sound{
 				
 				Clip clip = AudioSystem.getClip();
 				clip.open(audio);
-				clip.start();
 				//clip.loop(-1);
 				//Thread.sleep(1000);
 				
 				JOptionPane.showMessageDialog(null, "Press OK to stop playing");
 				
-			}else{
-				System.out.println("Can't find file");
-			}
-			
+			}	
 		}catch(Exception e){
 			System.out.println("Error");
 		}
 	}
 }
+

@@ -3,10 +3,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
+
 public class CPTtanks implements ActionListener, KeyListener{
 	//properties
 	JFrame theframe = new JFrame("Tanks");
 	tankpanel thepanel = new tankpanel(this);
+	NoorSound clicky = new NoorSound();
 	
 	int intRow = 0;
 	int intColumn = 0;
@@ -299,6 +301,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//if player starts game
 		}else if(evt.getSource() == playbut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 			thepanel.strScreen = "Play";
 			playbut.setVisible(false);
 			themebut.setVisible(false);
