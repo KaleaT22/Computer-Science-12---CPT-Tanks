@@ -76,8 +76,8 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.fillRect(620, 460, 40, 160);
 			
 			//TANK 1
-			g.setColor(Color.RED);
-			g.fillRect(intTank1Pos, 560, 100, 60);
+			///g.setColor(Color.RED);
+			///g.fillRect(intTank1Pos, 560, 100, 60);
 			//if angle >= 0
 			if(intTank1Ang >= 0 && intTank1Ang < 18 ){
 				g.drawImage(greenTank0img, intTank1Pos-10, 530, null);
@@ -136,8 +136,8 @@ public class tankpanel extends JPanel implements ActionListener{
 			}
 			
 			//TANK 2
-			g.setColor(Color.ORANGE);
-			g.fillRect(intTank2Pos, 560, 100, 60);
+			///g.setColor(Color.ORANGE);
+			///g.fillRect(intTank2Pos, 560, 100, 60);
 			//if angle >= 0
 			if(intTank2Ang >= 0 && intTank2Ang < 18){
 				g.drawImage(oranTank0img, intTank2Pos-10, 530, null);
