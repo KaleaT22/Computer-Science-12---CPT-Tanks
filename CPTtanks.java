@@ -198,6 +198,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 						theipAdd.setVisible(false);
 						theUser.setVisible(false);
 						theuserInput.setVisible(false);
+						helpbut.setVisible(false);
+						
 						
 						chatBut.setVisible(true);
 						chatBut.setEnabled(true);
@@ -297,7 +299,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			thechat.setVisible(true);
 			chatBut.setVisible(true);
 			chatBut.setEnabled(true);
-			
+			helpbut.setVisible(false);
 			ssm.sendText("server, playstart");
 			
 			theframe.requestFocus();
