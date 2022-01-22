@@ -167,7 +167,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			}
 			
 			//if angle == 90
-			if(intTank1Ang == 90){
+			if(intTank2Ang == 90){
 				g.drawImage(oranTank90img, intTank2Pos, 580, null);
 				
 			}
