@@ -1,3 +1,4 @@
+import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -34,6 +35,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//theme button to change theme/background
 	JButton themebut = new JButton("Theme");
 	
+	JButton generalbut = new JButton("General");
+	JButton christmasbut = new JButton("Christmas");
+	JButton halloweenbut = new JButton("Halloween");
+	
+	String strChosenTheme[] = new String[3];
+	
 	//help button
 	JButton helpbut = new JButton("Help");
 	
@@ -42,7 +49,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	//Test shoot Button
 	JButton TestBut = new JButton("Test Shoot");
-	
 	
 	//chat area
 	JLabel thechatarealabel = new JLabel("CHAT");
@@ -102,6 +108,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(blnIsConnected){
 				playbut.setEnabled(true);
 				themebut.setEnabled(true);
+				helpbut.setEnabled(true);
+				
 				thedisconnect.setEnabled(true);
 				theframe.requestFocus();
 				
@@ -133,6 +141,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(blnIsConnected){
 				playbut.setEnabled(false);
 				themebut.setEnabled(false);
+				
+				helpbut.setEnabled(true);
 				thedisconnect.setEnabled(true);
 				thechat.setEnabled(true);
 			
@@ -142,7 +152,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 				thechatarea.append("\nConnection Successful\n");
 				ssm.sendText("client, connect, " + strUser);
-				blnConnected=true;
+				
+				blnConnected = true;
+				
 			}else{
 				theclient.setEnabled(true); 
 				theipAdd.setEnabled(true);
@@ -204,6 +216,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					//if server starts game
 					if(strMessage[0][1].equals("playstart")){
 						thepanel.strScreen = "Play";
+						
 						playbut.setVisible(false);
 						themebut.setVisible(false);
 						thedisconnect.setVisible(false);
@@ -257,6 +270,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 					}else if(strMessage[0][1].equals("power")){
 						thepanel.intTank1PowBoost = Integer.parseInt(strMessage[0][2]);
 						System.out.println(thepanel.intTank1PowBoost);
+						
+					}
+					
+					//if selecting theme
+					if(strMessage[0][1].equals("theme")){
+						thepanel.strTheme = strMessage[0][2];
 					}
 					
 				//check if client
@@ -313,6 +332,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}else if(evt.getSource() == playbut){
 			clicky.se.setFile("CLICKNOISE2.wav");
 			clicky.se.play();
+			
 			thepanel.strScreen = "Play";
 			playbut.setVisible(false);
 			themebut.setVisible(false);
@@ -336,6 +356,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			chatBut.setVisible(true);
 			chatBut.setEnabled(true);
 			helpbut.setVisible(false);
+			
 			ssm.sendText("server, playstart");
 			
 			theframe.requestFocus();
@@ -343,6 +364,79 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}else if(evt.getSource() == themebut){
 			clicky.se.setFile("CLICKNOISE2.wav");
 			clicky.se.play();
+			
+			thepanel.strScreen = "Theme";
+			
+			playbut.setVisible(false);
+			themebut.setVisible(false);
+			thedisconnect.setVisible(false);
+			theserver.setVisible(false);
+			theclient.setVisible(false);
+			theIP.setVisible(false);
+			theipAdd.setVisible(false);
+			theUser.setVisible(false);
+			theuserInput.setVisible(false);
+			helpbut.setVisible(false);
+			
+			returnbut.setVisible(true);
+			returnbut.setLocation(100, 100);
+			
+			generalbut.setVisible(true);
+			christmasbut.setVisible(true);
+			halloweenbut.setVisible(true);
+			
+			try{
+				//open file
+				BufferedReader csvthemefile = new BufferedReader(new FileReader("themes.txt"));
+				String strLine;
+				
+				//load data into array
+				for(intRow = 0; intRow < 4; intRow++){
+					strLine = csvthemefile.readLine();
+					
+					strChosenTheme[intRow] = strLine;
+				
+				}
+				
+				csvthemefile.close();
+				
+			}catch(FileNotFoundException e){
+				System.out.println("File not found");
+				
+			}catch(IOException e){
+				System.out.println("Error reading from file or closing file");
+				
+			}catch(ArrayIndexOutOfBoundsException e){
+				System.out.println("Array Out of Index");
+			}
+			
+		//if player clicks general theme button
+		}else if(evt.getSource() == generalbut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
+			
+			thepanel.strTheme = strChosenTheme[0];
+			
+			ssm.sendText("server, theme, " + strChosenTheme[0]);
+			
+		//if player clicks christmas theme button
+		}else if(evt.getSource() == christmasbut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
+			
+			thepanel.strTheme = strChosenTheme[1];
+			
+			ssm.sendText("server, theme, " + strChosenTheme[1]);
+			
+		//if player clicks halloween theme button
+		}else if(evt.getSource() == halloweenbut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
+			
+			thepanel.strTheme = strChosenTheme[2];
+			
+			ssm.sendText("server, theme, " + strChosenTheme[2]);
+			
 		//if player clicks help
 		}else if(evt.getSource() == helpbut){
 			clicky.se.setFile("CLICKNOISE2.wav");
@@ -360,7 +454,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			helpbut.setVisible(false);
 			returnbut.setVisible(true);
 			TestBut.setVisible(true);
-			
+		
+		//if player clicks return to main menu
 		}else if(evt.getSource() == returnbut){
 			clicky.se.setFile("CLICKNOISE2.wav");
 			clicky.se.play();
@@ -375,8 +470,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theUser.setVisible(true);
 			theuserInput.setVisible(true);
 			helpbut.setVisible(true);
+			
 			returnbut.setVisible(false);
 			TestBut.setVisible(false);
+			generalbut.setVisible(false);
+			christmasbut.setVisible(false);
+			halloweenbut.setVisible(false);
+			
 			
 		//if player clicks chat button
 		}else if(evt.getSource() == chatBut){
@@ -649,18 +749,39 @@ public class CPTtanks implements ActionListener, KeyListener{
 		playbut.setSize(200, 25);
 		playbut.setLocation(450, 400);
 		playbut.addActionListener(this);
+		playbut.setEnabled(false);
 		thepanel.add(playbut);
 		
-		//theme button
+		//THEME BUTTONS
 		themebut.setSize(200, 25);
 		themebut.setLocation(450, 430);
 		themebut.addActionListener(this);
+		themebut.setEnabled(false);
 		thepanel.add(themebut);
 		
-		//help button
+		generalbut.setSize(200, 25);
+		generalbut.setLocation(150, 500);
+		generalbut.addActionListener(this);
+		generalbut.setVisible(false);
+		thepanel.add(generalbut);
+		
+		christmasbut.setSize(200, 25);
+		christmasbut.setLocation(475, 500);
+		christmasbut.addActionListener(this);
+		christmasbut.setVisible(false);
+		thepanel.add(christmasbut);
+		
+		halloweenbut.setSize(200, 25);
+		halloweenbut.setLocation(780, 500);
+		halloweenbut.addActionListener(this);
+		halloweenbut.setVisible(false);
+		thepanel.add(halloweenbut);
+		
+		//HELP BUTTONS
 		helpbut.setSize(200, 25);
 		helpbut.setLocation(450, 460);
 		helpbut.addActionListener(this);
+		helpbut.setEnabled(false);
 		thepanel.add(helpbut);
 		
 		//Return button
@@ -677,6 +798,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		TestBut.setVisible(false);
 		thepanel.add(TestBut);
 		 
+		//SSM BUTTONS
 		//server button
 		theserver.setSize(200, 25);
 		theserver.setLocation(1080, 0);

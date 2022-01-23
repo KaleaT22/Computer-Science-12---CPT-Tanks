@@ -26,6 +26,7 @@ public class tankpanel extends JPanel implements ActionListener{
 	
 	boolean blnPanelServer;
 	
+	//tank images
 	BufferedImage greenTank0img = null;
 	BufferedImage greenTank18img = null;
 	BufferedImage greenTank36img = null;
@@ -40,7 +41,25 @@ public class tankpanel extends JPanel implements ActionListener{
 	BufferedImage oranTank72img = null;
 	BufferedImage oranTank90img = null;
 	
+	//screen / theme images
+	BufferedImage generalMainmenu = null;
+	BufferedImage christmasMainmenu = null;
+	BufferedImage halloweenMainmenu = null;
+	
+	BufferedImage generalGame = null;
+	BufferedImage christmasGame = null;
+	BufferedImage halloweenGame = null;
+	
+	String strTheme = "general";
+	
+	int intRow;
+	int intColumn;
+	
 	BufferedImage HelpTextimg = null;
+	
+	BufferedImage generalTheme = null;
+	BufferedImage christmasTheme = null;
+	BufferedImage halloweenTheme = null;
 	
 	CPTtanks TheTanks;
 	
@@ -64,21 +83,61 @@ public class tankpanel extends JPanel implements ActionListener{
 		//Home screen
 		if(strScreen.equals("Start")){
 			//System.out.println("STARTED");
-			g.setColor(Color.GREEN);
-			g.fillRect(0, 0, 1280, 720);
+			//g.setColor(Color.GREEN);
+			//g.fillRect(0, 0, 1280, 720);
+			
+			//general theme
+			if(strTheme.equals("general")){
+				g.drawImage(generalMainmenu, 0, 0, null);
+				
+			//christmas theme
+			}else if(strTheme.equals("christmas")){
+				g.drawImage(christmasMainmenu, 0, 0, null);
+			
+			//halloween theme	
+			}else if(strTheme.equals("halloween")){
+				g.drawImage(halloweenMainmenu, 0, 0, null);
+				
+			}
 		
+		//help screen
 		}else if(strScreen.equals("Help")){
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, 1280, 720);
 			g.drawImage(HelpTextimg, 10, 50, null);
+		
+		//theme screen
+		}else if(strScreen.equals("Theme")){
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, 1280, 720);
+			
+			g.drawImage(generalTheme, 100, 210, null);
+			g.drawImage(christmasTheme, 425, 210, null);
+			g.drawImage(halloweenTheme, 730, 210, null);
 			
 		//Game screen
 		}else if(strScreen.equals("Play")){
 			//System.out.println("Game screen launched");
-			g.setColor(Color.CYAN);
-			g.fillRect(0, 0, 1280, 720);
-			g.setColor(Color.GREEN);
-			g.fillRect(0, 620, 1280, 100);
+			//g.setColor(Color.CYAN);
+			//g.fillRect(0, 0, 1280, 720);
+			//g.setColor(Color.GREEN);
+			//g.fillRect(0, 620, 1280, 100);
+			
+			//general theme
+			if(strTheme.equals("general")){
+				g.drawImage(generalGame, 0, 0, null);
+	
+			//christmas theme
+			}else if(strTheme.equals("christmas")){
+				g.drawImage(christmasGame, 0, 0, null);
+			
+			//halloween theme	
+			}else if(strTheme.equals("halloween")){
+				g.drawImage(halloweenGame, 0, 0, null);
+				
+			}
+			
+			//middle column
 			g.setColor(Color.GRAY);
 			g.fillRect(620, 460, 40, 160);
 			
@@ -126,16 +185,32 @@ public class tankpanel extends JPanel implements ActionListener{
 			bullet1.drawIt(g);
 			Font Scorefont10 = new Font("Comic Sans MS", Font.PLAIN, 21);
 			if(blnPanelServer == true){
+				if(strTheme.equals("halloween")){
+					g.setColor(Color.WHITE);
+					
+				}else{
+					g.setColor(Color.BLACK);
+					
+				}
+				
 				g.setFont(Scorefont10);
-				g.setColor(Color.BLACK);
+				
 				g.drawString("Launch angle: "+intTank1Ang, 25, 85);
 				g.drawString("Health: "+intHealth1, 25, 50);
 				g.drawString("Health: "+intHealth2, 1100, 50);
 				g.drawString("POWER: "+(intTank1Pow+intTank1PowBoost), 25, 120);
 			}
 			else{
+				if(strTheme.equals("halloween")){
+					g.setColor(Color.WHITE);
+					
+				}else{
+					g.setColor(Color.BLACK);
+					
+				}
+				
 				g.setFont(Scorefont10);
-				g.setColor(Color.BLACK);
+				
 				g.drawString("Launch angle: "+intTank2Ang, 1100, 85);
 				g.drawString("Health: "+intHealth2, 1100, 50);
 				g.drawString("Health: "+intHealth1, 25, 50);
@@ -248,6 +323,7 @@ public class tankpanel extends JPanel implements ActionListener{
 		
 		//images
 		try{
+			//tank images
 			greenTank0img = ImageIO.read(new File("THEGREENTANK0.png"));
 			greenTank18img = ImageIO.read(new File("THEGREENTANK18.png"));
 			greenTank36img = ImageIO.read(new File("THEGREENTANK36.png"));
@@ -262,8 +338,22 @@ public class tankpanel extends JPanel implements ActionListener{
 			oranTank72img = ImageIO.read(new File("THEORANGETANK72.png"));
 			oranTank90img = ImageIO.read(new File("THEORANGETANK90.png"));
 			
+			//screen + theme images
+			generalMainmenu = ImageIO.read(new File("DOODLETANKS2.png"));
+			christmasMainmenu = ImageIO.read(new File("christmasMain.png"));
+			halloweenMainmenu = ImageIO.read(new File("halloweenMain.png"));
+			
+			generalGame = ImageIO.read(new File("gameplayScreen.png"));
+			christmasGame = ImageIO.read(new File("christmasScreen.png"));
+			halloweenGame = ImageIO.read(new File("halloweenScreen.png"));
+			
 			HelpTextimg = ImageIO.read(new File("HelpScreen.png"));
-		
+			
+			generalTheme = ImageIO.read(new File("mainTheme.png"));
+			christmasTheme = ImageIO.read(new File("christmasTheme.png"));
+			halloweenTheme = ImageIO.read(new File("halloweenTheme.png"));
+			
+			
 		
 		}catch(IOException e){
 			System.out.println("Unable to load image");
