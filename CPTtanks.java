@@ -477,6 +477,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 			christmasbut.setVisible(false);
 			halloweenbut.setVisible(false);
 			
+		}else if(evt.getSource() == TestBut){
+			if(thepanel.blnHelpLaunch == false){
+				thepanel.bulletHelp = new getBullet(370, 75, 20, true, true);
+				thepanel.blnHelpLaunch = true;
+			}
 			
 		//if player clicks chat button
 		}else if(evt.getSource() == chatBut){
@@ -786,14 +791,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//Return button
 		returnbut.setSize(200, 50);
-		returnbut.setLocation(300, 600);
+		returnbut.setLocation(50, 650);
 		returnbut.addActionListener(this);
 		returnbut.setVisible(false);
 		thepanel.add(returnbut);
 		
 		//Test arena access button
 		TestBut.setSize(200, 50);
-		TestBut.setLocation(700, 600);
+		TestBut.setLocation(250, 650);
 		TestBut.addActionListener(this);
 		TestBut.setVisible(false);
 		thepanel.add(TestBut);

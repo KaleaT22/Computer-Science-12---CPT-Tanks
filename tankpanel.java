@@ -25,6 +25,7 @@ public class tankpanel extends JPanel implements ActionListener{
 	int intHealth2 = 100;
 	
 	boolean blnPanelServer;
+	boolean blnHelpLaunch = false;
 	
 	//tank images
 	BufferedImage greenTank0img = null;
@@ -68,6 +69,8 @@ public class tankpanel extends JPanel implements ActionListener{
 	
 	getBullet bullet2 = new getBullet(1310, 0, 0, false, true);
 	
+	getBullet bulletHelp = new getBullet(-30, 0, 0, false, true);
+	
 	Timer thetimer = new Timer(1000/60, this);
 	String strScreen = "Start";
 	
@@ -105,6 +108,26 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, 1280, 720);
 			g.drawImage(HelpTextimg, 10, 50, null);
+			
+			g.drawImage(greenTank18img, intTank1Pos-10, 530, null);
+			
+			bulletHelp.drawIt(g);
+			if(bulletHelp.boolHitbox==false){
+				if(bulletHelp.intY>600){
+					bulletHelp.boolLaunched=false;
+					bulletHelp.boolHitbox=true;
+					//TheTanks.allowShooting();
+					blnHelpLaunch = false;
+					//If the bullet touches the floor, stop the bullet from moving and change it's color to red
+				}else if(bulletHelp.intX<0 || bulletHelp.intX>1280){
+					bulletHelp.boolLaunched=false;
+					bulletHelp.boolHitbox=true;
+					//TheTanks.allowShooting();
+					blnHelpLaunch = false;
+					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
+				}
+			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
+			}
 		
 		//theme screen
 		}else if(strScreen.equals("Theme")){
@@ -308,6 +331,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				}
 			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
 			}
+			
 			
 			
 		}
