@@ -244,6 +244,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					//if fires
 					}else if(strMessage[0][1].equals("shoot")){
+						clicky.se.setFile("PEWPEWPEW2.wav");
+						clicky.se.play();
 						thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true, true);
 						
 						blnShotfreeze = true;
@@ -291,6 +293,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					//if fires
 					if(strMessage[0][1].equals("shoot")){
+						clicky.se.setFile("PEWPEWPEW2.wav");
+						clicky.se.play();
 						thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true, false);
 						
 						blnShotfreeze = true;
@@ -508,6 +512,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 				//shoot
 				if(evt.getKeyChar() == ' '){
+					clicky.se.setFile("PEWPEWPEW2.wav");
+					clicky.se.play();
 					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true, true);
 					System.out.println("FIRED!");
 					
@@ -575,6 +581,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				//Decrease power
 				
 				if(evt.getKeyChar() == ' '){
+					clicky.se.setFile("PEWPEWPEW2.wav");
+					clicky.se.play();
 					thepanel.bullet2 = new getBullet((thepanel.intTank2Pos + 40), thepanel.intTank2Pow+thepanel.intTank2PowBoost, (180-thepanel.intTank2Ang), true, false);
 					ssm.sendText("client, shoot");
 					System.out.println("FIRED!");
