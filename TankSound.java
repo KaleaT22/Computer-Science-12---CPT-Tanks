@@ -4,15 +4,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
-public class NoorSound{
+public class TankSound{
 	String clickSound;
 	SoundEffect se = new SoundEffect();
 	int intRun = 0;
-	
-	
-	public void Sound(){
-		clickSound = "CLICKNOISE2.mp3";
-	}
 	
 	public class SoundEffect{
 		
@@ -35,7 +30,7 @@ public class NoorSound{
 			click.start();
 		}
 	}
-	public NoorSound(){
+	public TankSound(){
 		
 	}
 }

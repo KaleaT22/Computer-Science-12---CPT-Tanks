@@ -8,7 +8,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//properties
 	JFrame theframe = new JFrame("Tanks");
 	tankpanel thepanel = new tankpanel(this);
-	NoorSound clicky = new NoorSound();
+	TankSound clicky = new TankSound();
 	
 	int intRow = 0;
 	int intColumn = 0;
@@ -87,6 +87,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//server connects
 		}else if(evt.getSource() == theserver){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 			theserver.setEnabled(false); 
 			theclient.setEnabled(false);
 			theipAdd.setEnabled(false);
@@ -118,6 +120,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 		//if client connects
 		}else if(evt.getSource() == theclient){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 			theclient.setEnabled(false);
 			theserver.setEnabled(false);
 			theipAdd.setEnabled(false);
@@ -148,6 +152,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//if player disconnects	
 		}else if(evt.getSource() == thedisconnect){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 			thedisconnect.setEnabled(false);
 			theuserInput.setEnabled(true);
 			thechat.setEnabled(false);
@@ -329,9 +335,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 			ssm.sendText("server, playstart");
 			
 			theframe.requestFocus();
-		
+		//if player clicks theme button
+		}else if(evt.getSource() == themebut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 		//if player clicks help
 		}else if(evt.getSource() == helpbut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 			thepanel.strScreen = "Help";
 			playbut.setVisible(false);
 			themebut.setVisible(false);
@@ -347,6 +358,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			TestBut.setVisible(true);
 			
 		}else if(evt.getSource() == returnbut){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
 			thepanel.strScreen = "Start";
 			playbut.setVisible(true);
 			themebut.setVisible(true);
