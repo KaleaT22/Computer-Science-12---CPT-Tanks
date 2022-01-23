@@ -479,6 +479,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 		}else if(evt.getSource() == TestBut){
 			if(thepanel.blnHelpLaunch == false){
+				clicky.se.setFile("PEWPEWPEW2.wav");
+				clicky.se.play();
 				thepanel.bulletHelp = new getBullet(370, 75, 20, true, true);
 				thepanel.blnHelpLaunch = true;
 			}
