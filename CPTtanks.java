@@ -738,6 +738,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//Constantly update the tanks location, also constantly make sure that the tank is teleported back onto screen the moment it goes out of screen
 	
 	public void allowShooting(){
+		clicky.se.setFile("EXPLOSION.wav");
+		clicky.se.play();
 		blnShotfreeze = false;
 		if(blnserverTurn == false){
 			blnserverTurn = true;
