@@ -373,12 +373,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 				ssm.sendText("server, playstart");
 				
 				theframe.requestFocus();
-				
-			}else if(thepanel.intHealth1 == 0 && thepanel.intHealth2 > 0){
-				thepanel.strScreen = "tank2Win";
-				
-				returnbut2.setVisible(true);
-				
+				/*if(thepanel.intHealth1 >= 0 || thepanel.intHealth2 >= 0){
+					thepanel.strScreen = "Test";
+					returnbut.setVisible(true);
+				}*/
 			}
 		//if player clicks theme button
 		}else if(evt.getSource() == themebut){

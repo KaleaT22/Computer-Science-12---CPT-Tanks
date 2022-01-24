@@ -113,10 +113,9 @@ public class tankpanel extends JPanel implements ActionListener{
 		
 		//help screen
 		}else if(strScreen.equals("Help")){
-			g.setColor(Color.GREEN);
+			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, 1280, 720);
-			g.drawImage(HelpTextimg, 10, 50, null);
-			
+			//g.drawImage(HelpTextimg, 10, 50, null);
 			g.drawImage(greenTank18img, intTank1Pos-10, 530, null);
 			
 			bulletHelp.drawIt(g);
@@ -353,6 +352,8 @@ public class tankpanel extends JPanel implements ActionListener{
 					g.drawImage(generalWin, 0, 0, null);
 				}
 			}
+		}else if(strScreen.equals("Test")){
+			g.drawImage(generalWin, 0, 0, null);
 		}
 	}
 	
