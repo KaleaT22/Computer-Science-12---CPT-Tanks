@@ -138,6 +138,8 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.drawImage(christmasTheme, 425, 210, null);
 			g.drawImage(halloweenTheme, 730, 210, null);
 			
+		}else if(strScreen.equals("End Screen")){
+			
 		//Game screen
 		}else if(strScreen.equals("Play")){
 			//System.out.println("Game screen launched");
@@ -286,7 +288,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 560, 100, 60))){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
-					intHealth2 = intHealth2 - 10;
+					intHealth2 = intHealth2 - 100;
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet1.intY>600){
@@ -311,7 +313,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 560, 100, 60))){
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
-					intHealth1 = intHealth1 - 10;
+					intHealth1 = intHealth1 - 100;
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet2.intY>600){

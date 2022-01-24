@@ -44,6 +44,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//help button
 	JButton helpbut = new JButton("Help");
 	
+	//Return from end of game button
+	JButton returnbut2 = new JButton("Back to Menu");
+	
 	//button to go back to menu from Help Screen
 	JButton returnbut = new JButton("Back to Menu");
 	
@@ -339,36 +342,40 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//if player starts game
 		}else if(evt.getSource() == playbut){
-			clicky.se.setFile("CLICKNOISE2.wav");
-			clicky.se.play();
-			
-			thepanel.strScreen = "Play";
-			playbut.setVisible(false);
-			themebut.setVisible(false);
-			thedisconnect.setVisible(false);
-			theserver.setVisible(false);
-			theclient.setVisible(false);
-			theIP.setVisible(false);
-			theipAdd.setVisible(false);
-			theUser.setVisible(false);
-			theuserInput.setVisible(false);
-			returnbut.setVisible(false);
-			TestBut.setVisible(false);
-			
-			thechatarealabel.setLocation(1080, 150);
-			thechatscroll.setLocation(1080, 150);
-			thechatlabel.setLocation(1080, 500);
-			thechat.setLocation(1080, 525);
-			chatBut.setLocation(1080, 550);
-			
-			thechat.setVisible(true);
-			chatBut.setVisible(true);
-			chatBut.setEnabled(true);
-			helpbut.setVisible(false);
-			
-			ssm.sendText("server, playstart");
-			
-			theframe.requestFocus();
+			if(thepanel.intHealth1 > 0 || thepanel.intHealth2 > 0){
+				clicky.se.setFile("CLICKNOISE2.wav");
+				clicky.se.play();
+				
+				thepanel.strScreen = "Play";
+				playbut.setVisible(false);
+				themebut.setVisible(false);
+				thedisconnect.setVisible(false);
+				theserver.setVisible(false);
+				theclient.setVisible(false);
+				theIP.setVisible(false);
+				theipAdd.setVisible(false);
+				theUser.setVisible(false);
+				theuserInput.setVisible(false);
+				returnbut.setVisible(false);
+				TestBut.setVisible(false);
+				
+				thechatarealabel.setLocation(1080, 150);
+				thechatscroll.setLocation(1080, 150);
+				thechatlabel.setLocation(1080, 500);
+				thechat.setLocation(1080, 525);
+				chatBut.setLocation(1080, 550);
+				
+				thechat.setVisible(true);
+				chatBut.setVisible(true);
+				chatBut.setEnabled(true);
+				helpbut.setVisible(false);
+				
+				ssm.sendText("server, playstart");
+				
+				theframe.requestFocus();
+			}else if(thepanel.intHealth1 == 0 || thepanel.intHealth2 == 0){
+				returnbut2.setVisible(true);
+			}
 		//if player clicks theme button
 		}else if(evt.getSource() == themebut){
 			clicky.se.setFile("CLICKNOISE2.wav");
@@ -829,6 +836,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 		returnbut.addActionListener(this);
 		returnbut.setVisible(false);
 		thepanel.add(returnbut);
+		
+		//Return from end of game button
+		returnbut2.setSize(200, 50);
+		returnbut2.setLocation(50, 650);
+		returnbut2.addActionListener(this);
+		returnbut2.setVisible(false);
+		thepanel.add(returnbut2);
 		
 		//Test arena access button
 		TestBut.setSize(200, 50);
