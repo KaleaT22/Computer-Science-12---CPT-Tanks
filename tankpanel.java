@@ -162,7 +162,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			//middle column
 			g.setColor(Color.GRAY);
-			g.fillRect(620, 460, 40, 160);
+			g.fillRect(520,460,40,160);
 			
 			//TANK 1
 			///g.setColor(Color.RED);
@@ -294,12 +294,12 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet1.boolHitbox=true;
 					TheTanks.allowShooting();
 					//If the bullet touches the floor, stop the bullet from moving and change it's color to red
-				}else if(bullet1.intX<0 || bullet1.intX>1280){
+				}else if(bullet1.intX<0 || bullet1.intX>1080){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
 					TheTanks.allowShooting();
 					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
-				}else if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(620, 460, 40, 160))){
+				}else if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(520,460,40,160))){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
 					TheTanks.allowShooting();
@@ -319,12 +319,12 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet2.boolHitbox=true;
 					TheTanks.allowShooting();
 					//If the bullet touches the floor, stop the bullet from moving and change it's color to red
-				}else if(bullet2.intX<0 || bullet2.intX>1280){
+				}else if(bullet2.intX<0 || bullet2.intX>1080){
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
 					TheTanks.allowShooting();
 					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
-				}else if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(620, 460, 40, 160))){
+				}else if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(520,460,40,160))){
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
 					TheTanks.allowShooting();
