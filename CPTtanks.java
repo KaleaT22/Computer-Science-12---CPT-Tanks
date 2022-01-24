@@ -77,7 +77,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	boolean blnisServer;
 	
 	boolean blnserverTurn = true;
-	boolean blnShotfreeze=false;
+	boolean blnShotfreeze = false;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
@@ -454,11 +454,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 			helpbut.setVisible(false);
 			returnbut.setVisible(true);
 			TestBut.setVisible(true);
-		
+			
+			returnbut.setLocation(50, 650);
+			
 		//if player clicks return to main menu
 		}else if(evt.getSource() == returnbut){
 			clicky.se.setFile("CLICKNOISE2.wav");
 			clicky.se.play();
+			
 			thepanel.strScreen = "Start";
 			playbut.setVisible(true);
 			themebut.setVisible(true);
