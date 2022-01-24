@@ -869,7 +869,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		thechatscroll = new JScrollPane(thechatarea);
 		thechatscroll.setSize(200, 350);
 		thechatscroll.setLocation(1080, 200);
-		thechatarea.setEnabled(false);
+		thechatarea.setEditable(false);
 		thepanel.add(thechatscroll);  
 	
 		//chat label

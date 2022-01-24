@@ -75,7 +75,7 @@ public class getBullet{
 	}
 	
 	public void drawIt(Graphics g){
-		g.setColor(Color.BLACK);
+		g.setColor(Color.DARK_GRAY);
 		if(dblPowerX ==0){
 			g.setColor(Color.RED);
 		}
