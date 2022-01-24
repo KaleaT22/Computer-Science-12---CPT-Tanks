@@ -251,6 +251,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank1Pos = Integer.parseInt(strMessage[0][2]);
 						
+						clicky.se.setFile("TankMovement2LOUDER.wav");
+						clicky.se.play();
+						
 					//if depress / elevating cannon
 					}else if(strMessage[0][1].equals("angle")){
 						thepanel.intTank1Ang = Integer.parseInt(strMessage[0][2]);				
@@ -266,6 +269,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 					//chat message	
 					}else if(strMessage[0][1].equals("chat")){
 						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
+						
+						thechatarea.setCaretPosition(thechatarea.getDocument().getLength());
 						
 					}else if(strMessage[0][1].equals("power")){
 						thepanel.intTank1PowBoost = Integer.parseInt(strMessage[0][2]);
@@ -296,6 +301,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 					//if move	
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank2Pos = Integer.parseInt(strMessage[0][2]);	
+						
+						clicky.se.setFile("TankMovement2LOUDER.wav");
+						clicky.se.play();
 						
 					}
 					
@@ -581,6 +589,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Server: Left");
 				thepanel.intTank1Def = -5;
 				
+				clicky.se.setFile("TankMovement2LOUDER.wav");
+				clicky.se.play();
+				
 				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
 				
 				//call function to send ssm to move tank
@@ -590,6 +601,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 			}else if(evt.getKeyChar() == 'd' && (thepanel.intTank1Pos+80)<1080){
 				System.out.println("Server: Right");
 				thepanel.intTank1Def = 5;
+				
+				clicky.se.setFile("TankMovement2LOUDER.wav");
+				clicky.se.play();
 				
 				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
 				
@@ -647,6 +661,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Client: Left");
 				thepanel.intTank2Def = -5;
 				
+				clicky.se.setFile("TankMovement2LOUDER.wav");
+				clicky.se.play();
+				
 				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
 				
 				//call function to send ssm to move tank
@@ -657,6 +674,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Client: Right");
 				System.out.println(thepanel.intTank2Pos);
 				thepanel.intTank2Def = 5;
+				
+				clicky.se.setFile("TankMovement2LOUDER.wav");
+				clicky.se.play();
 				
 				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
 				
