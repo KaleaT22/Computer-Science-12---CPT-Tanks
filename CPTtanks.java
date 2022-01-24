@@ -254,8 +254,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank1Pos = Integer.parseInt(strMessage[0][2]);
 						
-						clicky.se.setFile("TankMovement2LOUDER.wav");
-						clicky.se.play();
+						//clicky.se.setFile("TankMovement2LOUDER.wav");
+						//clicky.se.play();
 						
 					//if depress / elevating cannon
 					}else if(strMessage[0][1].equals("angle")){
@@ -305,8 +305,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank2Pos = Integer.parseInt(strMessage[0][2]);	
 						
-						clicky.se.setFile("TankMovement2LOUDER.wav");
-						clicky.se.play();
+						//clicky.se.setFile("TankMovement2LOUDER.wav");
+						//clicky.se.play();
 						
 					}
 					
@@ -373,8 +373,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 				ssm.sendText("server, playstart");
 				
 				theframe.requestFocus();
-			}else if(thepanel.intHealth1 == 0 || thepanel.intHealth2 == 0){
+				
+			}else if(thepanel.intHealth1 == 0 && thepanel.intHealth2 > 0){
+				thepanel.strScreen = "tank2Win";
+				
 				returnbut2.setVisible(true);
+				
 			}
 		//if player clicks theme button
 		}else if(evt.getSource() == themebut){
@@ -596,8 +600,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Server: Left");
 				thepanel.intTank1Def = -5;
 				
-				clicky.se.setFile("TankMovement2LOUDER.wav");
-				clicky.se.play();
+				//clicky.se.setFile("TankMovement2LOUDER.wav");
+				//clicky.se.play();
 				
 				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
 				
@@ -609,8 +613,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Server: Right");
 				thepanel.intTank1Def = 5;
 				
-				clicky.se.setFile("TankMovement2LOUDER.wav");
-				clicky.se.play();
+				//clicky.se.setFile("TankMovement2LOUDER.wav");
+				//clicky.se.play();
 				
 				//ssm.sendText("server, move, " + thepanel.intTank1Pos);
 				
@@ -668,8 +672,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println("Client: Left");
 				thepanel.intTank2Def = -5;
 				
-				clicky.se.setFile("TankMovement2LOUDER.wav");
-				clicky.se.play();
+				//clicky.se.setFile("TankMovement2LOUDER.wav");
+				//clicky.se.play();
 				
 				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
 				
@@ -682,8 +686,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				System.out.println(thepanel.intTank2Pos);
 				thepanel.intTank2Def = 5;
 				
-				clicky.se.setFile("TankMovement2LOUDER.wav");
-				clicky.se.play();
+				//clicky.se.setFile("TankMovement2LOUDER.wav");
+				//clicky.se.play();
 				
 				//ssm.sendText("client, move, " + thepanel.intTank2Pos);
 				

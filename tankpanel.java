@@ -51,6 +51,14 @@ public class tankpanel extends JPanel implements ActionListener{
 	BufferedImage christmasGame = null;
 	BufferedImage halloweenGame = null;
 	
+	BufferedImage generalWin = null;
+	BufferedImage christmasWin = null;
+	BufferedImage halloweenWin = null;
+	
+	BufferedImage generalLose = null;
+	BufferedImage christmasLose = null;
+	BufferedImage halloweenLose = null;
+	
 	String strTheme = "general";
 	
 	int intRow;
@@ -335,7 +343,16 @@ public class tankpanel extends JPanel implements ActionListener{
 			}
 			
 			
-			
+		//if player 2 wins
+		}else if(strScreen.equals("tank2Win")){
+			if(strTheme.equals("general")){
+				if(blnPanelServer == true){
+					g.drawImage(generalLose, 0, 0, null);
+					
+				}else{
+					g.drawImage(generalWin, 0, 0, null);
+				}
+			}
 		}
 	}
 	
@@ -378,6 +395,14 @@ public class tankpanel extends JPanel implements ActionListener{
 			generalTheme = ImageIO.read(new File("mainTheme.png"));
 			christmasTheme = ImageIO.read(new File("christmasTheme.png"));
 			halloweenTheme = ImageIO.read(new File("halloweenTheme.png"));
+			
+			generalLose = ImageIO.read(new File("doodleLoseScreen.png"));
+			christmasLose = ImageIO.read(new File("christmasScreen.png"));
+			halloweenLose = ImageIO.read(new File("halloweenLoseScreen.png"));
+			
+			generalWin = ImageIO.read(new File("doodleWinScreen.png"));
+			christmasWin = ImageIO.read(new File("christmasWinScreen.png"));
+			halloweenWin = ImageIO.read(new File("halloweenWinScreen.png"));
 			
 			
 		
