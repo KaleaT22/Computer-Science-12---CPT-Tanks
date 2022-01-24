@@ -324,6 +324,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("chat")){
 						thechatarea.append("\n" + strMessage[0][2] + ": " + strMessage[0][3]);
 						
+						thechatarea.setCaretPosition(thechatarea.getDocument().getLength());
 					}
 				}
 			}
@@ -441,6 +442,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}else if(evt.getSource() == helpbut){
 			clicky.se.setFile("CLICKNOISE2.wav");
 			clicky.se.play();
+			
 			thepanel.strScreen = "Help";
 			playbut.setVisible(false);
 			themebut.setVisible(false);
@@ -452,6 +454,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			theUser.setVisible(false);
 			theuserInput.setVisible(false);
 			helpbut.setVisible(false);
+			
 			returnbut.setVisible(true);
 			TestBut.setVisible(true);
 			
@@ -517,6 +520,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				ssm.sendText("server, chat, " + strUser + ", " + strChat);
 				
 				thechat.setText("");
+				
+				thechatarea.setCaretPosition(thechatarea.getDocument().getLength());
 			
 			//send for client
 			}else{
@@ -525,6 +530,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 				ssm.sendText("client, chat, " + strUser + ", " + strChat);
 				
 				thechat.setText("");
+				
+				thechatarea.setCaretPosition(thechatarea.getDocument().getLength());
 			}
 		}
 	}
