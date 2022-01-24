@@ -45,7 +45,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	JButton helpbut = new JButton("Help");
 	
 	//Return from end of game button
-	JButton returnbut2 = new JButton("Back to Menu");
+	static JButton returnbut2 = new JButton("Back to Menu");
 	
 	//button to go back to menu from Help Screen
 	JButton returnbut = new JButton("Back to Menu");
@@ -83,6 +83,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 	boolean blnShotfreeze = false;
 	
 	//methods
+	public static void ShowEndBut(){
+		returnbut2.setVisible(true);
+	}
 	public void actionPerformed(ActionEvent evt){
 		//if player enters username
 		if(evt.getSource() == theuserInput){
@@ -342,7 +345,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//if player starts game
 		}else if(evt.getSource() == playbut){
-			if(thepanel.intHealth1 > 0 || thepanel.intHealth2 > 0){
+			if(thepanel.intHealth1 > 0 && thepanel.intHealth2 > 0){
 				clicky.se.setFile("CLICKNOISE2.wav");
 				clicky.se.play();
 				
@@ -373,10 +376,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 				ssm.sendText("server, playstart");
 				
 				theframe.requestFocus();
-				/*if(thepanel.intHealth1 >= 0 || thepanel.intHealth2 >= 0){
-					thepanel.strScreen = "Test";
-					returnbut.setVisible(true);
-				}*/
 			}
 		//if player clicks theme button
 		}else if(evt.getSource() == themebut){

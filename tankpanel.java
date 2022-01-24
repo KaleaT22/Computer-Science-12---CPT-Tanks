@@ -296,6 +296,10 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
 					intHealth2 = intHealth2 - 100;
+					if(intHealth2 <= 0){
+						strScreen = "Test";
+						CPTtanks.ShowEndBut();
+					}
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet1.intY>600){
@@ -321,6 +325,10 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
 					intHealth1 = intHealth1 - 100;
+					if(intHealth1 <= 0){
+						strScreen = "Test";
+						CPTtanks.ShowEndBut();
+					}
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet2.intY>600){
