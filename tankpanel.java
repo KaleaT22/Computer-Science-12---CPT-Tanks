@@ -72,6 +72,8 @@ public class tankpanel extends JPanel implements ActionListener{
 	
 	CPTtanks TheTanks;
 	
+	String strGameOver = "false";
+	
 	//Spawns bullet off screen in limbo waiting to be launched
 	getBullet bullet1 = new getBullet(-30,0,0,false, true);
 	
@@ -296,10 +298,23 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
 					intHealth2 = intHealth2 - 100;
-					if(intHealth2 <= 0){
-						strScreen = "Test";
-						CPTtanks.ShowEndBut();
+					
+					//if play 2 health <= 0, player 2 loses, player 1 wins
+					if(intHealth2 <= 0 && intHealth1 > 0){
+						strScreen = "tank1Win";
+						CPTtanks.returnbut2.setVisible(true);
+						
+						if(blnPanelServer == true){
+							CPTtanks.returnbut2.setEnabled(true);
+							
+						}else{
+							CPTtanks.returnbut2.setEnabled(false);
+							
+						}
+						
+						strGameOver = "play1Win";
 					}
+					
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet1.intY>600){
@@ -325,10 +340,23 @@ public class tankpanel extends JPanel implements ActionListener{
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
 					intHealth1 = intHealth1 - 100;
-					if(intHealth1 <= 0){
-						strScreen = "Test";
-						CPTtanks.ShowEndBut();
+					
+					//if play 1 health <= 0, player 2 wins, player 1 loses
+					if(intHealth1 <= 0 && intHealth2 > 0){
+						strScreen = "tank2Win";
+						CPTtanks.returnbut2.setVisible(true);
+						
+						if(blnPanelServer == true){
+							CPTtanks.returnbut2.setEnabled(true);
+							
+						}else{
+							CPTtanks.returnbut2.setEnabled(false);
+							
+						}
+						
+						strGameOver = "play2Win";
 					}
+					
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet2.intY>600){
@@ -358,10 +386,61 @@ public class tankpanel extends JPanel implements ActionListener{
 					
 				}else{
 					g.drawImage(generalWin, 0, 0, null);
+					
+				}
+			
+			}else if(strTheme.equals("christmas")){
+				if(blnPanelServer == true){
+					g.drawImage(christmasLose, 0, 0, null);
+					
+					
+				}else{
+					g.drawImage(christmasWin, 0, 0, null);
+					
+				}
+			
+			}else if(strTheme.equals("halloween")){
+				if(blnPanelServer == true){
+					g.drawImage(halloweenLose, 0, 0, null);
+					
+					
+				}else{
+					g.drawImage(halloweenWin, 0, 0, null);
+					
 				}
 			}
-		}else if(strScreen.equals("Test")){
-			g.drawImage(generalWin, 0, 0, null);
+		
+		}else if(strScreen.equals("tank1Win")){
+			if(strTheme.equals("general")){
+				if(blnPanelServer == true){
+					g.drawImage(generalWin, 0, 0, null);
+					
+					
+				}else{
+					g.drawImage(generalLose, 0, 0, null);
+					
+				}
+			
+			}else if(strTheme.equals("christmas")){
+				if(blnPanelServer == true){
+					g.drawImage(christmasWin, 0, 0, null);
+					
+					
+				}else{
+					g.drawImage(christmasLose, 0, 0, null);
+					
+				}
+			
+			}else if(strTheme.equals("halloween")){
+				if(blnPanelServer == true){
+					g.drawImage(halloweenWin, 0, 0, null);
+					
+					
+				}else{
+					g.drawImage(halloweenLose, 0, 0, null);
+					
+				}
+			}
 		}
 	}
 	

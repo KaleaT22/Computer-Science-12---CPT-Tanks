@@ -82,10 +82,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 	boolean blnserverTurn = true;
 	boolean blnShotfreeze = false;
 	
-	//methods
-	public static void ShowEndBut(){
-		returnbut2.setVisible(true);
-	}
 	public void actionPerformed(ActionEvent evt){
 		//if player enters username
 		if(evt.getSource() == theuserInput){
@@ -345,7 +341,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//if player starts game
 		}else if(evt.getSource() == playbut){
-			if(thepanel.intHealth1 > 0 && thepanel.intHealth2 > 0){
+			if(thepanel.strGameOver.equals("false")){
 				clicky.se.setFile("CLICKNOISE2.wav");
 				clicky.se.play();
 				
@@ -376,7 +372,24 @@ public class CPTtanks implements ActionListener, KeyListener{
 				ssm.sendText("server, playstart");
 				
 				theframe.requestFocus();
+				
 			}
+			
+			/*//if player 1 loses all health, player 2 wins
+			}else if(thepanel.strGameOver.equals("play2Win")){
+				thepanel.strScreen = "tank2Win";
+				
+				returnbut.setVisible(true);
+				returnbut.setLocation(500, 500);
+			
+			//if player 2 loses all health, player 1 wins
+			}else if(thepanel.strGameOver.equals("play1Win")){
+				thepanel.strScreen = "tank1Win";
+				
+				returnbut.setVisible(true);
+				returnbut.setLocation(500, 500);
+			}*/
+			
 		//if player clicks theme button
 		}else if(evt.getSource() == themebut){
 			clicky.se.setFile("CLICKNOISE2.wav");
@@ -425,6 +438,9 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 			}catch(ArrayIndexOutOfBoundsException e){
 				System.out.println("Array Out of Index");
+				
+			}catch(NullPointerException e){
+				System.out.println("Null pointer");
 			}
 			
 		//if player clicks general theme button
@@ -475,6 +491,29 @@ public class CPTtanks implements ActionListener, KeyListener{
 			TestBut.setVisible(true);
 			
 			returnbut.setLocation(50, 650);
+		
+		//if player wins, server brings to main menu
+		}else if(evt.getSource() == returnbut2){
+			clicky.se.setFile("CLICKNOISE2.wav");
+			clicky.se.play();
+			
+			thepanel.strScreen = "Start";
+			playbut.setVisible(true);
+			themebut.setVisible(true);
+			thedisconnect.setVisible(true);
+			theserver.setVisible(true);
+			theclient.setVisible(true);
+			theIP.setVisible(true);
+			theipAdd.setVisible(true);
+			theUser.setVisible(true);
+			theuserInput.setVisible(true);
+			helpbut.setVisible(true);
+			
+			returnbut2.setVisible(false);
+			TestBut.setVisible(false);
+			generalbut.setVisible(false);
+			christmasbut.setVisible(false);
+			halloweenbut.setVisible(false);
 			
 		//if player clicks return to main menu
 		}else if(evt.getSource() == returnbut){
@@ -593,7 +632,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		//server movements
 		if(blnisServer == true && blnShotfreeze == false){
 			//left
-			if(evt.getKeyChar() == 'a' && thepanel.intTank1Pos>0){
+			if(evt.getKeyChar() == 'a' && thepanel.intTank1Pos > 0){
 				System.out.println("Server: Left");
 				thepanel.intTank1Def = -5;
 				
@@ -620,46 +659,44 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 			}
 			
-			if(blnserverTurn == true && blnShotfreeze == false){
-				//elevate the gun
-				if(evt.getKeyChar() == 'w' && thepanel.intTank1Ang<90){
-					System.out.println("Server: gun elevating");
-					thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
-					
-					System.out.println(thepanel.intTank1Ang);
-					
-					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
+			//elevate the gun
+			if(evt.getKeyChar() == 'w' && thepanel.intTank1Ang<90){
+				System.out.println("Server: gun elevating");
+				thepanel.intTank1Ang = thepanel.intTank1Ang + 5;
+				
+				System.out.println(thepanel.intTank1Ang);
+				
+				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
 
-				//depress the gun
-				}else if(evt.getKeyChar() == 's' && thepanel.intTank1Ang>0){
-					System.out.println("Server: gun depressing");
-					thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
-					System.out.println(thepanel.intTank1Ang);
-					ssm.sendText("server, angle, " + thepanel.intTank1Ang);
-				}
+			//depress the gun
+			}else if(evt.getKeyChar() == 's' && thepanel.intTank1Ang>0){
+				System.out.println("Server: gun depressing");
+				thepanel.intTank1Ang = thepanel.intTank1Ang - 5;
+				System.out.println(thepanel.intTank1Ang);
+				ssm.sendText("server, angle, " + thepanel.intTank1Ang);
+			}
+			
+			if(evt.getKeyChar() == 'e' && thepanel.intTank1PowBoost<20){
+				thepanel.intTank1PowBoost=thepanel.intTank1PowBoost+2;
+				ssm.sendText("server, power, " + thepanel.intTank1PowBoost);
+			//Increase power
+			
+			}else if(evt.getKeyChar() == 'q' && thepanel.intTank1PowBoost>0){
+				thepanel.intTank1PowBoost=thepanel.intTank1PowBoost-2;
+				ssm.sendText("server, power, " + thepanel.intTank1PowBoost);
+			}
+			//Decrease power
+			
+			//shoot
+			if(evt.getKeyChar() == ' '){
+				clicky.se.setFile("PEWPEWPEW2.wav");
+				clicky.se.play();
+				thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true, true);
+				System.out.println("FIRED!");
 				
-				if(evt.getKeyChar() == 'e' && thepanel.intTank1PowBoost<20){
-					thepanel.intTank1PowBoost=thepanel.intTank1PowBoost+2;
-					ssm.sendText("server, power, " + thepanel.intTank1PowBoost);
-				//Increase power
-				
-				}else if(evt.getKeyChar() == 'q' && thepanel.intTank1PowBoost>0){
-					thepanel.intTank1PowBoost=thepanel.intTank1PowBoost-2;
-					ssm.sendText("server, power, " + thepanel.intTank1PowBoost);
-				}
-				//Decrease power
-				
-				//shoot
-				if(evt.getKeyChar() == ' '){
-					clicky.se.setFile("PEWPEWPEW2.wav");
-					clicky.se.play();
-					thepanel.bullet1 = new getBullet((thepanel.intTank1Pos + 40), thepanel.intTank1Pow+thepanel.intTank1PowBoost, thepanel.intTank1Ang, true, true);
-					System.out.println("FIRED!");
-					
-					ssm.sendText("server, shoot");
-					thepanel.intTank1Def = 0;
-					blnShotfreeze = true;
-				}
+				ssm.sendText("server, shoot");
+				thepanel.intTank1Def = 0;
+				blnShotfreeze = true;
 			}
 		
 		//client movements
@@ -840,7 +877,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//Return from end of game button
 		returnbut2.setSize(200, 50);
-		returnbut2.setLocation(50, 650);
+		returnbut2.setLocation(500, 300);
 		returnbut2.addActionListener(this);
 		returnbut2.setVisible(false);
 		thepanel.add(returnbut2);
