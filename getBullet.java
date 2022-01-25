@@ -1,3 +1,7 @@
+//Doodle Tanks (Bullet Object)
+//By: Atilla Awista, Kalea Tse, & Noor Qureshi
+//Date: December 16, 2021
+
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
@@ -38,22 +42,22 @@ public class getBullet{
 		dblAngleRadians=Math.toRadians(dblAngle);
 		dblPowerX=((dblPower)*(Math.cos(dblAngleRadians)));
 		dblPowerY=(1*((dblPower)*(Math.sin(dblAngleRadians))));
+		//Uses kinematics to calculate cannonball velocity in the X and Y
 		
 		if(boolServerTank==true){
 			intBulletOffset=40;
 		}else{
 			intBulletOffset=-40;
 		}
-		//This makes it so the cannonball fires out of the barrel side of the tank
+		//This makes it so the cannonball fires out of the barrel side of the tank depending if its a client or server tank
 		
 		//d = v*t
 		intX=((int)(dblPowerX*dblTime))+(intTankX+intBulletOffset);
-		//intX=0;
+		//Uses kinematics to calculate cannonball displacement in the X (displacement= velocity*time)
 		
 		//d = Vi*t + 1/2*a*t^2
 		intY=((((int)((dblPowerY*dblTime)+(0.5*dblGravity*(Math.pow(dblTime, 2)))))*-1)+560);
-		//System.out.println(dblTime+"");
-		//System.out.println(intY+"");
+		//Uses kinematic equation to calculate cannonball displacement in the Y
 		
 		if(boolLaunched==false){
 			if(boolHitbox==true && boolGetCoords==true){
@@ -79,10 +83,11 @@ public class getBullet{
 		if(dblPowerX ==0){
 			g.setColor(Color.RED);
 		}
-		//Once the cannon stops moving, turn it red
+		//Once the cannon stops moving, turn it red as a visual indicator (for testing purposes)
 		g.fillOval(intX, intY, 20, 20);
 		this.nextPos();
 	}
+	//This function visually draws out the cannonball
 	
 	//Constructor
 	public getBullet(int intTankX, double dblPower, double dblAngle, boolean boolLaunched, boolean boolServerTank){

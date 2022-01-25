@@ -1,3 +1,7 @@
+//Doodle Tanks (Panel)
+//By: Atilla Awista, Kalea Tse, & Noor Qureshi
+//Date: December 16, 2021
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -117,7 +121,7 @@ public class tankpanel extends JPanel implements ActionListener{
 		}else if(strScreen.equals("Help")){
 			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, 1280, 720);
-			//g.drawImage(HelpTextimg, 10, 50, null);
+			g.drawImage(HelpTextimg, 10, 50, null);
 			g.drawImage(greenTank18img, intTank1Pos-10, 530, null);
 			
 			bulletHelp.drawIt(g);
@@ -137,6 +141,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				}
 			//If client's bullet hits enemy tank (server), stop the bullet from moving and change it's color to red
 			}
+		//When help screen is activated, load interactive test tank and help screen
 		
 		//theme screen
 		}else if(strScreen.equals("Theme")){
@@ -157,27 +162,28 @@ public class tankpanel extends JPanel implements ActionListener{
 			//g.setColor(Color.GREEN);
 			//g.fillRect(0, 620, 1280, 100);
 			
-			//general theme
+			//draws out general theme
 			if(strTheme.equals("general")){
 				g.drawImage(generalGame, 0, 0, null);
 	
-			//christmas theme
+			//draws out christmas theme
 			}else if(strTheme.equals("christmas")){
 				g.drawImage(christmasGame, 0, 0, null);
 			
-			//halloween theme	
+			//draws out halloween theme	
 			}else if(strTheme.equals("halloween")){
 				g.drawImage(halloweenGame, 0, 0, null);
 				
 			}
 			
-			//middle column
+			//draws out middle column
 			g.setColor(Color.GRAY);
 			g.fillRect(520,460,40,160);
 			
 			//TANK 1
 			///g.setColor(Color.RED);
 			///g.fillRect(intTank1Pos, 560, 100, 60);
+			///Tank hitbox for testing purposes
 			//if angle >= 0
 			if(intTank1Ang >= 0 && intTank1Ang < 18 ){
 				g.drawImage(greenTank0img, intTank1Pos-10, 530, null);
@@ -213,8 +219,10 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.drawImage(greenTank90img, intTank1Pos-10, 530, null);
 				
 			}
-
+			//Updates server tanks visual sprite depending on the angle
+			
 			intTank1Pos = intTank1Pos + intTank1Def;
+			//Moves server tank using deflection
 			
 			bullet1.drawIt(g);
 			Font Scorefont10 = new Font("Comic Sans MS", Font.PLAIN, 21);
@@ -226,7 +234,7 @@ public class tankpanel extends JPanel implements ActionListener{
 					g.setColor(Color.BLACK);
 					
 				}
-				
+				//If theme is halloween, change font to white (for visibility)
 				g.setFont(Scorefont10);
 				
 				g.drawString("Launch angle: "+intTank1Ang, 25, 85);
@@ -234,6 +242,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.drawString("Health: "+intHealth2, 1100, 50);
 				g.drawString("POWER: "+(intTank1Pow+intTank1PowBoost), 25, 120);
 			}
+			//Draws out UI for server showing server tank stats + enemy health
 			else{
 				if(strTheme.equals("halloween")){
 					g.setColor(Color.WHITE);
@@ -242,7 +251,7 @@ public class tankpanel extends JPanel implements ActionListener{
 					g.setColor(Color.BLACK);
 					
 				}
-				
+				//If theme is halloween, change font to white (for visibility)
 				g.setFont(Scorefont10);
 				
 				g.drawString("Launch angle: "+intTank2Ang, 1100, 85);
@@ -250,6 +259,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.drawString("Health: "+intHealth1, 25, 50);
 				g.drawString("POWER: "+(intTank2Pow+intTank2PowBoost), 1100, 120);
 			}
+			//Draws out UI for client showing server tank stats + enemy health
 			
 			//TANK 2
 			///g.setColor(Color.ORANGE);
@@ -289,8 +299,9 @@ public class tankpanel extends JPanel implements ActionListener{
 				g.drawImage(oranTank90img, intTank2Pos-10, 530, null);
 				
 			}
-			
+			//Updates client tanks visual sprite depending on the angle
 			intTank2Pos = intTank2Pos + intTank2Def;
+			//Moves client tank using deflection
 			
 			bullet2.drawIt(g);
 			if(bullet1.boolHitbox==false){
@@ -314,7 +325,7 @@ public class tankpanel extends JPanel implements ActionListener{
 						strGameOver = "play1Win";
 					}
 					TheTanks.allowShooting();
-					//If the bullet hits a tank
+					//If the bullet hits a tank, deal damage, switch to next players turn and allow shooting
 				}else if(bullet1.intY>600){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
@@ -386,26 +397,22 @@ public class tankpanel extends JPanel implements ActionListener{
 					g.drawImage(generalWin, 0, 0, null);
 					
 				}
-			
+				//draws out general win/lose for client
 			}else if(strTheme.equals("christmas")){
 				if(blnPanelServer == true){
 					g.drawImage(christmasLose, 0, 0, null);
-					
-					
 				}else{
 					g.drawImage(christmasWin, 0, 0, null);
-					
 				}
-			
+				//draws out christmas win/lose for client
+				
 			}else if(strTheme.equals("halloween")){
 				if(blnPanelServer == true){
 					g.drawImage(halloweenLose, 0, 0, null);
-					
-					
 				}else{
 					g.drawImage(halloweenWin, 0, 0, null);
-					
 				}
+				//draws out halloween win/lose for client
 			}
 			
 			strGameOver = "false";
@@ -414,32 +421,24 @@ public class tankpanel extends JPanel implements ActionListener{
 			if(strTheme.equals("general")){
 				if(blnPanelServer == true){
 					g.drawImage(generalWin, 0, 0, null);
-					
-					
 				}else{
 					g.drawImage(generalLose, 0, 0, null);
-					
 				}
-			
+				//draws out general win/lose for server
 			}else if(strTheme.equals("christmas")){
 				if(blnPanelServer == true){
 					g.drawImage(christmasWin, 0, 0, null);
-					
-					
 				}else{
 					g.drawImage(christmasLose, 0, 0, null);
-					
 				}
-			
+				//draws out christmas win/lose for server
 			}else if(strTheme.equals("halloween")){
 				if(blnPanelServer == true){
 					g.drawImage(halloweenWin, 0, 0, null);
-					
-					
 				}else{
 					g.drawImage(halloweenLose, 0, 0, null);
-					
 				}
+				//draws out halloween win/lose for server
 			}
 			
 			strGameOver = "false";
@@ -498,7 +497,7 @@ public class tankpanel extends JPanel implements ActionListener{
 		
 		}catch(IOException e){
 			System.out.println("Unable to load image");
-			
 		}
+		//Catches IOException for loading images
 	}
 }

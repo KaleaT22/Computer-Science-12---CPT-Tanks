@@ -1,3 +1,7 @@
+//Doodle Tanks (Main)
+//By: Atilla Awista, Kalea Tse, & Noor Qureshi
+//Date: December 16, 2021
+
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
@@ -109,6 +113,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			boolean blnIsConnected = ssm.connect();
 			
+			//When you connect, enable buttons and and request focus
 			if(blnIsConnected){
 				playbut.setEnabled(true);
 				themebut.setEnabled(true);
@@ -217,7 +222,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 				//check if server
 				if(strMessage[0][0].equals("server")){
-					//if server starts game
+					//if server starts game, set up variables, change panel/buttons
 					if(strMessage[0][1].equals("playstart")){
 						blnGameStart=true;
 						thepanel.strScreen = "Play";
@@ -258,24 +263,24 @@ public class CPTtanks implements ActionListener, KeyListener{
 						
 						theframe.requestFocus();
 					
-					//if stop movement
+					// stop server tank movement
 					}else if(strMessage[0][1].equals("stop")){
 						thepanel.intTank1Def = 0;
 						
 					}
 					
-					//if move
+					//Update server tank position
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank1Pos = Integer.parseInt(strMessage[0][2]);
 						
 						//clicky.se.setFile("TankMovement2LOUDER.wav");
 						//clicky.se.play();
 						
-					//if depress / elevating cannon
+					//Update server tank angle
 					}else if(strMessage[0][1].equals("angle")){
 						thepanel.intTank1Ang = Integer.parseInt(strMessage[0][2]);				
 					
-					//if fires
+					//Launch cannonball from server tank
 					}else if(strMessage[0][1].equals("shoot")){
 						clicky.se.setFile("PEWPEWPEW2.wav");
 						clicky.se.play();
@@ -293,7 +298,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 						thepanel.intTank1PowBoost = Integer.parseInt(strMessage[0][2]);
 						System.out.println(thepanel.intTank1PowBoost);
 					
-					//if selecting theme
+					//Set client theme
 					}else if(strMessage[0][1].equals("theme")){
 						thepanel.strTheme = strMessage[0][2];
 					
@@ -329,13 +334,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 					
 					}
 					
-					//if stop movement
+					//stop client tank movement
 					if(strMessage[0][1].equals("stop")){
 						thepanel.intTank2Def = 0;
 					
 					}
 					
-					//if move	
+					//Update client tank position
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank2Pos = Integer.parseInt(strMessage[0][2]);	
 						
@@ -344,18 +349,18 @@ public class CPTtanks implements ActionListener, KeyListener{
 						
 					}
 					
-					//if depress / elevating cannon
+					//Update client tank angle
 					if(strMessage[0][1].equals("angle")){
 						thepanel.intTank2Ang = Integer.parseInt(strMessage[0][2]);
 					
 					}
 					
-					//Updates client power
+					//Updates client tank power
 					if(strMessage[0][1].equals("power")){
 						thepanel.intTank2PowBoost = Integer.parseInt(strMessage[0][2]);
 					}
 					
-					//if fires
+					//Fires cannonball from client tank
 					if(strMessage[0][1].equals("shoot")){
 						clicky.se.setFile("PEWPEWPEWAT.wav");
 						clicky.se.play();
@@ -374,7 +379,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				}
 			}
 		
-		//if player starts game
+		//if server starts game
 		}else if(evt.getSource() == playbut){
 			if(thepanel.strGameOver.equals("false")){
 				clicky.se.setFile("CLICKNOISE2.wav");
@@ -735,6 +740,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					thepanel.intTank1Def = 0;
 					blnShotfreeze = true;
 				}
+				//Launches cannonball from server tank
 			}
 		//client movements
 		}else if(blnShotfreeze==false && blnGameStart == true){
@@ -808,6 +814,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 					thepanel.intTank2Def = 0;
 					blnShotfreeze = true;
 				}
+				//Launches cannonball from client tank
 			}
 		}
 	}
