@@ -365,6 +365,18 @@ public class CPTtanks implements ActionListener, KeyListener{
 				clicky.se.setFile("CLICKNOISE2.wav");
 				clicky.se.play();
 				
+				thepanel.intHealth1 = 100;
+				thepanel.intHealth2 = 100;
+				
+				thepanel.intTank1Ang = 45;
+				thepanel.intTank2Ang = 45;
+				
+				thepanel.intTank1Pos = 320;
+				thepanel.intTank2Pos = 960;
+				
+				thepanel.intTank1Pow = 80;
+				thepanel.intTank2Pow = 80;
+				
 				thepanel.strScreen = "Play";
 				playbut.setVisible(false);
 				themebut.setVisible(false);
