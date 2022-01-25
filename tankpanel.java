@@ -409,6 +409,8 @@ public class tankpanel extends JPanel implements ActionListener{
 					
 				}
 			}
+			
+			strGameOver = "false";
 		
 		}else if(strScreen.equals("tank1Win")){
 			if(strTheme.equals("general")){
@@ -441,6 +443,8 @@ public class tankpanel extends JPanel implements ActionListener{
 					
 				}
 			}
+			
+			strGameOver = "false";
 		}
 	}
 	
