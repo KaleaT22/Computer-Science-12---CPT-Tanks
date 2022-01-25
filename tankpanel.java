@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class tankpanel extends JPanel implements ActionListener{
 	//Properties
-	int intTank1Pos = 320;
+	int intTank1Pos = 170;
 	int intTank1Def = 0;
 	int intTank1Pow = 80;
 	int intTank1PowBoost = 0;
@@ -17,7 +17,7 @@ public class tankpanel extends JPanel implements ActionListener{
 	int intHealth1 = 100;
 	
 	
-	int intTank2Pos = 960;
+	int intTank2Pos = 810;
 	int intTank2Def = 0;
 	int intTank2Pow = 80;
 	int intTank2PowBoost = 0;
