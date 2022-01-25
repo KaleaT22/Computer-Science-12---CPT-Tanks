@@ -1,6 +1,6 @@
 //Doodle Tanks (Main)
 //By: Atilla Awista, Kalea Tse, & Noor Qureshi
-//Date: December 16, 2021
+//Date: January 27, 2022
 
 import java.io.*;
 import java.awt.*;
@@ -927,7 +927,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//Return button
 		returnbut.setSize(200, 50);
-		returnbut.setLocation(50, 650);
+		returnbut.setLocation(50, 625);
 		returnbut.addActionListener(this);
 		returnbut.setVisible(false);
 		thepanel.add(returnbut);
@@ -941,7 +941,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//Test arena access button
 		TestBut.setSize(200, 50);
-		TestBut.setLocation(250, 650);
+		TestBut.setLocation(250, 625);
 		TestBut.addActionListener(this);
 		TestBut.setVisible(false);
 		thepanel.add(TestBut);
