@@ -115,7 +115,7 @@ public class tankpanel extends JPanel implements ActionListener{
 		
 		//help screen
 		}else if(strScreen.equals("Help")){
-			g.setColor(Color.WHITE);
+			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, 1280, 720);
 			//g.drawImage(HelpTextimg, 10, 50, null);
 			g.drawImage(greenTank18img, intTank1Pos-10, 530, null);
@@ -309,12 +309,10 @@ public class tankpanel extends JPanel implements ActionListener{
 							
 						}else{
 							CPTtanks.returnbut2.setEnabled(false);
-							
 						}
 						
 						strGameOver = "play1Win";
 					}
-					
 					TheTanks.allowShooting();
 					//If the bullet hits a tank
 				}else if(bullet1.intY>600){

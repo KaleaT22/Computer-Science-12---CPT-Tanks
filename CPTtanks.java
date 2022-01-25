@@ -70,6 +70,8 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	String strUser = "";
 	
+	boolean blnGameStart = false;
+	
 	//SSM
 	SuperSocketMaster ssm;
 	
@@ -146,7 +148,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				
 				helpbut.setEnabled(true);
 				thedisconnect.setEnabled(true);
-				thechat.setEnabled(true);
+				thechat.setEnabled(false);
 			
 				//System.out.println("client");
 				
@@ -217,6 +219,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				if(strMessage[0][0].equals("server")){
 					//if server starts game
 					if(strMessage[0][1].equals("playstart")){
+						blnGameStart=true;
 						thepanel.strScreen = "Play";
 						
 						thepanel.intHealth1 = 100;
@@ -412,7 +415,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				chatBut.setVisible(true);
 				chatBut.setEnabled(true);
 				helpbut.setVisible(false);
-				
+				blnGameStart=true;
 				ssm.sendText("server, playstart");
 				
 				theframe.requestFocus();
@@ -663,7 +666,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	public void keyPressed(KeyEvent evt){
 		//server movements
-		if(blnisServer == true && blnShotfreeze == false){
+		if(blnisServer == true && blnShotfreeze == false && blnGameStart == true){
 			//left
 			if(evt.getKeyChar() == 'a' && thepanel.intTank1Pos > 0){
 				System.out.println("Server: Left");
@@ -734,7 +737,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 				}
 			}
 		//client movements
-		}else if(blnShotfreeze==false){
+		}else if(blnShotfreeze==false && blnGameStart == true){
 			//left
 			if(evt.getKeyChar() == 'a' && thepanel.intTank2Pos>0){
 				System.out.println("Client: Left");
@@ -834,14 +837,27 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(thepanel.intTank2Pos<650){
 				thepanel.intTank2Pos=650;
 			}
+			//This makes sure the tanks can't move out of bounds by replacing them back into bounds the moment they leave
 			
 			if(blnisServer == true){
 				ssm.sendText("server, move, " + thepanel.intTank1Pos);
-				
 			}else if(blnisServer == false){
 				ssm.sendText("client, move, " + thepanel.intTank2Pos);
 				
 			}
+			//This constantly updates the other user with their positions allowing for smooth 60fps movement
+			
+			if(blnChat==false){
+				theframe.requestFocus();
+			}
+			//This constantly requests focus while chat mode is off, this prevents errors that disallow the ability to control tanks
+			
+			if(thepanel.intHealth1<=0){
+				blnGameStart=false;
+			}else if(thepanel.intHealth1<=0){
+				blnGameStart=false;
+			}
+			//When the game is over (one tanks health = 0), disallow any tank movement and firing, this is to prevent tanks from moving and firing while in the main menu
 		}
 	}
 	//Constantly update the tanks location, also constantly make sure that the tank is teleported back onto screen the moment it goes out of screen
