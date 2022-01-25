@@ -140,7 +140,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			
 			boolean blnIsConnected = ssm.connect();
 			
-			if(blnIsConnected){
+			if(blnIsConnected){				
 				playbut.setEnabled(false);
 				themebut.setEnabled(false);
 				
@@ -277,12 +277,32 @@ public class CPTtanks implements ActionListener, KeyListener{
 					}else if(strMessage[0][1].equals("power")){
 						thepanel.intTank1PowBoost = Integer.parseInt(strMessage[0][2]);
 						System.out.println(thepanel.intTank1PowBoost);
-						
-					}
 					
 					//if selecting theme
-					if(strMessage[0][1].equals("theme")){
+					}else if(strMessage[0][1].equals("theme")){
 						thepanel.strTheme = strMessage[0][2];
+					
+					//if game over, return to home screen
+					}else if(strMessage[0][1].equals("returnMenu")){
+						thepanel.strScreen = "Start";
+						playbut.setVisible(true);
+						themebut.setVisible(true);
+						thedisconnect.setVisible(true);
+						theserver.setVisible(true);
+						theclient.setVisible(true);
+						theIP.setVisible(true);
+						theipAdd.setVisible(true);
+						theUser.setVisible(true);
+						theuserInput.setVisible(true);
+						helpbut.setVisible(true);
+						
+						returnbut2.setVisible(false);
+						chatBut.setVisible(false);
+						
+						thechatarealabel.setLocation(1080, 200);
+						thechatscroll.setLocation(1080, 200);
+						thechatlabel.setLocation(1080, 550);
+						thechat.setLocation(1080, 575);
 					}
 					
 				//check if client
@@ -374,21 +394,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 				theframe.requestFocus();
 				
 			}
-			
-			/*//if player 1 loses all health, player 2 wins
-			}else if(thepanel.strGameOver.equals("play2Win")){
-				thepanel.strScreen = "tank2Win";
-				
-				returnbut.setVisible(true);
-				returnbut.setLocation(500, 500);
-			
-			//if player 2 loses all health, player 1 wins
-			}else if(thepanel.strGameOver.equals("play1Win")){
-				thepanel.strScreen = "tank1Win";
-				
-				returnbut.setVisible(true);
-				returnbut.setLocation(500, 500);
-			}*/
 			
 		//if player clicks theme button
 		}else if(evt.getSource() == themebut){
@@ -510,10 +515,14 @@ public class CPTtanks implements ActionListener, KeyListener{
 			helpbut.setVisible(true);
 			
 			returnbut2.setVisible(false);
-			TestBut.setVisible(false);
-			generalbut.setVisible(false);
-			christmasbut.setVisible(false);
-			halloweenbut.setVisible(false);
+			chatBut.setVisible(false);
+			
+			thechatarealabel.setLocation(1080, 200);
+			thechatscroll.setLocation(1080, 200);
+			thechatlabel.setLocation(1080, 550);
+			thechat.setLocation(1080, 575);
+			
+			ssm.sendText("server, returnMenu");
 			
 		//if player clicks return to main menu
 		}else if(evt.getSource() == returnbut){

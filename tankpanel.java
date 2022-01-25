@@ -485,7 +485,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			halloweenTheme = ImageIO.read(new File("halloweenTheme.png"));
 			
 			generalLose = ImageIO.read(new File("doodleLoseScreen.png"));
-			christmasLose = ImageIO.read(new File("christmasScreen.png"));
+			christmasLose = ImageIO.read(new File("christmasLoseScreen.png"));
 			halloweenLose = ImageIO.read(new File("halloweenLoseScreen.png"));
 			
 			generalWin = ImageIO.read(new File("doodleWinScreen.png"));
