@@ -119,10 +119,30 @@ public class tankpanel extends JPanel implements ActionListener{
 		
 		//help screen
 		}else if(strScreen.equals("Help")){
-			g.setColor(Color.GREEN);
+			Color helpColor = new Color(255, 227, 178);
+			
+			g.setColor(helpColor);
 			g.fillRect(0, 0, 1280, 720);
-			g.drawImage(HelpTextimg, 10, 50, null);
-			g.drawImage(greenTank18img, intTank1Pos-10, 530, null);
+			g.setColor(Color.BLACK);
+			Font TitleFont1 = new Font("Comic Sans MS", Font.PLAIN, 40);
+			g.setFont(TitleFont1);
+			g.drawString("Help Menu:", 15, 60);
+			Font TextFont1 = new Font("Comic Sans MS", Font.PLAIN, 15);
+			g.setFont(TextFont1);
+			g.drawString("How to play the game:", 15, 90);
+			g.drawString("First, the server player must enter their name and THEN declare", 15, 110);
+			g.drawString("themselves as server by clicking the server button. Once this is done, the ", 15, 130);
+			g.drawString("second player, the client, can join. This is done by first, entering their ", 15, 150);
+			g.drawString("name, then they must enter the IP, and then declare themselves as client, ", 15, 170);
+			g.drawString("by clicking the client button. ", 15, 190);
+			g.drawString("Once these steps are completed, the server can start the game. To play ", 15, 210);
+			g.drawString("the game, use A and D to move left and right. W and S are used to ", 15, 230);
+			g.drawString("elevate and depress the gun. Press the Spacebar to shoot the gun. When ", 15, 250);
+			g.drawString("the gun is shot, it is the next player's turn. The server starts, then turns", 15, 270);
+			g.drawString("alternate", 15, 290);
+			
+			//g.drawImage(HelpTextimg, 10, 50, null);
+			g.drawImage(greenTank18img, 320, 530, null);
 			
 			bulletHelp.drawIt(g);
 			if(bulletHelp.boolHitbox==false){

@@ -941,7 +941,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//Test arena access button
 		TestBut.setSize(200, 50);
-		TestBut.setLocation(250, 625);
+		TestBut.setLocation(250, 650);
 		TestBut.addActionListener(this);
 		TestBut.setVisible(false);
 		thepanel.add(TestBut);
