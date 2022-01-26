@@ -1,3 +1,6 @@
+//Doodle Tanks (Sound Object)
+//By: Atilla Awista, Kalea Tse, & Noor Qureshi
+//Date: January 27, 2022
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -5,10 +8,10 @@ import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
 public class TankSound{
-	String clickSound;
+	//Variable to call in main program to import sounds
 	SoundEffect se = new SoundEffect();
-	int intRun = 0;
 	
+	//Method to import sound and run it 
 	public class SoundEffect{
 		
 		Clip click;
