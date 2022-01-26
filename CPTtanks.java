@@ -9,10 +9,10 @@ import java.awt.event.*;
 import javax.swing.event.*;
 
 /**
- * <h1>Doodle Tanks (CPTtanks Main)<br>
+ * <h1>Doodle Tanks (CPTtanks Main)<br></h1>
  * By: Atilla Awista, Kalea Tse, Noor Qureshi<br>
  * Date: January 27, 2022<br>
- * <br> This is the main file used for Doodle Tanks</h1>
+ * <br> This is the main file used for Doodle Tanks
  */
 
 public class CPTtanks implements ActionListener, KeyListener{
@@ -927,9 +927,11 @@ public class CPTtanks implements ActionListener, KeyListener{
 	//Once the cannonball lands, switch to the next players turn and allow movement
 	
 	/**
-	 * The main method that is used to launch the program.
-	 * This program accesses tankpanel.java and getbullet.java.
-	 * The program combines all files to create the game and GUI for the game.
+	 * The constructor that is used to build or "construct" the program.
+	 * It initializes the GUI / javaxswing elements of the code.<br>
+	 * Ex. The buttons are initialized here. Their sizes and location are set.
+	 * ActionListeners are added to each one. And they are added to the panel.
+	 * Their settings, setEnabled and setVisible, vary based on when they are of use.
 	 */
 	
 	//constructor
@@ -1088,6 +1090,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 	}
 	
+	/**
+	 * This method us used to initialize and run the program.
+	 */
+	 
 	//main method
 	public static void main(String[] args){
 		new CPTtanks();
