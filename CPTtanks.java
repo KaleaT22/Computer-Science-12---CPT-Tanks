@@ -134,8 +134,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 				thedisconnect.setEnabled(true);
 				theframe.requestFocus();
 				
-				//System.out.println("server");
-				
 				blnisServer = true;
 				thepanel.blnPanelServer = true;
 				
@@ -207,7 +205,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		//servers connected
 		}else if(evt.getSource() == ssm){
-			//System.out.println("SSM TEST: " + ssm.readText());
 			if(ssm != null){	
 				try{		
 					for(intRow = 0; intRow < 1; intRow++){
@@ -218,20 +215,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 								
 						for(intColumn = 0; intColumn < 4; intColumn++){
 							strMessage[intRow][intColumn] = strLineSplit[intColumn];
-							//System.out.println("strMessage[" + intRow + "][" + intColumn + "]");
-							//System.out.println("Array: " + strMessage[intRow][intColumn]);
-							
 						}
-						
-						//System.out.println("TEST 1: " + strMessage[0][0]);
-						
 					}
 					
 				}catch(ArrayIndexOutOfBoundsException e){
-					//System.out.println("No string split");
 					
 				}
-					
+				
 				//check if server
 				if(strMessage[0][0].equals("server")){
 					//if server starts game, set up variables, change panel/buttons
@@ -285,8 +275,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank1Pos = Integer.parseInt(strMessage[0][2]);
 						
-						//clicky.se.setFile("TankMovement2LOUDER.wav");
-						//clicky.se.play();
 						
 					//Update server tank angle
 					}else if(strMessage[0][1].equals("angle")){
@@ -306,6 +294,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 						
 						thechatarea.setCaretPosition(thechatarea.getDocument().getLength());
 						
+					//Power of bullet shot
 					}else if(strMessage[0][1].equals("power")){
 						thepanel.intTank1PowBoost = Integer.parseInt(strMessage[0][2]);
 						System.out.println(thepanel.intTank1PowBoost);
@@ -356,9 +345,6 @@ public class CPTtanks implements ActionListener, KeyListener{
 					if(strMessage[0][1].equals("move")){
 						thepanel.intTank2Pos = Integer.parseInt(strMessage[0][2]);	
 						
-						//clicky.se.setFile("TankMovement2LOUDER.wav");
-						//clicky.se.play();
-						
 					}
 					
 					//Update client tank angle
@@ -396,7 +382,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			if(thepanel.strGameOver.equals("false")){
 				clicky.se.setFile("CLICKNOISE2.wav");
 				clicky.se.play();
-				
+				//Set all gameplay values to default
 				thepanel.intHealth1 = 100;
 				thepanel.intHealth2 = 100;
 				
@@ -591,6 +577,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 			christmasbut.setVisible(false);
 			halloweenbut.setVisible(false);
 			
+		//When player clicks test shoot button in help menu
 		}else if(evt.getSource() == TestBut){
 			if(thepanel.blnHelpLaunch == false){
 				clicky.se.setFile("PEWPEWPEW2.wav");

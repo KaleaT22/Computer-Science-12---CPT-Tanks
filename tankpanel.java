@@ -99,9 +99,6 @@ public class tankpanel extends JPanel implements ActionListener{
 	public void paintComponent(Graphics g){
 		//Home screen
 		if(strScreen.equals("Start")){
-			//System.out.println("STARTED");
-			//g.setColor(Color.GREEN);
-			//g.fillRect(0, 0, 1280, 720);
 			
 			//general theme
 			if(strTheme.equals("general")){
@@ -141,7 +138,6 @@ public class tankpanel extends JPanel implements ActionListener{
 			g.drawString("the gun is shot, it is the next player's turn. The server starts, then turns", 15, 270);
 			g.drawString("alternate", 15, 290);
 			
-			//g.drawImage(HelpTextimg, 10, 50, null);
 			g.drawImage(greenTank18img, 320, 530, null);
 			
 			bulletHelp.drawIt(g);
@@ -149,13 +145,11 @@ public class tankpanel extends JPanel implements ActionListener{
 				if(bulletHelp.intY>600){
 					bulletHelp.boolLaunched=false;
 					bulletHelp.boolHitbox=true;
-					//TheTanks.allowShooting();
 					blnHelpLaunch = false;
 					//If the bullet touches the floor, stop the bullet from moving and change it's color to red
 				}else if(bulletHelp.intX<0 || bulletHelp.intX>1280){
 					bulletHelp.boolLaunched=false;
 					bulletHelp.boolHitbox=true;
-					//TheTanks.allowShooting();
 					blnHelpLaunch = false;
 					//If the bullet touches the sides of the screen, stop the bullet from moving and change it's color to red
 				}
@@ -176,11 +170,6 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 		//Game screen
 		}else if(strScreen.equals("Play")){
-			//System.out.println("Game screen launched");
-			//g.setColor(Color.CYAN);
-			//g.fillRect(0, 0, 1280, 720);
-			//g.setColor(Color.GREEN);
-			//g.fillRect(0, 620, 1280, 100);
 			
 			//draws out general theme
 			if(strTheme.equals("general")){
@@ -328,7 +317,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				if(new Rectangle(bullet1.intX, bullet1.intY, 20, 20).intersects(new Rectangle(intTank2Pos, 560, 100, 60))){
 					bullet1.boolLaunched=false;
 					bullet1.boolHitbox=true;
-					intHealth2 = intHealth2 - 100;
+					intHealth2 = intHealth2 - 10;
 					
 					//if play 2 health <= 0, player 2 loses, player 1 wins
 					if(intHealth2 <= 0 && intHealth1 > 0){
@@ -368,7 +357,7 @@ public class tankpanel extends JPanel implements ActionListener{
 				if(new Rectangle(bullet2.intX, bullet2.intY, 20, 20).intersects(new Rectangle(intTank1Pos, 560, 100, 60))){
 					bullet2.boolLaunched=false;
 					bullet2.boolHitbox=true;
-					intHealth1 = intHealth1 - 100;
+					intHealth1 = intHealth1 - 10;
 					
 					//if play 1 health <= 0, player 2 wins, player 1 loses
 					if(intHealth1 <= 0 && intHealth2 > 0){
