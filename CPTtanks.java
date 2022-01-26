@@ -8,6 +8,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
+/**
+ * <h1>Doodle Tanks (CPTtanks Main)<br>
+ * By: Atilla Awista, Kalea Tse, Noor Qureshi<br>
+ * Date: January 27, 2022<br>
+ * <br> This is the main file used for Doodle Tanks</h1>
+ */
 
 public class CPTtanks implements ActionListener, KeyListener{
 	//properties
@@ -87,6 +93,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 	
 	boolean blnserverTurn = true;
 	boolean blnShotfreeze = false;
+	
+	/**
+	 * Activates when an ActionEvent occurs.
+	 * When activated, the code for that specific event runs.
+	 * The function of events vary based on the ActionEvent source.
+	 */
 	
 	public void actionPerformed(ActionEvent evt){
 		//if player enters username
@@ -632,6 +644,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}
 	}
 	
+	/**
+	 * Upon key being released, get key character or code (getKeyChar() or getKeyCode()).
+	 * Actions in the program are based on whichever key is being obtained.<br>
+	 * Eg. if key is 'd', stop tank movement by changing tank deflection to 0.
+	 */
+	 
 	public void keyReleased(KeyEvent evt){
 		//stop server movements 
 		if(blnisServer == true){
@@ -669,6 +687,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}
 	}
 	
+	/**
+	 * Upon key being pressed, get key character or code (getKeyChar() or getKeyCode()).
+	 * Actions in the program are based off of the key that is obtained.<br>
+	 * Eg. if key is 'd', move tank to right by changing tank deflection.
+	 */
+	 
 	public void keyPressed(KeyEvent evt){
 		//server movements
 		if(blnisServer == true && blnShotfreeze == false && blnGameStart == true){
@@ -819,9 +843,19 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}
 	}
 	
+	/** 
+	 * Activates when a key is typed (waits for both keypressed and keyreleased combined).
+	 * This method has no function in our program
+	 */
+	 
 	public void keyTyped(KeyEvent evt){
 		
 	}
+	
+	/**
+	 * When function is activated (tank moves), get string value.
+	 * Set strSSM to the string value and send SSM  to other player to display on their screen.
+	 */
 	
 	//ssm movements method
 	public void moveTank(String strMove){
@@ -829,6 +863,13 @@ public class CPTtanks implements ActionListener, KeyListener{
 		
 		ssm.sendText(strMove);
 	}
+	
+	/**
+	 * Creates tank boundaries (for movement), stopping tanks from being able to leave the screen or pass the center obstacle.
+	 * Sends out updated tank position to other player using SSM.
+	 * Requests focus onto the game frame.
+	 * Haltstank controls while in main menu and resumes them once in game.
+	 */
 	
 	public void movingTank(){
 		if(blnConnected==true){
@@ -869,6 +910,10 @@ public class CPTtanks implements ActionListener, KeyListener{
 	}
 	//Constantly update the tanks location, also constantly make sure that the tank is teleported back onto screen the moment it goes out of screen
 	
+	/**
+	 * Plays explosion sound effect, allows tanks to move, and toggles blnserverTurn in order to switch to next tank's turn.
+	 */
+	 
 	public void allowShooting(){
 		clicky.se.setFile("EXPLOSION.wav");
 		clicky.se.play();
@@ -880,6 +925,12 @@ public class CPTtanks implements ActionListener, KeyListener{
 		}
 	}
 	//Once the cannonball lands, switch to the next players turn and allow movement
+	
+	/**
+	 * The main method that is used to launch the program.
+	 * This program accesses tankpanel.java and getbullet.java.
+	 * The program combines all files to create the game and GUI for the game.
+	 */
 	
 	//constructor
 	public CPTtanks(){
