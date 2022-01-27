@@ -52,6 +52,7 @@ public class TankSound{
 				}catch(Exception e){
 				}
 			}
+			//If this is a jar file, try to get sound file from jar file, turn it into AudioInputStream and set up sound variables
 			try{
 				File file = new File(soundFileName);
 				AudioInputStream soundy = AudioSystem.getAudioInputStream(file);

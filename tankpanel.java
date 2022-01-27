@@ -555,7 +555,7 @@ public class tankpanel extends JPanel implements ActionListener{
 		generalWina = this.getClass().getResourceAsStream("doodleWinScreen.png");
 		christmasWina = this.getClass().getResourceAsStream("christmasWinScreen.png");
 		halloweenWina = this.getClass().getResourceAsStream("halloweenWinScreen.png");
-		
+		//If inputstream is not null (meaning this is a jar file because there are files inside), set image variables by reading InputStream
 		if(greenTank0imga==null){
 			System.out.println("Files not loaded");
 		}else{
@@ -593,7 +593,7 @@ public class tankpanel extends JPanel implements ActionListener{
 		}
 		
 		try{
-			//tank images
+			//loads tank images from file (if not a jar file)
 			greenTank0img = ImageIO.read(new File("THEGREENTANK0.png"));
 			greenTank18img = ImageIO.read(new File("THEGREENTANK18.png"));
 			greenTank36img = ImageIO.read(new File("THEGREENTANK36.png"));

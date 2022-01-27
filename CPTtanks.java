@@ -7,6 +7,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
+import java.io.InputStream;
+import java.io.FileInputStream;
 
 /**
  * <h1>Doodle Tanks (CPTtanks Main)<br></h1>
@@ -450,20 +452,41 @@ public class CPTtanks implements ActionListener, KeyListener{
 			christmasbut.setVisible(true);
 			halloweenbut.setVisible(true);
 			
+			InputStream thethemefile = null;
+			thethemefile = this.getClass().getResourceAsStream("themes.txt");
+			
+			if(thethemefile==null){
+				System.out.println("Files not loaded");
+			}else{
+				try{
+					//open file, trys to get jar files and converts InputStreamReader to buffered reader
+					BufferedReader themefile = new BufferedReader(new InputStreamReader(thethemefile));
+					String strLine;
+					
+					//load data into array
+					for(intRow = 0; intRow < 4; intRow++){
+						strLine = themefile.readLine();
+						strChosenTheme[intRow] = strLine;
+					}
+				themefile.close();
+				}catch(IOException e){
+				}
+			}
+			
 			try{
 				//open file
-				BufferedReader csvthemefile = new BufferedReader(new FileReader("themes.txt"));
+				BufferedReader themefile = new BufferedReader(new FileReader("themes.txt"));
 				String strLine;
 				
 				//load data into array
 				for(intRow = 0; intRow < 4; intRow++){
-					strLine = csvthemefile.readLine();
+					strLine = themefile.readLine();
 					
 					strChosenTheme[intRow] = strLine;
 				
 				}
 				
-				csvthemefile.close();
+				themefile.close();
 				
 			}catch(FileNotFoundException e){
 				System.out.println("File not found");
@@ -1065,7 +1088,7 @@ public class CPTtanks implements ActionListener, KeyListener{
 		chatBut.setSize(200, 25);
 		chatBut.setLocation(1080, 600);
 		chatBut.addActionListener(this);
-		chatBut.setVisible(false);
+		chatBut.setVisible(true);
 		thepanel.add(chatBut);
 		
 		theframe.setContentPane(thepanel);
