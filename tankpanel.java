@@ -9,6 +9,8 @@ import javax.swing.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.io.FileInputStream;
 
 /**
  * <h1>Doodle Tanks (tankpanel)<br></h1>
@@ -484,7 +486,112 @@ public class tankpanel extends JPanel implements ActionListener{
 		
 		this.TheTanks = TheTanks;
 		
+		
 		//images
+		
+		
+		InputStream greenTank0imga = null;
+		InputStream greenTank18imga = null;
+		InputStream greenTank36imga = null;
+		InputStream greenTank54imga = null;
+		InputStream greenTank72imga = null;
+		InputStream greenTank90imga = null;
+		InputStream oranTank0imga = null;
+		InputStream oranTank18imga = null;
+		InputStream oranTank36imga = null;
+		InputStream oranTank54imga = null;
+		InputStream oranTank72imga = null;
+		InputStream oranTank90imga = null;
+		InputStream generalMainmenua = null;
+		InputStream christmasMainmenua = null;
+		InputStream halloweenMainmenua = null;
+		InputStream generalGamea = null;
+		InputStream christmasGamea = null;
+		InputStream halloweenGamea = null;
+		InputStream HelpTextimga = null;
+		InputStream generalThemea = null;
+		InputStream christmasThemea = null;
+		InputStream halloweenThemea = null;
+		InputStream generalLosea = null;
+		InputStream christmasLosea = null;
+		InputStream halloweenLosea = null;
+		InputStream generalWina = null;
+		InputStream christmasWina = null;
+		InputStream halloweenWina = null;
+		
+		greenTank0imga = this.getClass().getResourceAsStream("THEGREENTANK0.png");
+		greenTank18imga = this.getClass().getResourceAsStream("THEGREENTANK18.png");
+		greenTank36imga = this.getClass().getResourceAsStream("THEGREENTANK36.png");
+		greenTank54imga = this.getClass().getResourceAsStream("THEGREENTANK54.png");
+		greenTank72imga = this.getClass().getResourceAsStream("THEGREENTANK72.png");
+		greenTank90imga = this.getClass().getResourceAsStream("THEGREENTANK90.png");
+		
+		oranTank0imga = this.getClass().getResourceAsStream("THEORANGETANK0.png");
+		oranTank18imga = this.getClass().getResourceAsStream("THEORANGETANK18.png");
+		oranTank36imga = this.getClass().getResourceAsStream("THEORANGETANK36.png");
+		oranTank54imga = this.getClass().getResourceAsStream("THEORANGETANK54.png");
+		oranTank72imga = this.getClass().getResourceAsStream("THEORANGETANK72.png");
+		oranTank90imga = this.getClass().getResourceAsStream("THEORANGETANK90.png");
+		
+		//screen + theme images
+		generalMainmenua = this.getClass().getResourceAsStream("DOODLETANKS2.png");
+		christmasMainmenua = this.getClass().getResourceAsStream("christmasMain.png");
+		halloweenMainmenua = this.getClass().getResourceAsStream("halloweenMain.png");
+			
+		generalGamea = this.getClass().getResourceAsStream("gameplayScreen.png");
+		christmasGamea = this.getClass().getResourceAsStream("christmasScreen.png");
+		halloweenGamea = this.getClass().getResourceAsStream("halloweenScreen.png");
+			
+		HelpTextimga = this.getClass().getResourceAsStream("HelpScreen.png");
+		
+		generalThemea = this.getClass().getResourceAsStream("mainTheme.png");
+		christmasThemea = this.getClass().getResourceAsStream("christmasTheme.png");
+		halloweenThemea = this.getClass().getResourceAsStream("halloweenTheme.png");
+			
+		generalLosea = this.getClass().getResourceAsStream("doodleLoseScreen.png");
+		christmasLosea = this.getClass().getResourceAsStream("christmasLoseScreen.png");
+		halloweenLosea = this.getClass().getResourceAsStream("halloweenLoseScreen.png");
+			
+		generalWina = this.getClass().getResourceAsStream("doodleWinScreen.png");
+		christmasWina = this.getClass().getResourceAsStream("christmasWinScreen.png");
+		halloweenWina = this.getClass().getResourceAsStream("halloweenWinScreen.png");
+		
+		if(greenTank0imga==null){
+			System.out.println("Files not loaded");
+		}else{
+			try{
+				greenTank0img = ImageIO.read(greenTank0imga);
+				greenTank18img=ImageIO.read(greenTank18imga);
+				greenTank36img=ImageIO.read(greenTank36imga);
+				greenTank54img=ImageIO.read(greenTank54imga);
+				greenTank72img=ImageIO.read(greenTank72imga);
+				greenTank90img=ImageIO.read(greenTank90imga);
+				oranTank0img=ImageIO.read(oranTank0imga);
+				oranTank18img=ImageIO.read(oranTank18imga);
+				oranTank36img=ImageIO.read(oranTank36imga);
+				oranTank54img=ImageIO.read(oranTank54imga);
+				oranTank72img=ImageIO.read(oranTank72imga);
+				greenTank90img=ImageIO.read(greenTank90imga);
+				generalMainmenu=ImageIO.read(generalMainmenua);
+				christmasMainmenu=ImageIO.read(christmasMainmenua);
+				halloweenMainmenu=ImageIO.read(halloweenMainmenua);
+				generalGame=ImageIO.read(generalGamea);
+				christmasGame=ImageIO.read(christmasGamea);
+				halloweenGame=ImageIO.read(halloweenGamea);
+				HelpTextimg=ImageIO.read(HelpTextimga);
+				generalTheme=ImageIO.read(generalThemea);
+				christmasTheme=ImageIO.read(christmasThemea);
+				halloweenTheme=ImageIO.read(halloweenThemea);
+				generalLose=ImageIO.read(generalLosea);
+				christmasLose=ImageIO.read(christmasLosea);
+				halloweenLose=ImageIO.read(halloweenLosea);
+				generalWin=ImageIO.read(generalWina);
+				christmasWin=ImageIO.read(christmasWina);
+				halloweenWin=ImageIO.read(halloweenWina);
+			}catch(IOException e){
+			}
+		}
+		
 		try{
 			//tank images
 			greenTank0img = ImageIO.read(new File("THEGREENTANK0.png"));
@@ -522,9 +629,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			generalWin = ImageIO.read(new File("doodleWinScreen.png"));
 			christmasWin = ImageIO.read(new File("christmasWinScreen.png"));
-			halloweenWin = ImageIO.read(new File("halloweenWinScreen.png"));
-			
-			
+			halloweenWin = ImageIO.read(new File("halloweenWinScreen.png"));		
 		
 		}catch(IOException e){
 			System.out.println("Unable to load image");

@@ -6,6 +6,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.net.URL;
 
 /**
  * <h1>Doodle Tanks (TankSound)<br></h1>
@@ -37,6 +40,18 @@ public class TankSound{
 		 */
 		
 		public void setFile(String soundFileName){
+			InputStream soundclass = null;
+			soundclass = this.getClass().getResourceAsStream(soundFileName);
+			if(soundclass == null){
+			}else{
+				try{
+					URL viaClass= SoundEffect.class.getResource(soundFileName);
+					AudioInputStream soundy = AudioSystem.getAudioInputStream(viaClass);
+					click = AudioSystem.getClip();
+					click.open(soundy);
+				}catch(Exception e){
+				}
+			}
 			try{
 				File file = new File(soundFileName);
 				AudioInputStream soundy = AudioSystem.getAudioInputStream(file);
