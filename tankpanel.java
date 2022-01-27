@@ -600,7 +600,6 @@ public class tankpanel extends JPanel implements ActionListener{
 			greenTank54img = ImageIO.read(new File("THEGREENTANK54.png"));
 			greenTank72img = ImageIO.read(new File("THEGREENTANK72.png"));
 			greenTank90img = ImageIO.read(new File("THEGREENTANK85.png"));
-			
 			oranTank0img = ImageIO.read(new File("THEORANGETANK0.png"));
 			oranTank18img = ImageIO.read(new File("THEORANGETANK18.png"));
 			oranTank36img = ImageIO.read(new File("THEORANGETANK36.png"));
