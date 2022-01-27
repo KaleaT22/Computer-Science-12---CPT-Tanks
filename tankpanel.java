@@ -97,6 +97,11 @@ public class tankpanel extends JPanel implements ActionListener{
 	Timer thetimer = new Timer(1000/60, this);
 	String strScreen = "Start";
 	
+	/**
+	 * An event that activates when an actionPerformed occurs.<br>
+	 * However the only variable in this actionPerformed is theTimer.
+	 * This creates an FPS counter which allows the display of animation of certain moving objects
+	 */
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == thetimer){
@@ -104,7 +109,9 @@ public class tankpanel extends JPanel implements ActionListener{
 			TheTanks.movingTank();
 		}
 	}//Repaints Panel
-	
+	/**
+	 * The file used to construct all the images, backgrounds, text, tank properties, etc.
+	 */
 	public void paintComponent(Graphics g){
 		//Home screen
 		if(strScreen.equals("Start")){
