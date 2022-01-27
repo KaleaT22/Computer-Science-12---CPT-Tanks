@@ -16,9 +16,7 @@ import java.awt.image.BufferedImage;
  * <br> This is the main file for images and text drawn in the game
  */
 
-/**
- * The file used to construct all the images, backgrounds, text, tank properties, etc.
- */
+
 public class tankpanel extends JPanel implements ActionListener{
 	//Properties
 	int intTank1Pos = 170;
@@ -469,7 +467,9 @@ public class tankpanel extends JPanel implements ActionListener{
 			strGameOver = "false";
 		}
 	}
-	
+	/**
+	 * The file used to construct all the images, backgrounds, text, tank properties, etc.
+     */
 	//constructor
 	public tankpanel(CPTtanks TheTanks){
 		super();
