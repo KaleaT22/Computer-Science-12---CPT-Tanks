@@ -237,13 +237,13 @@ public class tankpanel extends JPanel implements ActionListener{
 			}
 			
 			//if angle >= 72
-			if(intTank1Ang >= 72 && intTank1Ang < 90){
+			if(intTank1Ang >= 72 && intTank1Ang < 85){
 				g.drawImage(greenTank72img, intTank1Pos-10, 530, null);
 				
 			}
 			
 			//if angle = 90
-			if(intTank1Ang == 90){
+			if(intTank1Ang >= 85){
 				g.drawImage(greenTank90img, intTank1Pos-10, 530, null);
 				
 			}
@@ -317,13 +317,13 @@ public class tankpanel extends JPanel implements ActionListener{
 			}
 			
 			//if angle >= 72
-			if(intTank2Ang >= 72 && intTank2Ang < 90){
+			if(intTank2Ang >= 72 && intTank2Ang < 85){
 				g.drawImage(oranTank72img, intTank2Pos-10, 530, null);
 				
 			}
 			
 			//if angle == 90
-			if(intTank2Ang == 90){
+			if(intTank2Ang >= 85){
 				g.drawImage(oranTank90img, intTank2Pos-10, 530, null);
 				
 			}
@@ -524,14 +524,14 @@ public class tankpanel extends JPanel implements ActionListener{
 		greenTank36imga = this.getClass().getResourceAsStream("THEGREENTANK36.png");
 		greenTank54imga = this.getClass().getResourceAsStream("THEGREENTANK54.png");
 		greenTank72imga = this.getClass().getResourceAsStream("THEGREENTANK72.png");
-		greenTank90imga = this.getClass().getResourceAsStream("THEGREENTANK90.png");
+		greenTank90imga = this.getClass().getResourceAsStream("THEGREENTANK85.png");
 		
 		oranTank0imga = this.getClass().getResourceAsStream("THEORANGETANK0.png");
 		oranTank18imga = this.getClass().getResourceAsStream("THEORANGETANK18.png");
 		oranTank36imga = this.getClass().getResourceAsStream("THEORANGETANK36.png");
 		oranTank54imga = this.getClass().getResourceAsStream("THEORANGETANK54.png");
 		oranTank72imga = this.getClass().getResourceAsStream("THEORANGETANK72.png");
-		oranTank90imga = this.getClass().getResourceAsStream("THEORANGETANK90.png");
+		oranTank90imga = this.getClass().getResourceAsStream("THEORANGETANK85.png");
 		
 		//screen + theme images
 		generalMainmenua = this.getClass().getResourceAsStream("DOODLETANKS2.png");
@@ -599,14 +599,14 @@ public class tankpanel extends JPanel implements ActionListener{
 			greenTank36img = ImageIO.read(new File("THEGREENTANK36.png"));
 			greenTank54img = ImageIO.read(new File("THEGREENTANK54.png"));
 			greenTank72img = ImageIO.read(new File("THEGREENTANK72.png"));
-			greenTank90img = ImageIO.read(new File("THEGREENTANK90.png"));
+			greenTank90img = ImageIO.read(new File("THEGREENTANK85.png"));
 			
 			oranTank0img = ImageIO.read(new File("THEORANGETANK0.png"));
 			oranTank18img = ImageIO.read(new File("THEORANGETANK18.png"));
 			oranTank36img = ImageIO.read(new File("THEORANGETANK36.png"));
 			oranTank54img = ImageIO.read(new File("THEORANGETANK54.png"));
 			oranTank72img = ImageIO.read(new File("THEORANGETANK72.png"));
-			oranTank90img = ImageIO.read(new File("THEORANGETANK90.png"));
+			oranTank90img = ImageIO.read(new File("THEORANGETANK85.png"));
 			
 			//screen + theme images
 			generalMainmenu = ImageIO.read(new File("DOODLETANKS2.png"));
