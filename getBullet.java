@@ -77,7 +77,11 @@ public class getBullet{
 		}
 		//If the ball isn't considered "launched", stop the ball from moving
 	}
-	
+	/**
+	 * Constructs the bullet that tanks shoot and draws them to the screen.
+	 * It draws them travelling in an arc from a specific starting position
+	 * To a specific end position.
+	 */
 	public void drawIt(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		if(dblPowerX ==0){
@@ -90,6 +94,13 @@ public class getBullet{
 	//This function visually draws out the cannonball
 	
 	//Constructor
+	/**
+	 * Constructs the bullet that tanks shoot and draws them to the screen.
+	 * It draws them travelling in an arc from a specific starting position
+	 * To a specific end position. These are found based on the X position 
+	 * of the tank, how much power the gun launches from, what angle to shoot at
+	 * and if the tank gun has been fired.
+	 */
 	public getBullet(int intTankX, double dblPower, double dblAngle, boolean boolLaunched, boolean boolServerTank){
 		super();
 		this.intTankX=intTankX;
