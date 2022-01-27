@@ -244,7 +244,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			//if angle = 90
 			if(intTank1Ang >= 85){
-				g.drawImage(greenTank90img, intTank1Pos-10, 530, null);
+				g.drawImage(greenTank72img, intTank1Pos-10, 530, null);
 				
 			}
 			//Updates server tanks visual sprite depending on the angle
@@ -324,7 +324,7 @@ public class tankpanel extends JPanel implements ActionListener{
 			
 			//if angle == 90
 			if(intTank2Ang >= 85){
-				g.drawImage(oranTank90img, intTank2Pos-10, 530, null);
+				g.drawImage(greenTank72img, intTank2Pos-10, 530, null);
 				
 			}
 			//Updates client tanks visual sprite depending on the angle
