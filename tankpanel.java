@@ -9,7 +9,16 @@ import javax.swing.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+/**
+ * <h1>Doodle Tanks (CPTtanks Main)<br></h1>
+ * By: Atilla Awista, Kalea Tse, Noor Qureshi<br>
+ * Date: January 27, 2022<br>
+ * <br> This is the main file for images and text drawn in the game
+ */
 
+/**
+ * The file used to construct all the images, backgrounds, text, tank properties, etc.
+ */
 public class tankpanel extends JPanel implements ActionListener{
 	//Properties
 	int intTank1Pos = 170;
