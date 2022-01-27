@@ -11,34 +11,32 @@ import javax.swing.JOptionPane;
  * <h1>Doodle Tanks (TankSound)<br></h1>
  * By: Atilla Awista, Kalea Tse, Noor Qureshi<br>
  * Date: January 27, 2022<br>
- * <br> This is the Sound Object file for Doodle Tanks
+ * <br> This is the Sound Object file for Doodle Tanks.
  */
-
-/**
- * The Constructor which you can send the Sound File to, and play when you need it to.
- * The sound file can be activated using the play() method.
- */
+ 
 public class TankSound{
 	//Variable to call in main program to import sounds
+	 
 	SoundEffect se = new SoundEffect();
-	
-	/**
-	 * Constructor that is used to turn the sound into an object
-	 * In the main program, SoundEffect can be called and a sound
-	 * file can be sent to this constructor. When that is done, 
-	 * this method can play a specific sound file given (only .wav) 
+	 
+	/**Method that is used to turn the sound into an object
+	 * SoundEffect can be called in the main program and a sound
+	 * file is sent to this method. When that is done, 
+	 * this method can play the specific sound file given (only .wav) 
 	 * when the specific condition is fulfilled (whether it be an if,
 	 * while, for, etc.)
 	 */
-	//Method to import sound and run it 
+	 
 	public class SoundEffect{
+	//Method to import sound and run it 
 		
 		Clip click;
 		
+		/**
+		 * Creates a new "File" where the sound file can be stored to play when it is called.
+		 */
+		
 		public void setFile(String soundFileName){
-			/**
-			 * Creates a new "File" where the sound file can be stored to play when it is called.
-			 */
 			try{
 				File file = new File(soundFileName);
 				AudioInputStream soundy = AudioSystem.getAudioInputStream(file);
@@ -49,14 +47,24 @@ public class TankSound{
 				System.out.println(e.toString());
 			}
 		}
+		
 		/**
-		 * Plays a sound when the variable is called
+		 * Plays a sound when the method is called on.
 		 */
+		 
 		public void play(){
 			click.setFramePosition(0);
 			click.start();
 		}
 	}
+	
+	/**
+     * A way to call the entire method from another program.
+     * Non-static variables persist in this method and cannot be called
+     * from static contexts. This method allows for the method to be called 
+     * from static variables.
+     */
+	 
 	public TankSound(){
 		
 	}

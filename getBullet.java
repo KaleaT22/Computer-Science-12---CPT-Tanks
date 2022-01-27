@@ -6,6 +6,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 
+/**
+ * <h1>Doodle Tanks (getBullet)<br></h1>
+ * By: Atilla Awista, Kalea Tse, Noor Qureshi<br>
+ * Date: January 27, 2022<br>
+ * <br> This is the main file for the bullet animation in the game
+ */
+
 public class getBullet{
 	//Properties
 	double dblPower;
@@ -32,10 +39,11 @@ public class getBullet{
 	String strColor = "WHITE";
 	
 	//Method
-	///Override the method in JPanel
-	///To draw this APanel differently
-	///JPanel by default draws a grey background
-	///APanel will draw whatever we want it to
+	/**Overrides the method in JPanel. To draw this APanel differently,
+	 * JPanel by default draws a grey background. APanel will draw whatever we want it to/
+	 * This method is also used to determine the next coordinate where the bullet will be drawn to.
+	 */
+	 
 	public void nextPos(){
 		dblTime=dblTime+(10/60.0);
 		
@@ -77,11 +85,11 @@ public class getBullet{
 		}
 		//If the ball isn't considered "launched", stop the ball from moving
 	}
+	
 	/**
-	 * Constructs the bullet that tanks shoot and draws them to the screen.
-	 * It draws them travelling in an arc from a specific starting position
-	 * To a specific end position.
+	 * Draws the bullet that is being shot and draws it to the screen.
 	 */
+	 
 	public void drawIt(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		if(dblPowerX ==0){
@@ -95,12 +103,11 @@ public class getBullet{
 	
 	//Constructor
 	/**
-	 * Constructs the bullet that tanks shoot and draws them to the screen.
-	 * It draws them travelling in an arc from a specific starting position
-	 * To a specific end position. These are found based on the X position 
-	 * of the tank, how much power the gun launches from, what angle to shoot at
-	 * and if the tank gun has been fired.
+	 * Constructs a bullet and draws it to the screen when called.
+	 * The arc that the bullet is drawn in varies depending on the starting x-coordinate
+	 * of the tank shooting, the power the gun is set to, and what angle to shoot at.
 	 */
+	 
 	public getBullet(int intTankX, double dblPower, double dblAngle, boolean boolLaunched, boolean boolServerTank){
 		super();
 		this.intTankX=intTankX;

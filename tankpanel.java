@@ -9,13 +9,13 @@ import javax.swing.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+
 /**
- * <h1>Doodle Tanks (CPTtanks Main)<br></h1>
+ * <h1>Doodle Tanks (tankpanel)<br></h1>
  * By: Atilla Awista, Kalea Tse, Noor Qureshi<br>
  * Date: January 27, 2022<br>
- * <br> This is the main file for images and text drawn in the game
+ * <br> This is the main file for the images, animation, and text drawn in the game
  */
-
 
 public class tankpanel extends JPanel implements ActionListener{
 	//Properties
@@ -96,10 +96,11 @@ public class tankpanel extends JPanel implements ActionListener{
 	String strScreen = "Start";
 	
 	/**
-	 * An event that activates when an actionPerformed occurs.<br>
-	 * However the only variable in this actionPerformed is theTimer.
-	 * This creates an FPS counter which allows the display of animation of certain moving objects
+	 *Activates when an ActionEvent occurs.<br>
+	 * The only evt.getSource is theTimer.
+	 * This creates an FPS counter which controls the display of animation of certain moving objects.
 	 */
+	 
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == thetimer){
@@ -107,9 +108,11 @@ public class tankpanel extends JPanel implements ActionListener{
 			TheTanks.movingTank();
 		}
 	}//Repaints Panel
+	
 	/**
-	 * The file used to construct all the images, backgrounds, text, tank properties, etc.
+	 * The file used to draw all of the images,  text, tank properties, etc to the screen.
 	 */
+	 
 	public void paintComponent(Graphics g){
 		//Home screen
 		if(strScreen.equals("Start")){
@@ -468,8 +471,11 @@ public class tankpanel extends JPanel implements ActionListener{
 		}
 	}
 	/**
-	 * The file used to construct all the images, backgrounds, text, tank properties, etc.
+	 * The file used to construct all of the images, text, tank properties, etc.
+	 * Its parent file is CPTtanks, which allows access to variables and methods
+	 * found in CPTtanks.
      */
+     
 	//constructor
 	public tankpanel(CPTtanks TheTanks){
 		super();
